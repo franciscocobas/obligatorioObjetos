@@ -38,6 +38,7 @@ namespace Dominio.ServiciosDominio
             CargarHabitacionesPrueba();
             CargarServiciosPrueba();
             Pasajero pas = new Pasajero(123, "Uruguay", "Pasajero Pasajero", new Direccion());
+            if (this.Pasajeros == null) this.Pasajeros = new List<Pasajero>();
             this.Pasajeros.Add(pas);
 
         }

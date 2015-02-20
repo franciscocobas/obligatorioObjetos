@@ -8,27 +8,29 @@ using Dominio.ServiciosDominio;
 using Dominio.EntidadesDominio;
 using Dominio.Utilidades;
 
+
 namespace WebPruebas
 {
     public partial class Default : System.Web.UI.Page
     {
+        Sistema elSistema = Sistema.Instancia;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            Sistema elSistema = Sistema.Instancia;
             //Response.Write("Se agregaron " + elSistema.Habitaciones.Count + " Habitaciones");
             //Response.Write("Se agregaron " + elSistema.Servicios.Count + " Servicios");
-           
-            foreach (string i in ListaPaises.Nombres){
-                drp_Pais.Items.Add(i);
+            if (!IsPostBack)
+            {
+                drp_Pais.DataSource = ListaPaises.llenarPaises();
+                drp_Pais.DataBind();
+                drp_Pais.Items.Insert(0, "Seleccionar");
             }
-            
 
         }
 
         protected void Submit_Click(object sender, EventArgs e)
         {
-            Sistema S = Sistema.Instancia;
-            Pasajero p = S.BuscarPasajeroPorDocPais(int.Parse(txt_documento.Text), drp_Pais.SelectedValue);
+            Pasajero p = elSistema.BuscarPasajeroPorDocPais(int.Parse(txt_documento.Text), drp_Pais.SelectedValue);
             int resultado;
             if(int.TryParse(txt_documento.Text, out resultado)) 
             {
