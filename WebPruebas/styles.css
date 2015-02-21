@@ -1,0 +1,54 @@
+﻿body {
+    background-color:whitesmoke
+}
+
+
+.cssLabels{
+    color: black;
+    font-family: 'Courier New';
+    font-size: 16px;
+    margin-right: 15px;
+    float:left;
+}
+
+#txt_documento, #txt_CP  {
+    margin-left:21px;
+}
+
+#drp_paisResid{
+    margin-left:2px;
+}
+
+#txt_dptoProv{
+    margin-left:12px;
+}
+
+#txt_documento2 {
+    margin-left:59px;
+}
+
+#txt_nombre, #txt_ciudad{
+    margin-left:87px;
+}
+
+#txt_dir1, #txt_dir2, #drp_Pais2 {
+    margin-left:39px;
+}
+
+#txt_dir1, #txt_dir2, #txt_nombre, #txt_ciudad, #txt_dptoProv{
+    width:441px;
+}
+
+#h1_titleHome, #h1_editTitle, #h1_inputTitle, #div_errorMessageDiv, #div_3,  #div_11{
+    text-align:center;
+}
+
+#div_1, #div_2, #div_4, #div_5, #div_6, #div_7, #div_10, #div_9, #div_8 {
+    margin: 0 auto;
+    width:610px;
+}
+
+#div_errorMessageDiv{
+    height:50px;
+}
+

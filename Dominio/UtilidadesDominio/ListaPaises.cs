@@ -10,7 +10,7 @@ namespace Dominio.Utilidades
     {
        
         public static List<String> Nombres = new List<string>();
-        public static void llenarPaises()
+        public static List<string> llenarPaises()
         {
             string nom = "";
             foreach (CultureInfo cultura in CultureInfo.GetCultures(CultureTypes.SpecificCultures ))
@@ -20,6 +20,7 @@ namespace Dominio.Utilidades
                 if (!Nombres.Contains (nom)) Nombres.Add(nom); 
             }
             Nombres.Sort();
+            return Nombres;
         }
     }
 }

@@ -37,7 +37,8 @@ namespace Dominio.ServiciosDominio
             ConfigurarParametros();
             CargarHabitacionesPrueba();
             CargarServiciosPrueba();
-            Pasajero pas = new Pasajero(123, "Uruguay", "Pasajero Pasajero", new Direccion());
+            Pasajero pas = new Pasajero(12345678, "Uruguay", "Pasajero Pasajero", new Direccion(1, "SanMartin3384", "", "Montevideo", "Montevideo", "11710", "Uruguay"));
+            if (this.Pasajeros == null) this.Pasajeros = new List<Pasajero>();
             this.Pasajeros.Add(pas);
 
         }

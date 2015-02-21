@@ -15,6 +15,13 @@ namespace Dominio.EntidadesDominio
         string ciudad;
         string dptoProvincia;
         string codigoPostal;
+        string pais; // agregado, no estaba en el original, pero puede ser diferente de el pais emisor del documento
+
+        public string Pais
+        {
+            get { return pais; }
+            set { pais = value; }
+        }
 
         public int Id
         {
@@ -56,6 +63,23 @@ namespace Dominio.EntidadesDominio
         {
             get { return codigoPostal; }
             set { codigoPostal = value; }
+        }
+
+        public Direccion (){
+
+        }
+
+        public Direccion(int _id, string _calleNro, string _dirAdicional, string _ciudad, string _dptoProvinc, string _cPostal, string _pais)
+        {
+            this.id = _id;
+            Direccion.ultId = _id;
+            this.calleNro = _calleNro;
+            this.dirAdicional = _dirAdicional;
+            this.ciudad = _ciudad;
+            this.dptoProvincia = _dptoProvinc;
+            this.codigoPostal = _cPostal;
+            this.pais = _pais;
+
         }
     }
 }
