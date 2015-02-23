@@ -62,6 +62,11 @@ namespace Dominio.EntidadesDominio
         {
             return base.ToString();
         }
+
+        public override int GetHashCode() /// agregué esto porque me decia: Warning1 'Dominio.EntidadesDominio.Habitacion' overrides Object.Equals(object o) but does not override Object.GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 
 }

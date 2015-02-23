@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Dominio.Utilidades;
 using Dominio.EntidadesDominio;
+
+
 namespace Dominio.ServiciosDominio
 {
 
@@ -37,9 +39,7 @@ namespace Dominio.ServiciosDominio
             ConfigurarParametros();
             CargarHabitacionesPrueba();
             CargarServiciosPrueba();
-            Pasajero pas = new Pasajero(12345678, "Uruguay", "Pasajero Pasajero", new Direccion(1, "SanMartin3384", "", "Montevideo", "Montevideo", "11710", "Uruguay"));
-            if (this.Pasajeros == null) this.Pasajeros = new List<Pasajero>();
-            this.Pasajeros.Add(pas);
+            AgregarPasajero (CrearPasajero(12345678, "Uruguay", "Pasajero Pasajero", new Direccion("SanMartin3384", "", "Montevideo", "Montevideo", "11710", "Uruguay")));
 
         }
         private void ConfigurarParametros()
@@ -152,11 +152,17 @@ namespace Dominio.ServiciosDominio
         {
             return new Pasajero(pDocumento, pPaisDoc, pNombre, pDireccion);
         }
+
+        public void AgregarPasajero(Pasajero p){ ///////////// NUEVO
+            if (this.Pasajeros == null) this.Pasajeros = new List<Pasajero>();
+            this.Pasajeros.Add(p);
+        }
+
         public Pasajero ModificarPasajero(int pDocumento, string pPaisDoc, string pNombre, Direccion pDireccion)
         {
             Pasajero pasajeroAModificar = BuscarPasajeroPorDocPais(pDocumento, pPaisDoc);
-            pasajeroAModificar.Documento = pDocumento;
-            pasajeroAModificar.PaisDocumento = pPaisDoc;
+            //pasajeroAModificar.Documento = pDocumento; <-------- documento y pais documento deberian ser inmodificables porque permanecen siempre
+            //pasajeroAModificar.PaisDocumento = pPaisDoc;
             pasajeroAModificar.Nombre = pNombre;
             pasajeroAModificar.Direccion = pDireccion;
 
@@ -211,6 +217,8 @@ namespace Dominio.ServiciosDominio
         }
 
         #endregion
+
+        // PORQUE NO CREAR UN METODO MODIFICARDIRECCION() ? -- aunque no hay lista de Direcciones aca
 
     }
 }

@@ -59,8 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Home.aspx" />
-    <Content Include="styles.css" />
     <Content Include="ModificarUsuario.aspx" />
+    <Content Include="Reserva.aspx" />
+    <Content Include="styles.css" />
+    <Content Include="IngresarVerUsuario.aspx" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
@@ -75,6 +77,13 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="IngresarVerUsuario.aspx.cs">
+      <DependentUpon>IngresarVerUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IngresarVerUsuario.aspx.designer.cs">
+      <DependentUpon>IngresarVerUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ModificarUsuario.aspx.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -83,6 +92,13 @@
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reserva.aspx.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reserva.aspx.designer.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-2.1.3.min.map" />

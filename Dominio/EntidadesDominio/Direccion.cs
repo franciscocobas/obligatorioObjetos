@@ -66,13 +66,14 @@ namespace Dominio.EntidadesDominio
         }
 
         public Direccion (){
-
+            this.id = ultId + 1;
+            Direccion.ultId = this.id;
         }
 
-        public Direccion(int _id, string _calleNro, string _dirAdicional, string _ciudad, string _dptoProvinc, string _cPostal, string _pais)
+        public Direccion(string _calleNro, string _dirAdicional, string _ciudad, string _dptoProvinc, string _cPostal, string _pais)
         {
-            this.id = _id;
-            Direccion.ultId = _id;
+            this.id = ultId + 1;
+            Direccion.ultId = this.id;
             this.calleNro = _calleNro;
             this.dirAdicional = _dirAdicional;
             this.ciudad = _ciudad;

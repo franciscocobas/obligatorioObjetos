@@ -11,16 +11,25 @@
     float:left;
 }
 
+.validators{
+    font-family: 'Courier New';
+    color: red;
+    font-size: 12px;
+}
+
 #txt_documento, #txt_CP  {
     margin-left:21px;
+    margin-right: 3px;
 }
 
 #drp_paisResid{
     margin-left:2px;
+    margin-right: 3px;
 }
 
 #txt_dptoProv{
     margin-left:12px;
+    margin-right: 3px;
 }
 
 #txt_documento2 {
@@ -45,10 +54,16 @@
 
 #div_1, #div_2, #div_4, #div_5, #div_6, #div_7, #div_10, #div_9, #div_8 {
     margin: 0 auto;
-    width:610px;
+    width:620px;
 }
 
 #div_errorMessageDiv{
     height:50px;
+}
+
+#div_errorMessageDiv2{
+    height:80px;
+    text-align:center;
+
 }
 

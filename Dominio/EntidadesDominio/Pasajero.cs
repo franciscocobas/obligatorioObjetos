@@ -62,5 +62,17 @@ namespace Dominio.EntidadesDominio
             this.Nombre = pNombre;
             this.Direccion = pDireccion;
         }
+        ///////
+        public override bool Equals(object obj)
+        {
+            Pasajero p = obj as Pasajero;
+            if (obj == null) return false;
+            return this.id == p.id;
+        }
+
+        public override int GetHashCode() /// agregué esto porque me decia: Warning1 'Dominio.EntidadesDominio.Habitacion' overrides Object.Equals(object o) but does not override Object.GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
     }
 }
