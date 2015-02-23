@@ -48,7 +48,7 @@
     width:441px;
 }
 
-#h1_titleHome, #h1_editTitle, #h1_inputTitle, #div_errorMessageDiv, #div_3,  #div_11{
+#h1_titleHome, #h1_editTitle, #h1_inputTitle, #div_errorMessageDiv, #div_3,  #div_11, #div_1_login, #div_2_login, #div_3_login, #div_errorMessageDiv_login{
     text-align:center;
 }
 
@@ -57,8 +57,21 @@
     width:620px;
 }
 
+#div_1_login, #div_2_login, #div_3_login, #div_errorMessageDiv_login{
+    margin: 0 auto;
+    width:286px;
+}
+
+#txt_usr{
+    margin-left:28px;
+}
+
 #div_errorMessageDiv{
     height:50px;
+}
+
+#div_errorMessageDiv_login{
+    height: 20px;
 }
 
 #div_errorMessageDiv2{

@@ -68,14 +68,29 @@ namespace Dominio.ServiciosDominio
         }
         #endregion
         #region Administrativos
-        public Administrativo CrearAdministrativo(string pUsuario, string pPassword, string pNombre)
+        private Administrativo CrearAdministrativo(string pUsuario, string pPassword, string pNombre) //public/private
         {
             return new Administrativo(pUsuario, pPassword, pNombre);
         }
-        public void AgregarAdministrativo (Administrativo pAdmin)
+        private void AgregarAdministrativo (Administrativo pAdmin)
         {
             if (this.Administrativos == null) this.Administrativos = new List<Administrativo>();
             this.Administrativos.Add(pAdmin);
+        }
+
+
+        /// NUEVO METODO
+        public Administrativo LoginAdmin(string pUser, string pPassword)
+        {
+            Administrativo adminEncontrado = null;
+            foreach (Administrativo a in this.Administrativos)
+            {
+                if (a.Usuario == pUser && a.Password == pPassword)
+                {
+                    adminEncontrado = a;
+                }
+            }
+            return adminEncontrado;
         }
 
         #endregion

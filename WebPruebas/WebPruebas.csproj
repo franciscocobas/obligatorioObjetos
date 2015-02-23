@@ -58,7 +58,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="controlPanelAdmin.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="loginAdmin.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="Reserva.aspx" />
     <Content Include="styles.css" />
@@ -70,6 +72,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controlPanelAdmin.aspx.cs">
+      <DependentUpon>controlPanelAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controlPanelAdmin.aspx.designer.cs">
+      <DependentUpon>controlPanelAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -83,6 +92,13 @@
     </Compile>
     <Compile Include="IngresarVerUsuario.aspx.designer.cs">
       <DependentUpon>IngresarVerUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="loginAdmin.aspx.cs">
+      <DependentUpon>loginAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="loginAdmin.aspx.designer.cs">
+      <DependentUpon>loginAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="ModificarUsuario.aspx.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
