@@ -31,6 +31,7 @@ namespace Dominio.ServiciosDominio
         public List<Administrativo> Administrativos { get; private set; }
 
         #endregion
+
         # region Carga de datos iniciales
     
         void Inicializar()
@@ -39,15 +40,17 @@ namespace Dominio.ServiciosDominio
             ConfigurarParametros();
             CargarHabitacionesPrueba();
             CargarServiciosPrueba();
-            AgregarPasajero (CrearPasajero(12345678, "Uruguay", "Pasajero Pasajero", new Direccion("SanMartin3384", "", "Montevideo", "Montevideo", "11710", "Uruguay")));
-
+            CargarAdministrativoPrueba();
+            //agregar pasajero se tiene que eliminar cuando se entregue??
+            CrearPasajero(12345678, "Uruguay", "Pasajero Pasajero", new Direccion("SanMartin3384", "", "Montevideo", "Montevideo", "11710", "Uruguay"));
         }
+
         private void ConfigurarParametros()
         {
             Estandar.PrecioBasicoXCama = new Precio(89);
             CotizacionDolar.Instancia.ActualizarPrecios(23.40M, 20.50M);//M es el sufijo para decimal
-
         }
+
         private void CargarServiciosPrueba()
         {
             AgregarServicio(new Servicio("Canoas", new Precio(180M), 75, 89));
@@ -62,35 +65,71 @@ namespace Dominio.ServiciosDominio
             AgregarHabitacion(CrearHabitacionSuite(110, true, true, 0, 1, new Precio(250.0M)));
 
         }
+
         private void CargarAdministrativoPrueba()
         {
-            AgregarAdministrativo(CrearAdministrativo("admin", "admin", "Administrativo"));
+            AgregarAdmin("admin", "admin", "Administrativo");
         }
+
         #endregion
+
         #region Administrativos
-        private Administrativo CrearAdministrativo(string pUsuario, string pPassword, string pNombre) //public/private
+
+        public Administrativo ValidarLogin(string usrname, string pass)
         {
-            return new Administrativo(pUsuario, pPassword, pNombre);
-        }
-        private void AgregarAdministrativo (Administrativo pAdmin)
-        {
-            if (this.Administrativos == null) this.Administrativos = new List<Administrativo>();
-            this.Administrativos.Add(pAdmin);
+            Administrativo usr = this.BuscarAdmin(usrname);
+            bool login_true = false;
+
+            if (usr != null)
+                login_true = usr.loginCorrecto(usrname, pass);
+            if (login_true)
+                return usr;
+            else
+            {
+                return null;
+            }
         }
 
-
-        /// NUEVO METODO
-        public Administrativo LoginAdmin(string pUser, string pPassword)
+        private Administrativo BuscarAdmin(string usrnm)
         {
             Administrativo adminEncontrado = null;
+
             foreach (Administrativo a in this.Administrativos)
             {
-                if (a.Usuario == pUser && a.Password == pPassword)
+                if (a.Usuario == usrnm)
                 {
                     adminEncontrado = a;
                 }
             }
             return adminEncontrado;
+
+        }
+
+        private bool ExisteAdmin(string usrnm)
+        {
+            return (this.BuscarAdmin(usrnm) != null);
+        }
+
+        //eliminé el RolAutenticado(string usrnm, string pass) /// ver si es que alguien lo llama...
+
+        private bool AgregarAdmin(Administrativo admin)
+        {
+            if (admin != null)
+            {
+                if (this.Administrativos == null) this.Administrativos = new List<Administrativo>();
+                if (!this.ExisteAdmin(admin.Usuario))
+                {
+                    Administrativos.Add(admin);
+                    return true; // para avisar si se agregó
+                }
+            }
+            return false; // para avisar si se agregó
+        }
+
+        private bool AgregarAdmin(string usu, string pwd, string name) //era bool
+        {
+            Administrativo nuevoA = new Administrativo(usu, pwd, name);
+            return AgregarAdmin(nuevoA); //iba return here
         }
 
         #endregion
@@ -154,6 +193,7 @@ namespace Dominio.ServiciosDominio
             return new Precio(0M);
         }
         #endregion
+
         #region  Servicios
         public void AgregarServicio(Servicio s)
         {
@@ -163,12 +203,16 @@ namespace Dominio.ServiciosDominio
         #endregion
 
         #region Pasajeros
+
         public Pasajero CrearPasajero(int pDocumento, string pPaisDoc, string pNombre, Direccion pDireccion)
         {
-            return new Pasajero(pDocumento, pPaisDoc, pNombre, pDireccion);
+            Pasajero p = new Pasajero(pDocumento, pPaisDoc, pNombre, pDireccion);
+            AgregarPasajero(p);
+            return p;
         }
 
-        public void AgregarPasajero(Pasajero p){ ///////////// NUEVO
+        public void AgregarPasajero(Pasajero p) ///////////// NUEVO
+        { 
             if (this.Pasajeros == null) this.Pasajeros = new List<Pasajero>();
             this.Pasajeros.Add(p);
         }
@@ -176,13 +220,13 @@ namespace Dominio.ServiciosDominio
         public Pasajero ModificarPasajero(int pDocumento, string pPaisDoc, string pNombre, Direccion pDireccion)
         {
             Pasajero pasajeroAModificar = BuscarPasajeroPorDocPais(pDocumento, pPaisDoc);
-            //pasajeroAModificar.Documento = pDocumento; <-------- documento y pais documento deberian ser inmodificables porque permanecen siempre
-            //pasajeroAModificar.PaisDocumento = pPaisDoc;
+            //documento y pais documento deberian ser inmodificables porque permanecen siempre
             pasajeroAModificar.Nombre = pNombre;
             pasajeroAModificar.Direccion = pDireccion;
 
             return pasajeroAModificar;
         }
+
         public Pasajero BuscarPasajeroPorDocPais(int pDocumento, string pPaisDocumento)
         {
             Pasajero pasajeroEncontrado = null;
@@ -195,6 +239,45 @@ namespace Dominio.ServiciosDominio
             }
             return pasajeroEncontrado;
         }
+
+        // para login Pasajero
+        public Pasajero existePasajero(string pDoc, string pPais, out string alert){
+
+            Pasajero p = null;
+            string issue;
+            int intDoc = this.validarPasajero(pDoc, pPais, out issue);
+            alert = issue;
+
+            if (intDoc != 0) // si es 0, significa que el doc no era todo numeros o no entraba en el rango de caracteres
+            {
+                p = BuscarPasajeroPorDocPais(intDoc, pPais);
+            }
+
+            return p;
+        }
+
+        public int validarPasajero(string pDoc, string pPais, out string issues)
+        {
+            issues = null;
+            int intDoc = 0;
+            int.TryParse(pDoc, out intDoc);
+
+            if (intDoc != 0)
+            {
+                if (!Pasajero.valSizeDocumento(pDoc))
+                {
+                    intDoc = 0;
+                    issues = "El documento debe tener de 8 a 10 caracteres";
+                }
+            }
+            else
+            {
+                issues = "El documento debe contener solo números";
+            }
+
+            return intDoc;
+        }
+
         #endregion
 
         #region Reservas

@@ -21,6 +21,6 @@ C:\Users\Francisco\Desktop\Taller Objetos\SolucionReservasWeb\Dominio\bin\Debug\
 C:\Users\Francisco\Desktop\Taller Objetos\SolucionReservasWeb\Dominio\bin\Debug\Dominio.pdb
 C:\Users\Usuario\Documents\Visual Studio 2013\Projects\SolucionReservasWeb\Dominio\bin\Debug\Dominio.dll
 C:\Users\Usuario\Documents\Visual Studio 2013\Projects\SolucionReservasWeb\Dominio\bin\Debug\Dominio.pdb
-C:\Users\Usuario\Documents\Visual Studio 2013\Projects\SolucionReservasWeb\Dominio\obj\Debug\Dominio.csprojResolveAssemblyReference.cache
 C:\Users\Usuario\Documents\Visual Studio 2013\Projects\SolucionReservasWeb\Dominio\obj\Debug\Dominio.dll
 C:\Users\Usuario\Documents\Visual Studio 2013\Projects\SolucionReservasWeb\Dominio\obj\Debug\Dominio.pdb
+C:\Users\Usuario\Documents\Visual Studio 2013\Projects\SolucionReservasWeb\Dominio\obj\Debug\Dominio.csprojResolveAssemblyReference.cache

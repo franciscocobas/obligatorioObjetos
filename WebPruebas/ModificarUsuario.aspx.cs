@@ -57,18 +57,9 @@ namespace WebPruebas
             int int_doc = int.Parse(doc);
             string pais = Request.QueryString["pais"];
             
-            if (IsFilled(txt_nombre.Text) && IsFilled(txt_dir1.Text) && IsFilled(txt_ciudad.Text) && IsFilled(txt_dptoProv.Text) && IsFilled(txt_CP.Text) && drp_paisResid.SelectedIndex != 0)
-            {
-                //aca puedo cambiar new Direction por un metodo que sea modificar direccion?
-                elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue));
-                Response.Redirect("Home.aspx");
-            }
-            else
-            {
-                //
-            }
- 
-
+            //aca puedo cambiar new Direction por un metodo que sea modificar direccion?
+            elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue));
+            Response.Redirect("Home.aspx");
         }
 
         protected void Cancelar_Click(object sender, EventArgs e)

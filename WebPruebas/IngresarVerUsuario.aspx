@@ -6,6 +6,7 @@
 <head runat="server">
     <title id="titulo"></title>
     <link href="styles.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/ValidacionUsuario"></script>
 </head>
 <body>
     <form id="form1" runat="server">

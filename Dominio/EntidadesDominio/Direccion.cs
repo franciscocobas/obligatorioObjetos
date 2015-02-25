@@ -17,6 +17,8 @@ namespace Dominio.EntidadesDominio
         string codigoPostal;
         string pais; // agregado, no estaba en el original, pero puede ser diferente de el pais emisor del documento
 
+        #region propiedades
+
         public string Pais
         {
             get { return pais; }
@@ -65,7 +67,10 @@ namespace Dominio.EntidadesDominio
             set { codigoPostal = value; }
         }
 
-        public Direccion (){
+        #endregion
+
+        public Direccion ()
+        {
             this.id = ultId + 1;
             Direccion.ultId = this.id;
         }

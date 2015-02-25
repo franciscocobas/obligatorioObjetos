@@ -6,7 +6,7 @@
 <head runat="server">
     <title id="titulo"></title>
     <link href="styles.css" rel="stylesheet" />
-
+    <script type="text/javascript" src="~/Scripts/ValidacionUsuario"></script
 </head>
 <body>
     <form id="form1" runat="server">
@@ -52,7 +52,7 @@
         </div>
         <br />
         <br />
-        <div id="div_errorMessageDiv" runat="server">
+        <div id="div_errorMessageDiv2" runat="server">
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validators" ValidationGroup="ValidatorModif" DisplayMode="List" EnableTheming="True" HeaderText="Los campos con * son obligatorios"/>
         </div>
         <div id="div_11">

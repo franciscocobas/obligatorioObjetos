@@ -9,12 +9,16 @@ namespace Dominio.EntidadesDominio
     public class Pasajero
     {
         #region Atributos
+
         int id;
         static int ultId;
         int documento;
         string paisDocumento;
         string nombre;
         Direccion direccion;
+        const int minSize = 8;
+        const int maxSize = 10;
+
         #endregion
 
         #region Propiedades
@@ -62,7 +66,7 @@ namespace Dominio.EntidadesDominio
             this.Nombre = pNombre;
             this.Direccion = pDireccion;
         }
-        ///////
+        
         public override bool Equals(object obj)
         {
             Pasajero p = obj as Pasajero;
@@ -74,5 +78,14 @@ namespace Dominio.EntidadesDominio
         {
             return this.Id.GetHashCode();
         }
+
+        #region Validacion
+
+        public static bool valSizeDocumento(string pDoc)
+        {
+            return pDoc.Length <= maxSize && pDoc.Length >= minSize;
+        }
+
+        #endregion
     }
 }

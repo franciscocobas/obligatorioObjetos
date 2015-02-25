@@ -1,17 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="controlPanelAdmin.aspx.cs" Inherits="WebPruebas.controlPanelAdmin" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Panel de Control</title>
-    <link href="styles.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
-    </form>
-</body>
-</html>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterAdmin.Master" AutoEventWireup="true" CodeBehind="controlPanelAdmin.aspx.cs" Inherits="WebPruebas.controlPanelAdmin" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Content1" runat="server">
+</asp:Content>
