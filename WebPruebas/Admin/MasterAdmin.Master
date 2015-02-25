@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterAdmin.master.cs" Inherits="WebPruebas.MasterAdmin" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="../styles.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+
+        <%-- CERRAR SESION----
+            <asp:LinkButton ID="LnkCerrarSesion" runat="server" onclick="LnkCerrarSesion_Click"
+        PostBackUrl="~/loginAdmin.aspx">Cerrar Sesión</asp:LinkButton>--%>
+        <asp:ContentPlaceHolder ID="Content1" runat="server">
+
+
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

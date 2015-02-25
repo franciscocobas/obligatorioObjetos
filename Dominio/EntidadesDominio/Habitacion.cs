@@ -83,6 +83,12 @@ namespace Dominio.EntidadesDominio
             if (obj == null) return false;
             return this.numeroHabitacion == h.numeroHabitacion;
         }
+
+        public override int GetHashCode() /// agregué esto porque me decia: Warning1 'Dominio.EntidadesDominio.Habitacion' overrides Object.Equals(object o) but does not override Object.GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+
         #endregion
         #region Constructores
         public Habitacion(int numero, bool jacuzzi, bool exterior, int camasSimples, int CamasDobles)

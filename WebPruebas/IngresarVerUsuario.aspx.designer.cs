@@ -10,7 +10,7 @@
 namespace WebPruebas {
     
     
-    public partial class ModificarUsuario1 {
+    public partial class ModificarUsuario {
         
         /// <summary>
         /// titulo control.
@@ -38,6 +38,15 @@ namespace WebPruebas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl h1_editTitle;
+        
+        /// <summary>
+        /// h1_inputTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl h1_inputTitle;
         
         /// <summary>
         /// lbl_doc control.
@@ -281,6 +290,15 @@ namespace WebPruebas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_cancelar;
+        
+        /// <summary>
+        /// btn_modifDato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_modifDato;
         
         /// <summary>
         /// btn_hacerReserva control.
