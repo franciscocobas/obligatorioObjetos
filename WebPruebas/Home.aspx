@@ -30,7 +30,6 @@
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="AllValidators" HeaderText="Los campos con * son obligatorios" CssClass="validators" />
         </div>
         <div id="div_3"><asp:Button ID="Submit" runat="server" Text="Hacer reserva" OnClick="Submit_Click" ValidationGroup="AllValidators" /></div>
-
         <br />
     </div>
     </form>

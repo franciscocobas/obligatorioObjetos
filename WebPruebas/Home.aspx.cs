@@ -2,10 +2,6 @@
 using Dominio.ServiciosDominio;
 using Dominio.Utilidades;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -17,6 +13,7 @@ namespace WebPruebas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.WebForms;
             ScriptResourceDefinition jQuery = new ScriptResourceDefinition();
             jQuery.Path = "~/scripts/jquery-2.1.3.min.js";
@@ -35,6 +32,7 @@ namespace WebPruebas
 
         protected void Submit_Click(object sender, EventArgs e)
         {
+
 
             string doc = txt_documento.Text;
             string pais = drp_Pais.SelectedValue;

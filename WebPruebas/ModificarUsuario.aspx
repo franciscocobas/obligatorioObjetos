@@ -6,7 +6,7 @@
 <head runat="server">
     <title id="titulo"></title>
     <link href="styles.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/Scripts/ValidacionUsuario"></script
+    <script type="text/javascript" src="~/Scripts/ValidacionUsuario"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -56,10 +56,11 @@
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validators" ValidationGroup="ValidatorModif" DisplayMode="List" EnableTheming="True" HeaderText="Los campos con * son obligatorios"/>
         </div>
         <div id="div_11">
-            <asp:Button ID="btn_cancelar" runat="server" OnClick="Cancelar_Click" Text="Cancelar" />            
-            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="Reserva_Click" Text="Continuar con reserva" ValidationGroup="ValidatorModif" />
+            <asp:Button ID="btn_cancelar" runat="server" OnClick="Cancelar_Click" Text="Cancelar" />  
+            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="Reserva_Click" ValidationGroup="ValidatorModif" text="Continuar con la reserva" />
         </div>
     </div>
     </form>
 </body>
 </html>
+

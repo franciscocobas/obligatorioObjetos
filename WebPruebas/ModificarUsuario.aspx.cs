@@ -51,28 +51,23 @@ namespace WebPruebas
 
         }
 
-        protected void Reserva_Click(object sender, EventArgs e)
+        protected void ReservaModif_Click(object sender, AuthenticateEventArgs e)
         {
             string doc = Request.QueryString["doc"];
             int int_doc = int.Parse(doc);
             string pais = Request.QueryString["pais"];
             
             //aca puedo cambiar new Direction por un metodo que sea modificar direccion?
-            elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue));
-            Response.Redirect("Home.aspx");
+            Pasajero p = elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue));
+            if (p != null){
+                Session["Pasajero"] = p;
+                Response.Redirect("Pasajero/Reserva.aspx");
+            }
         }
 
         protected void Cancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");
-        }
-
-        private bool IsFilled(string s)
-        {
-            if (s != "")
-            { return true; }
-            else
-            { return false; }
         }
     }
 }

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Dominio.Utilidades;
 using Dominio.EntidadesDominio;
+using System.Security.Policy;
+using System.Reflection;
 
 
 namespace Dominio.ServiciosDominio
@@ -110,8 +112,6 @@ namespace Dominio.ServiciosDominio
             return (this.BuscarAdmin(usrnm) != null);
         }
 
-        //eliminé el RolAutenticado(string usrnm, string pass) /// ver si es que alguien lo llama...
-
         private bool AgregarAdmin(Administrativo admin)
         {
             if (admin != null)
@@ -192,6 +192,39 @@ namespace Dominio.ServiciosDominio
             // metodo a implementar
             return new Precio(0M);
         }
+
+        public List<string> obtenerTipoHabitaciones()
+        {
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            //Provide the current application domain evidence for the assembly.
+            Evidence asEvidence = currentDomain.Evidence;
+            //Load the assembly from the application directory using a simple name. 
+
+            //Make an array for the list of assemblies.
+            Assembly[] assems = currentDomain.GetAssemblies();
+
+            List<string> retorno = new List<string>();
+            for (var i = 0; i < assems.Length; i++)
+            {
+                Assembly a = assems[i];
+                string name = a.GetName().Name;
+                if (name == "Dominio")
+                {
+                    Type[] types = a.GetTypes();
+                    for (var e = 0; e < types.Length; e++)
+                    {
+                        Type t = types[e];
+                        Type typeHabitacion = Type.GetType("Dominio.EntidadesDominio.Habitacion");
+                        if (t.IsSubclassOf(typeHabitacion))
+                        {
+                            retorno.Add(t.Name);
+                        }
+                    }
+                }
+            }
+            return retorno;
+        }
+
         #endregion
 
         #region  Servicios

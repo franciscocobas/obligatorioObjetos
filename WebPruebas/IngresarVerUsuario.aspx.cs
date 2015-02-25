@@ -9,6 +9,8 @@ using Dominio.EntidadesDominio;
 using Dominio.ServiciosDominio;
 using Dominio.Utilidades;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Security;
+
 
 namespace WebPruebas
 {
@@ -18,6 +20,14 @@ namespace WebPruebas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.WebForms;
+            ScriptResourceDefinition jQuery = new ScriptResourceDefinition();
+            jQuery.Path = "~/scripts/jquery-2.1.3.min.js";
+            jQuery.DebugPath = "~/scripts/jquery-2.1.3.js";
+            jQuery.CdnPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.3.min.js";
+            jQuery.CdnDebugPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.3.js";
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", jQuery); 
+
             string doc = Request.QueryString["doc"];
             int int_doc = int.Parse(doc);
             string pais = Request.QueryString["pais"];   
@@ -86,13 +96,16 @@ namespace WebPruebas
 
             if (Request.QueryString["modo"] == "0") // usuario existente
             {
-                Response.Redirect("Reserva.aspx?doc=" + txt_documento2.Text + "&pais=" + drp_Pais2.SelectedValue); 
+                Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
+                Response.Redirect("Pasajero/Reserva.aspx"); 
             }
+
             else // usuario nuevo, validado
             { 
                 /// aca tengo que validar por JS que el nombre tenga un espacio <<<<<<<<<<<<<<<<--------------------------------
                 elSistema.CrearPasajero(int_doc, pais, txt_nombre.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue));
-                Response.Redirect("Reserva.aspx?doc=" + doc + "&pais=" + pais); 
+                Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
+                Response.Redirect("Pasajero/Reserva.aspx"); 
             }
 
         }

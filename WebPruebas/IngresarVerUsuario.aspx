@@ -59,7 +59,7 @@
         <div id="div_11">
             <asp:Button ID="btn_cancelar" runat="server" OnClick="Cancelar_Click" Text="Cancelar" />            
             <asp:Button ID="btn_modifDato" runat="server" OnClick="Modificar_Click" Text="Modificar datos" />
-            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="Reserva_Click" Text="Aceptar y continuar con reserva" ValidationGroup="ValidatorIngreso" />
+            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="Reserva_Click" ValidationGroup="ValidatorModif" text="Aceptar y continuar con la reserva" />
         </div>
     </div>
     </form>

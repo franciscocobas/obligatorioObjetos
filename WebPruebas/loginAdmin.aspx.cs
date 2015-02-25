@@ -1,17 +1,7 @@
 ﻿using Dominio.EntidadesDominio;
 using Dominio.ServiciosDominio;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 
 
 namespace WebPruebas
@@ -35,14 +25,14 @@ namespace WebPruebas
 
             if (a != null)
             {
-                Session["usuarioActivo"] = a;
+                Session["Admin"] = a;
                 e.Authenticated = true;
-                this.LoginAdmin.DestinationPageUrl = "controlPanelAdmin.aspx";
+                this.LoginAdmin.DestinationPageUrl = "Admin/controlPanelAdmin.aspx";
             }
                
             else
             {
-                Session["usuarioActivo"] = null;
+                Session["usuario"] = null;
                 e.Authenticated = false;
             }
         }

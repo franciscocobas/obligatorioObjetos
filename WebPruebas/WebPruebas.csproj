@@ -58,26 +58,29 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="controlPanelAdmin.aspx" />
+    <Content Include="Admin\controlPanelAdmin.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="Pasajero\ListarHabitaciones.aspx" />
     <Content Include="loginAdmin.aspx" />
     <Content Include="ModificarUsuario.aspx" />
-    <Content Include="Reserva.aspx" />
+    <Content Include="Pasajero\Reserva.aspx" />
+    <Content Include="Scripts\ValidacionUsuario.js" />
     <Content Include="styles.css" />
     <Content Include="IngresarVerUsuario.aspx" />
     <Content Include="packages.config" />
-    <Content Include="MasterAdmin.Master" />
+    <Content Include="Admin\MasterAdmin.Master" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Web.config" />
+    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="controlPanelAdmin.aspx.cs">
+    <Compile Include="Admin\controlPanelAdmin.aspx.cs">
       <DependentUpon>controlPanelAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="controlPanelAdmin.aspx.designer.cs">
+    <Compile Include="Admin\controlPanelAdmin.aspx.designer.cs">
       <DependentUpon>controlPanelAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
@@ -94,6 +97,13 @@
     <Compile Include="IngresarVerUsuario.aspx.designer.cs">
       <DependentUpon>IngresarVerUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pasajero\ListarHabitaciones.aspx.cs">
+      <DependentUpon>ListarHabitaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pasajero\ListarHabitaciones.aspx.designer.cs">
+      <DependentUpon>ListarHabitaciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="loginAdmin.aspx.cs">
       <DependentUpon>loginAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -101,11 +111,11 @@
     <Compile Include="loginAdmin.aspx.designer.cs">
       <DependentUpon>loginAdmin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MasterAdmin.Master.cs">
+    <Compile Include="Admin\MasterAdmin.Master.cs">
       <DependentUpon>MasterAdmin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MasterAdmin.Master.designer.cs">
+    <Compile Include="Admin\MasterAdmin.Master.designer.cs">
       <DependentUpon>MasterAdmin.Master</DependentUpon>
     </Compile>
     <Compile Include="ModificarUsuario.aspx.cs">
@@ -116,11 +126,11 @@
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reserva.aspx.cs">
+    <Compile Include="Pasajero\Reserva.aspx.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Reserva.aspx.designer.cs">
+    <Compile Include="Pasajero\Reserva.aspx.designer.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
