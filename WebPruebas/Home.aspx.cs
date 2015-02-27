@@ -13,7 +13,7 @@ namespace WebPruebas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["Usuario"] = null; // borrar
             Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.WebForms;
             ScriptResourceDefinition jQuery = new ScriptResourceDefinition();
             jQuery.Path = "~/scripts/jquery-2.1.3.min.js";

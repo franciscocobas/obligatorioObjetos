@@ -4,6 +4,7 @@ using Dominio.Utilidades;
 using Dominio.EntidadesDominio;
 using System.Security.Policy;
 using System.Reflection;
+using System.Globalization;
 
 
 namespace Dominio.ServiciosDominio
@@ -31,6 +32,7 @@ namespace Dominio.ServiciosDominio
         public List<Pasajero> Pasajeros { get; private set; }
         public List<Reserva> Reservas { get; private set; }
         public List<Administrativo> Administrativos { get; private set; }
+        public List<Direccion> Direcciones { get; private set; }
 
         #endregion
 
@@ -45,6 +47,8 @@ namespace Dominio.ServiciosDominio
             CargarAdministrativoPrueba();
             //agregar pasajero se tiene que eliminar cuando se entregue??
             CrearPasajero(12345678, "Uruguay", "Pasajero Pasajero", new Direccion("SanMartin3384", "", "Montevideo", "Montevideo", "11710", "Uruguay"));
+            CrearPasajero(12345678, "Argentina", "Arg Pasajero", new Direccion("SanMartin84", "", "BsAs", "BsAs", "11710", "Uruguay"));
+ 
         }
 
         private void ConfigurarParametros()
@@ -327,6 +331,36 @@ namespace Dominio.ServiciosDominio
 
         #endregion
 
+        #region Direccion
+
+        public Direccion ModificarDireccion(int pdoc, string pPaisDoc, string pDireccion1, string pDireccion2, string pCiudad, string pDptoProv, string pCP, string pPais) 
+        {   
+            //ya corrobore que existe la direccion porque sino no habria llegado a donde estoy
+            Direccion dir = this.BuscarDireccion(pdoc, pPaisDoc, pDireccion1, pDireccion2, pCiudad, pDptoProv, pCP, pPais);
+
+            dir.CalleNro = pDireccion1;
+            dir.DirAdicional = pDireccion2;
+            dir.Ciudad = pCiudad;
+            dir.DptoProvincia = pDptoProv;
+            dir.CodigoPostal = pCP;
+            dir.Pais = pPais;
+            
+            return dir;
+        }
+
+
+        public Direccion BuscarDireccion(int pdoc, string pPaisDoc, string pDireccion1, string pDireccion2, string pCiudad, string pDptoProv, string pCP, string pPais) 
+        {
+	        Direccion d;
+            Pasajero pas = this.BuscarPasajeroPorDocPais(pdoc, pPaisDoc);
+            d = pas.Direccion;
+
+	        return d;
+        }
+
+
+        #endregion
+        
         #region Otros
 
         public List<string> listaPaises()
@@ -335,10 +369,30 @@ namespace Dominio.ServiciosDominio
             return ListaPaises.Nombres;
         }
 
-        public Precio MostrarDineroRecaudadoEntreFechas(DateTime pDesde, DateTime pHasta)
+        public bool ValidarPrecios(string pVenta, string pCompra, out decimal newVenta, out decimal newCompra)
+        {     
+            bool valid = false;
+            newCompra = 0M;
+            bool exito = decimal.TryParse(pCompra, NumberStyles.Any, CultureInfo.InstalledUICulture, out newCompra);
+            newVenta = 0M;
+            bool exito2 = decimal.TryParse(pVenta, NumberStyles.Any, CultureInfo.InstalledUICulture, out newVenta);
+            
+            if (exito && exito2) valid = true;
+
+            return valid;
+        }
+
+        public Precio MostrarDineroRecaudado()
         {
-            // Método a implementar
-            return new Precio(0M);
+            decimal decTotal = 0M;
+            foreach (Reserva res in Reservas)
+            {
+                decTotal += res.CalcularPrecio().MontoDolares;
+            }
+
+            Precio precioTot = new Precio(decTotal);
+
+            return precioTot;
         }
 
         public List<Reserva> RecuperarReservasActivas(int pIdPasajero)
@@ -348,8 +402,6 @@ namespace Dominio.ServiciosDominio
         }
 
         #endregion
-
-        // PORQUE NO CREAR UN METODO MODIFICARDIRECCION() ? -- aunque no hay lista de Direcciones aca
 
     }
 }

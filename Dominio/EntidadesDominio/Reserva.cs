@@ -83,15 +83,32 @@ namespace Dominio.EntidadesDominio
             // metodo a implementar
         }
 
-        public void AgregarHabitacion(int pId)
+        public void AgregarHabitacion(Habitacion pHab)
         {
-            // metodo a implementar
+            if (this.Habitaciones == null) this.Habitaciones = new List<Habitacion>();
+            this.Habitaciones.Add(pHab);
         }
 
         public Precio CalcularPrecio()
         {
-            // metodo a implementar
-            return new Precio(0M);
+            Type tipo = Habitaciones[0].GetType(); 
+            decimal pTot = 0M;
+            if (tipo == typeof(Estandar)){
+                foreach (Estandar Est in this.Habitaciones){
+
+                    pTot += Est.CalcularPrecioTotal().MontoDolares;
+                }
+            }
+            else if (tipo == typeof(Suite)){
+                foreach (Suite Su in this.Habitaciones){
+
+                    pTot += Su.CalcularPrecioTotal().MontoDolares;
+                }
+            }
+
+            Precio tot = new Precio(pTot);
+
+            return tot;
         }
     }
 }

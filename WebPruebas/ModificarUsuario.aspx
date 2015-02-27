@@ -6,8 +6,7 @@
 <head runat="server">
     <title id="titulo"></title>
     <link href="styles.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/Scripts/ValidacionUsuario"></script>
-</head>
+</head>    
 <body>
     <form id="form1" runat="server">
     <div>
@@ -23,7 +22,9 @@
         </div>  
         <br />     
         <div id="div_4">
-            <asp:Label ID="lbl_nombre" CssClass="cssLabels" runat="server" Text="Nombre"></asp:Label><asp:TextBox ID="txt_nombre" runat="server"></asp:TextBox>            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorModif" ControlToValidate="txt_nombre">*</asp:RequiredFieldValidator>
+            <asp:Label ID="lbl_nombre" CssClass="cssLabels" runat="server" Text="Nombre"></asp:Label><asp:TextBox ID="txt_nombre" runat="server"></asp:TextBox>            
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorModif" ControlToValidate="txt_nombre">*</asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txt_nombre" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressions"></asp:RegularExpressionValidator>
         </div>
         <br />
         <div id="div_5">
@@ -53,11 +54,14 @@
         <br />
         <br />
         <div id="div_errorMessageDiv2" runat="server">
+            <div runat="server" id="div_jqueryValid2"> 
+            </div>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validators" ValidationGroup="ValidatorModif" DisplayMode="List" EnableTheming="True" HeaderText="Los campos con * son obligatorios"/>
+            <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="expressions" />
         </div>
         <div id="div_11">
             <asp:Button ID="btn_cancelar" runat="server" OnClick="Cancelar_Click" Text="Cancelar" />  
-            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="Reserva_Click" ValidationGroup="ValidatorModif" text="Continuar con la reserva" />
+            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="ReservaModif_Click" OnClientClick="sth()" ValidationGroup="ValidatorModif" text="Continuar con la reserva" />
         </div>
     </div>
     </form>

@@ -90,6 +90,7 @@ namespace Dominio.EntidadesDominio
         }
 
         #endregion
+
         #region Constructores
         public Habitacion(int numero, bool jacuzzi, bool exterior, int camasSimples, int CamasDobles)
         {
@@ -100,6 +101,7 @@ namespace Dominio.EntidadesDominio
             this.CantCamasDobles = CamasDobles;
         }
         #endregion
+
         #region Comportamiento 
         internal abstract Precio CalcularPrecioTotal();
 

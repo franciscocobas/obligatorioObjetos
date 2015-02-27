@@ -6,7 +6,72 @@
 <head runat="server">
     <title id="titulo"></title>
     <link href="styles.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/Scripts/ValidacionUsuario"></script>
+    <script src='Scripts/jquery-2.1.3.min.js' type = 'text/javascript'></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function inicio() {
+        divAlertaInicio = "<p style='color: #FF0000; font-size: 12px; margin:0px; font-family: &quot;Courier New&quot;, Courier, monospace'>";
+        divAlertaFin = "</p>";
+
+        $("#txt_nombre").blur(function () {
+            nom_val = $("#txt_nombre").val();
+            char = true;
+            for (i = 0; i < nom_val.length; i++) {
+                if (!isNaN(nom_val[i])) {
+                    if (nom_val[i] != " ") {
+                        char = false;
+                    }
+                }
+                else { char = true; }
+
+            };
+
+            if (!char) {
+                $("#div_jqueryValid").html(divAlertaInicio + "El nombre no puede contener números" + divAlertaFin);
+            }
+            else { $("#div_jqueryValid").html(""); }
+
+        });
+
+        $("#txt_ciudad").blur(function () {
+            ciudad_val = $("#txt_ciudad").val();
+            char = true;
+            for (i = 0; i < ciudad_val.length; i++) {
+                if (!isNaN(ciudad_val[i])) {
+                    if (ciudad_val[i] != " ") {
+                        char = false;
+                    }
+                }
+                else { char = true; }
+
+            };
+
+            if (!char) {
+                $("#div_jqueryValid").html(divAlertaInicio + "La ciudad no puede contener números" + divAlertaFin);
+            }
+            else { $("#div_jqueryValid").html(""); }
+
+        });
+
+        $("#txt_dptoProv").blur(function () {
+            dpto_val = $("#txt_dptoProv").val();
+            char = true;
+            for (i = 0; i < dpto_val.length; i++) {
+                if (!isNaN(dpto_val[i])) {
+                    if (dpto_val[i] != " ") {
+                        char = false;
+                    }
+                }
+                else { char = true; }
+
+            };
+
+            if (!char) {
+                $("#div_jqueryValid").html(divAlertaInicio + "El departamento/provincia no puede contener números" + divAlertaFin);
+            }
+            else { $("#div_jqueryValid").html("");}
+        });   
+    });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -54,12 +119,15 @@
         <br />
         <br />
         <div id="div_errorMessageDiv2" runat="server">
+            <div runat="server" id="div_jqueryValid">
+
+            </div>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validators" ValidationGroup="ValidatorIngreso" DisplayMode="List" EnableTheming="True" HeaderText="Los campos con * son obligatorios"/>
         </div>
         <div id="div_11">
             <asp:Button ID="btn_cancelar" runat="server" OnClick="Cancelar_Click" Text="Cancelar" />            
             <asp:Button ID="btn_modifDato" runat="server" OnClick="Modificar_Click" Text="Modificar datos" />
-            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="Reserva_Click" ValidationGroup="ValidatorModif" text="Aceptar y continuar con la reserva" />
+            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="Reserva_Click" ValidationGroup="ValidatorIngreso" Text="Aceptar y continuar con la reserva" />
         </div>
     </div>
     </form>

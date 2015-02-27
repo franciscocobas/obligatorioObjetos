@@ -11,6 +11,8 @@
 <body class=" ">
     <form id="form1" runat="server">
     <div>
+        <div id="div_0">
+            <asp:LinkButton ID="LinkLoginAdmin" PostBackUrl="~/loginAdmin.aspx" runat="server" ForeColor="#000066" BorderStyle="None">Registered Admin</asp:LinkButton></div>
         <h1 id="h1_titleHome" style="font-family: 'Courier New', Courier, monospace; font-size: large; font-weight: normal; font-style: normal; color: #000080;">Haz tu reserva aquí</h1>
         <br />
         <br />
