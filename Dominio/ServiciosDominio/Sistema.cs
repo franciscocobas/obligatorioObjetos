@@ -385,7 +385,7 @@ namespace Dominio.ServiciosDominio
         public Precio MostrarDineroRecaudado()
         {
             decimal decTotal = 0M;
-            foreach (Reserva res in Reservas)
+            foreach (Reserva res in Reservas)  //salta error aca, pero puede ser porque no tengo reservas todavia
             {
                 decTotal += res.CalcularPrecio().MontoDolares;
             }
