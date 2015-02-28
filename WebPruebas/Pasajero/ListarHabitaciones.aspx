@@ -15,7 +15,8 @@
         <br />
         <asp:Label Text="Tipo habitación: " runat="server" /><asp:DropDownList ID="ddl_tipoHabitaciones" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_tipoHabitaciones_SelectedIndexChanged"></asp:DropDownList>
         <div id="hola" runat="server">
-            <asp:GridView ID="grid_view_habitaciones" runat="server"></asp:GridView>
+            <asp:GridView ID="grid_view_habitaciones" runat="server">
+            </asp:GridView>
         </div>
     </div>
     </form>
