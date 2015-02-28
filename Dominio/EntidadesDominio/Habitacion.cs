@@ -6,7 +6,7 @@ namespace Dominio.EntidadesDominio
     {
         #region Atributos
         private int id;
-        static int ultId;
+        static int ultId = 0;
         private int numeroHabitacion;
         private bool jacuzzi;
         private bool esExterior;
@@ -94,6 +94,8 @@ namespace Dominio.EntidadesDominio
         #region Constructores
         public Habitacion(int numero, bool jacuzzi, bool exterior, int camasSimples, int CamasDobles)
         {
+            Habitacion.ultId = Habitacion.ultId + 1;
+            this.id = Habitacion.UltId;
             this.numeroHabitacion = numero;
             this.jacuzzi = jacuzzi;
             this.esExterior = exterior;
@@ -104,6 +106,12 @@ namespace Dominio.EntidadesDominio
 
         #region Comportamiento 
         internal abstract Precio CalcularPrecioTotal();
+        
+        public bool SonHabitacionesIguales(Habitacion h)
+        {
+            return (this.TieneJacuzzi == h.TieneJacuzzi && this.EsExterior == h.EsExterior && this.CantCamasDobles == h.CantCamasDobles 
+                && this.CantCamasSingles == h.CantCamasSingles && this.Precio.Equals(h.Precio)) ? true : false;
+        }
 
         #endregion
 

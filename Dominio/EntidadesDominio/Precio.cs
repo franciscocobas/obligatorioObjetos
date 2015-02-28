@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Dominio
 {
     public class Precio
+
     {
         public decimal MontoDolares { get; set; }
         private const string dolares = "U$S ";
@@ -27,6 +28,13 @@ namespace Dominio
         public decimal ConvertirAPesos(decimal cotizacion)
         {
             return Math.Round (this.MontoDolares * cotizacion,2);
+        }
+
+        public override bool Equals(Object obj)
+        {
+            Precio precio = obj as Precio;
+            if (obj == null) return false;
+            return this.MontoDolares == precio.MontoDolares;
         }
     }
 }

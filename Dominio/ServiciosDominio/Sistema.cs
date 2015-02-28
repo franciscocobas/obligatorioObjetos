@@ -5,6 +5,8 @@ using Dominio.EntidadesDominio;
 using System.Security.Policy;
 using System.Reflection;
 using System.Globalization;
+using System.Collections;
+
 
 
 namespace Dominio.ServiciosDominio
@@ -40,7 +42,7 @@ namespace Dominio.ServiciosDominio
     
         void Inicializar()
         {
-
+            Reservas = new List<Reserva>();
             ConfigurarParametros();
             CargarHabitacionesPrueba();
             CargarServiciosPrueba();
@@ -69,6 +71,8 @@ namespace Dominio.ServiciosDominio
             AgregarHabitacion(CrearHabitacionEstandar(108, false, true, 2, 1));
             AgregarHabitacion(CrearHabitacionSuite(109, true, true, 0, 1, new Precio(400)));
             AgregarHabitacion(CrearHabitacionSuite(110, true, true, 0, 1, new Precio(250.0M)));
+            AgregarHabitacion(CrearHabitacionSuite(111, false, true, 2, 1, new Precio(250.0M)));
+            AgregarHabitacion(CrearHabitacionSuite(112, false, true, 2, 1, new Precio(250.0M)));
 
         }
 
@@ -158,9 +162,20 @@ namespace Dominio.ServiciosDominio
 
         public List<Habitacion> ObtenerHabitacionesDisponiblesXFecha(DateTime pfechaDesde, DateTime pfechaHasta)
         {
-            // metodo a implementar.
-            return new List<Habitacion>();
-            
+
+            List<Habitacion> habitacionesNoDisponibles = ObtenerHabitNoDisponiblesXFecha(pfechaDesde, pfechaHasta);
+
+            List<Habitacion> habitacionesDisponibles = new List<Habitacion>();
+
+            foreach(Habitacion habitacion in this.Habitaciones)
+            {
+                if (!habitacionesNoDisponibles.Contains(habitacion))
+                {
+                    habitacionesDisponibles.Add(habitacion);
+                }
+            }
+
+            return habitacionesDisponibles;
         }
 
         public List<Habitacion> ObtenerHabitacionesDisponiblesXTipo(DateTime pFechaDesde, DateTime pFechaHasta, String pTipo)
@@ -180,7 +195,67 @@ namespace Dominio.ServiciosDominio
             return habitacionesDispXTipo;
         }
         
-        public List<Habitacion> MostrarHabitNoDisponibles(List<Habitacion> pHabitaciones, Precio pPrecio, DateTime pFechaDesde, DateTime pFechaHasta)
+        public List<Habitacion> ObtenerHabitNoDisponiblesXFecha(DateTime pFechaDesde, DateTime pFechaHasta)
+        {
+            List<Habitacion> habitacionesNoDisponibles = new List<Habitacion>();
+            foreach (Reserva reserva in this.Reservas)
+            {
+                if (pFechaDesde >= reserva.FechaDesde && reserva.FechaHasta <= pFechaHasta)
+                {
+                    foreach (Habitacion habitacionOcupadaReserva in reserva.Habitaciones)
+                    {
+                        if (!habitacionesNoDisponibles.Contains(habitacionOcupadaReserva))
+                        {
+                            habitacionesNoDisponibles.Add(habitacionOcupadaReserva);
+                        }
+                    }
+                }
+            }
+
+            return habitacionesNoDisponibles;
+        }
+
+        public List<ArrayList> obtenerHabitacionesIguales(List<Habitacion> habitaciones, out int cantPasajeros)
+        {
+            List<ArrayList> habitacionesIguales = new List<ArrayList>();
+            int contador = 0;
+            cantPasajeros = 0;
+            ArrayList array = null;
+            Habitacion habitacionAComparar = null;
+            foreach(Habitacion habitacion in habitaciones)
+            { 
+                if (habitacionAComparar == null)
+                {
+                    contador++;
+                    array = new ArrayList();
+                    array.Add(contador);
+                    array.Add(habitacion);
+                    habitacionesIguales.Add(array);
+                    habitacionAComparar = habitacion;
+                }
+                else if (habitacionAComparar.SonHabitacionesIguales(habitacion))
+                {
+                    if (array != null)
+                    {
+                        contador++;
+                        array[0] = contador;
+                        habitacionAComparar = habitacion;
+                    }
+                }else
+                {
+                    contador = 1;
+                    array = new ArrayList();
+                    array.Add(contador);
+                    array.Add(habitacion);
+                    habitacionesIguales.Add(array);
+                    habitacionAComparar = habitacion;
+                }
+                cantPasajeros += (habitacion.CantCamasDobles * 2) + habitacion.CantCamasSingles;
+            }
+            return habitacionesIguales;
+        }
+        
+        public List<Habitacion> MostrarHabitNoDisponiblesCPrecio(List<Habitacion> pHabitaciones, Precio pPrecio, DateTime pFechaDesde, DateTime pFechaHasta)
         {
             // metodo a implementar
             return new List<Habitacion>();
