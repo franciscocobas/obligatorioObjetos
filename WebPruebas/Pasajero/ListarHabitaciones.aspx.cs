@@ -52,9 +52,12 @@ namespace WebPruebas
                 {
                     DateTime fechaDesde = new DateTime(anioDesde, mesDesde, diaDesde);
                     DateTime fechaHasta = new DateTime(anioHasta, mesHasta, diaHasta);
+
                     List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value);
+                   
                     hola.Visible = true;
                     int cantidadPasajeros;
+                    
                     List<ArrayList> diccHabitaciones = sistema.obtenerHabitacionesIguales(habitaciones, out cantidadPasajeros);
                     grid_view_habitaciones.AutoGenerateColumns = false;
 

@@ -1,6 +1,8 @@
 ﻿using Dominio.EntidadesDominio;
 using Dominio.ServiciosDominio;
+using Dominio.Utilidades;
 using System;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 
@@ -10,12 +12,13 @@ namespace WebPruebas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["usuarioActivo"] != null)
-            //{
-            //    this.LoginPag.Visible = false;
-            //    this.LnkCerrarSesion.Visible = true;
-            //    this.Registro.Visible = false;
-            //}
+            Page.UnobtrusiveValidationMode = UnobtrusiveValidationMode.WebForms;
+            ScriptResourceDefinition jQuery = new ScriptResourceDefinition();
+            jQuery.Path = "~/scripts/jquery-2.1.3.min.js";
+            jQuery.DebugPath = "~/scripts/jquery-2.1.3.js";
+            jQuery.CdnPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.3.min.js";
+            jQuery.CdnDebugPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.3.js";
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", jQuery); 
         }
 
         protected void LoginAdmin_Authenticate(object sender, AuthenticateEventArgs e)
@@ -25,7 +28,7 @@ namespace WebPruebas
 
             if (a != null)
             {
-                Session["Admin"] = a;
+                Session["Admin"] = a; 
                 e.Authenticated = true;
                 this.LoginAdmin.DestinationPageUrl = "Admin/controlPanelAdmin.aspx";
             }

@@ -26,7 +26,6 @@
         <div id="hola" runat="server">
             <asp:GridView CssClass="cssLabels" ID="grid_view_habitaciones" runat="server" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal">
             </asp:GridView>
-
         </div>
     <//div>
     </form>

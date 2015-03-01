@@ -54,11 +54,11 @@ namespace WebPruebas
 
                 txt_documento2.Text = doc;
                 drp_Pais2.Items.FindByValue(pais).Selected = true;
-                txt_nombre.Text = p.Nombre;
+                txt_nombre2.Text = p.Nombre;
                 txt_dir1.Text = p.Direccion.CalleNro;
                 txt_dir2.Text = p.Direccion.DirAdicional;
-                txt_ciudad.Text = p.Direccion.Ciudad;
-                txt_dptoProv.Text = p.Direccion.DptoProvincia;
+                txt_ciudad2.Text = p.Direccion.Ciudad;
+                txt_dptoProv2.Text = p.Direccion.DptoProvincia;
                 drp_paisResid.Items.FindByValue(p.Direccion.Pais).Selected = true;
                 txt_CP.Text = p.Direccion.CodigoPostal;
 
@@ -90,22 +90,27 @@ namespace WebPruebas
 
         protected void Reserva_Click(object sender, EventArgs e)
         {
-            string doc = Request.QueryString["doc"];
-            string pais = Request.QueryString["pais"];
-            int int_doc = int.Parse(doc);
+            Page.Validate("expressionsIngr");
 
-            if (Request.QueryString["modo"] == "0") // usuario existente
+            if (Page.IsValid)
             {
-                Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
-                Response.Redirect("Pasajero/listarHabitaciones.aspx"); 
-            }
+                string doc = Request.QueryString["doc"];
+                string pais = Request.QueryString["pais"];
+                int int_doc = int.Parse(doc);
 
-            else // usuario nuevo, validado
-            { 
-                /// aca tengo que validar por JS que el nombre tenga un espacio <<<<<<<<<<<<<<<<--------------------------------
-                elSistema.CrearPasajero(int_doc, pais, txt_nombre.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue));
-                Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
-                Response.Redirect("Pasajero/Reserva.aspx"); 
+                if (Request.QueryString["modo"] == "0") // usuario existente
+                {
+                    Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
+                    Response.Redirect("Pasajero/listarHabitaciones.aspx");
+                }
+
+                else // usuario nuevo, validado
+                {
+                    /// aca tengo que validar por JS que el nombre tenga un espacio <<<<<<<<<<<<<<<<--------------------------------
+                    elSistema.CrearPasajero(int_doc, pais, txt_nombre2.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad2.Text, txt_dptoProv2.Text, txt_CP.Text, drp_paisResid.SelectedValue));
+                    Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
+                    Response.Redirect("Pasajero/listarHabitaciones.aspx");
+                }
             }
 
         }
@@ -120,11 +125,11 @@ namespace WebPruebas
             bool status = _status;
             txt_documento2.Enabled = false;
             drp_Pais2.Enabled = false;
-            txt_nombre.Enabled = status;
+            txt_nombre2.Enabled = status;
             txt_dir1.Enabled = status;
             txt_dir2.Enabled = status;
-            txt_ciudad.Enabled = status;
-            txt_dptoProv.Enabled = status;
+            txt_ciudad2.Enabled = status;
+            txt_dptoProv2.Enabled = status;
             drp_paisResid.Enabled = status;
             txt_CP.Enabled = status;
 

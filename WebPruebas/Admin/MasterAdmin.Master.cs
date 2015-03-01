@@ -24,6 +24,8 @@ namespace WebPruebas
 
         protected void LnkCerrarSesion_Click(object sender, EventArgs e)
         {
+            Session.Clear();
+            Session.Abandon();
             Session.Remove("Admin");
             Response.Redirect("loginAdmin.aspx");
 

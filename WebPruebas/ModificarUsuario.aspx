@@ -24,7 +24,7 @@
         <div id="div_4">
             <asp:Label ID="lbl_nombre" CssClass="cssLabels" runat="server" Text="Nombre"></asp:Label><asp:TextBox ID="txt_nombre" runat="server"></asp:TextBox>            
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorModif" ControlToValidate="txt_nombre">*</asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txt_nombre" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressions"></asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" CssClass="validators" runat="server" ControlToValidate="txt_nombre" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressions"></asp:RegularExpressionValidator>
         </div>
         <br />
         <div id="div_5">
@@ -37,11 +37,13 @@
         <br />
         <div id="div_7">
             <asp:Label ID="lbl_ciudad" CssClass="cssLabels" runat="server" Text="Ciudad"></asp:Label><asp:TextBox ID="txt_ciudad" runat="server"></asp:TextBox>            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorModif" ControlToValidate="txt_ciudad">*</asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" CssClass="validators" runat="server" ControlToValidate="txt_ciudad" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressions"></asp:RegularExpressionValidator>
         </div>
         <br />
 
         <div id="div_8">
             <asp:Label ID="lbl_dptoProv" CssClass="cssLabels" runat="server" Text="Dpto/Provincia"></asp:Label><asp:TextBox ID="txt_dptoProv" runat="server"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorModif" ControlToValidate="txt_dptoProv">*</asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" CssClass="validators" runat="server" ControlToValidate="txt_dptoProv" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressions"></asp:RegularExpressionValidator>
         </div>
         <br /> 
         <div id="div_9">
@@ -54,14 +56,12 @@
         <br />
         <br />
         <div id="div_errorMessageDiv2" runat="server">
-            <div runat="server" id="div_jqueryValid2"> 
-            </div>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validators" ValidationGroup="ValidatorModif" DisplayMode="List" EnableTheming="True" HeaderText="Los campos con * son obligatorios"/>
-            <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="expressions" />
+            <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="validators" ValidationGroup="expressions" DisplayMode="List" EnableTheming="True" HeaderText="Nombre, ciudad y Departamento/provincia no pueden contener números" />
         </div>
         <div id="div_11">
             <asp:Button ID="btn_cancelar" runat="server" OnClick="Cancelar_Click" Text="Cancelar" />  
-            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="ReservaModif_Click" OnClientClick="sth()" ValidationGroup="ValidatorModif" text="Continuar con la reserva" />
+            <asp:Button ID="btn_hacerReserva" runat="server" OnClick="ReservaModif_Click" ValidationGroup="ValidatorModif" text="Continuar con la reserva" />
         </div>
     </div>
     </form>
