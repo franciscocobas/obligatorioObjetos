@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <p runat="server" id="titulo"></p>
+        <div id="div_p_listaRes"><p runat="server" class="cssLabels" id="titulo"></p></div>
         <div id="div_gridview">
             <asp:GridView ID="GridView1" CssClass="cssLabels" runat="server" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal"></asp:GridView>
 

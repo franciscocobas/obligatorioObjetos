@@ -21,6 +21,18 @@
     margin-top:16px;
 }
 
+#titulo{
+    font-weight:600;
+    color: blueviolet;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 18px;
+}
+
+#div_p_listaRes{
+    margin: 0 auto;
+    width:400px;
+}
+
 #txt_documento, #txt_CP{
     margin-left:21px;
     margin-right: 3px;

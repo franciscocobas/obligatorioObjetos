@@ -82,6 +82,7 @@ namespace WebPruebas
                     DataColumn columnPrecio = new DataColumn(precio, typeof(System.Decimal));
                     table.Columns.Add(columnPrecio);
 
+
                     for (var i = 0; i < diccHabitaciones.Count ; i++)
                     {
                         DataRow row = table.NewRow();

@@ -415,6 +415,7 @@ namespace Dominio.ServiciosDominio
             reserva.FechaHasta = pFechaHasta;
             reserva.CantMayores = pCantMayores;
             reserva.CantMenores = pCantMenores;
+            reserva.Activa = true;
             
             foreach (int id in pHabitaciones)
             {
@@ -509,11 +510,14 @@ namespace Dominio.ServiciosDominio
         {
             List<Reserva> reservasActivas = new List<Reserva>();
 
-            foreach (Reserva r in pPasajero.listaReservas){
-                if (r.Activa == true ){
-                    reservasActivas.Add(r);
+            if (pPasajero.listaReservas != null){
+                foreach (Reserva r in pPasajero.listaReservas){
+                    if (r.Activa == true ){
+                        reservasActivas.Add(r);
+                    }
                 }
             }
+
 
             return reservasActivas;
         }

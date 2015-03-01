@@ -16,6 +16,7 @@ namespace WebPruebas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             int pDoc = int.Parse(Request.QueryString["pDoc"]);
             string pPais = Request.QueryString["pPais"];
             Pasajero p = elsistema.BuscarPasajeroPorDocPais(pDoc, pPais);
@@ -35,6 +36,7 @@ namespace WebPruebas
             string fDesde = "Desde";
             string fHasta = "Hasta";
 
+
             DataTable table = new DataTable();
             DataColumn columnNumHabit = new DataColumn(nuHabit, typeof(System.Int32));
             table.Columns.Add(columnNumHabit);
@@ -51,22 +53,26 @@ namespace WebPruebas
             DataColumn columnHasta = new DataColumn(fHasta, typeof(System.DateTime));
             table.Columns.Add(columnHasta);
 
+            
 
             foreach (Reserva res in reservasActivas)
             {
                 DataRow row = table.NewRow();
-                
-                foreach (Habitacion hab in res.Habitaciones){
 
+                foreach (Habitacion hab in res.Habitaciones)
+                {
+
+                    row[columnNumHabit] = res.Habitaciones.Count;
+                    row[columnTipoHabit] = res.Habitaciones[0].GetType().ToString();
+                    row[columnMenores] = res.CantMenores;
+                    row[columnMayores] = res.CantMayores;
+                    row[columnDesde] = res.FechaDesde;
+                    row[columnHasta] = res.FechaHasta;
+                    row[precio] = res.PrecioPesos;
+
+                    table.Rows.Add(row);
                 }
-                row[columnNumHabit] = res.Habitaciones.Count;
-                row[columnTipoHabit] = res.Habitaciones[0].GetType();
-                row[columnMenores] = res.CantMenores;
-                row[columnMayores] = res.CantMayores;
-                row[columnDesde] = res.FechaDesde;
-                row[columnHasta] = res.FechaHasta;
-                row[precio] = res.PrecioPesos;
-                table.Rows.Add(row);
+
             }
 
             foreach (DataColumn dc in table.Columns)
