@@ -175,7 +175,6 @@ namespace Dominio.ServiciosDominio
 
         public List<Habitacion> ObtenerHabitacionesDisponiblesXFecha(DateTime pfechaDesde, DateTime pfechaHasta)
         {
-
             List<Habitacion> habitacionesNoDisponibles = ObtenerHabitNoDisponiblesXFecha(pfechaDesde, pfechaHasta);
 
             List<Habitacion> habitacionesDisponibles = new List<Habitacion>();
@@ -190,7 +189,24 @@ namespace Dominio.ServiciosDominio
 
             return habitacionesDisponibles;
         }
+        public List<Habitacion> ObtenerHabitacionesNoDisponiblesXTipo(DateTime pFechaDesde, DateTime pFechaHasta, string pTipo)
+        {
+            List<Habitacion> habitacionesNoDisponibles = ObtenerHabitNoDisponiblesXFecha(pFechaDesde, pFechaHasta);
 
+            List<Habitacion> habitacionesNoDispXTipo = new List<Habitacion>();
+
+            // Filtro por tipo
+            foreach (Habitacion habitacion in habitacionesNoDisponibles)
+            {
+                Type tipoHabitacion = habitacion.GetType();
+                if (tipoHabitacion.Name == pTipo)
+                {
+                    habitacionesNoDispXTipo.Add(habitacion);
+                }
+            }
+            return habitacionesNoDispXTipo;
+
+        }
         public List<Habitacion> ObtenerHabitacionesDisponiblesXTipo(DateTime pFechaDesde, DateTime pFechaHasta, String pTipo)
         {
             List<Habitacion> habitacionesDispXTipo = new List<Habitacion>();
@@ -213,7 +229,9 @@ namespace Dominio.ServiciosDominio
             List<Habitacion> habitacionesNoDisponibles = new List<Habitacion>();
             foreach (Reserva reserva in this.Reservas)
             {
-                if (pFechaDesde >= reserva.FechaDesde && reserva.FechaHasta <= pFechaHasta)
+                if ((pFechaHasta > reserva.FechaDesde && pFechaHasta < reserva.FechaHasta) 
+                    || (pFechaDesde > reserva.FechaDesde && pFechaHasta < reserva.FechaHasta)
+                    || (pFechaDesde < reserva.FechaHasta && pFechaHasta > reserva.FechaDesde))
                 {
                     foreach (Habitacion habitacionOcupadaReserva in reserva.Habitaciones)
                     {

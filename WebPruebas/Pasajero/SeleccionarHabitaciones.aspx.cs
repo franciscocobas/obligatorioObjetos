@@ -39,12 +39,24 @@ namespace WebPruebas
 
                 string type = Request.QueryString["type"];
 
+                // Cargar habitaciones en disponibles
                 List<Habitacion> habitacionesDisponibles = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, type);
-                lbl_cant_pasajeros.Text = Request.QueryString["p"];
+                lbl_cant_mayores.Text = Request.QueryString["pMay"];
+                lbl_cant_menores.Text = Request.QueryString["pMen"];
 
                 grid_habitaciones_disponibles.AutoGenerateColumns = false;
                 grid_habitaciones_disponibles.DataSource = habitacionesDisponibles;
                 grid_habitaciones_disponibles.DataBind();
+
+                // Cargar habitaciones en no disponibles
+                List<Habitacion> habitacionesNoDisponibles = sistema.ObtenerHabitacionesNoDisponiblesXTipo(fechaDesde, fechaHasta, type);
+                if (habitacionesNoDisponibles.Count > 0)
+                {
+                    grid_habitaciones_no_disp.AutoGenerateColumns = false;
+                    grid_habitaciones_no_disp.DataSource = habitacionesNoDisponibles;
+                    grid_habitaciones_no_disp.DataBind();
+                }
+                
             }
         }
 

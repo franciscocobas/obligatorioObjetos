@@ -128,7 +128,7 @@ namespace WebPruebas
             string fechaDesde = datepickerFrom.Value;
             fechaDesde = fechaDesde.Replace("/", "");
             string fechaHasta = datepickerTo.Value;
-            fechaHasta = fechaDesde.Replace("/", "");
+            fechaHasta = fechaHasta.Replace("/", "");
             string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
             if (cantPasajerosMayores <= cantidadPasajeros)
             {
