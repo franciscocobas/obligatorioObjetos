@@ -63,10 +63,11 @@
     <Content Include="Admin\habitacionesDispAdmin.aspx" />
     <Content Include="Admin\ReservasdePasajero.aspx" />
     <Content Include="Home.aspx" />
-    <Content Include="Pasajero\ListarHabitaciones.aspx" />
+    <Content Include="ListarHabitaciones.aspx" />
+    <Content Include="ListarReservasPasaj.aspx" />
     <Content Include="loginAdmin.aspx" />
     <Content Include="ModificarUsuario.aspx" />
-    <Content Include="Pasajero\SeleccionarHabitaciones.aspx" />
+    <Content Include="SeleccionarHabitaciones.aspx" />
     <Content Include="styles.css" />
     <Content Include="IngresarVerUsuario.aspx" />
     <Content Include="packages.config" />
@@ -122,12 +123,19 @@
     <Compile Include="IngresarVerUsuario.aspx.designer.cs">
       <DependentUpon>IngresarVerUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pasajero\ListarHabitaciones.aspx.cs">
+    <Compile Include="ListarHabitaciones.aspx.cs">
       <DependentUpon>ListarHabitaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pasajero\ListarHabitaciones.aspx.designer.cs">
+    <Compile Include="ListarHabitaciones.aspx.designer.cs">
       <DependentUpon>ListarHabitaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListarReservasPasaj.aspx.cs">
+      <DependentUpon>ListarReservasPasaj.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarReservasPasaj.aspx.designer.cs">
+      <DependentUpon>ListarReservasPasaj.aspx</DependentUpon>
     </Compile>
     <Compile Include="loginAdmin.aspx.cs">
       <DependentUpon>loginAdmin.aspx</DependentUpon>
@@ -150,11 +158,11 @@
     <Compile Include="ModificarUsuario.aspx.designer.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pasajero\SeleccionarHabitaciones.aspx.cs">
+    <Compile Include="SeleccionarHabitaciones.aspx.cs">
       <DependentUpon>SeleccionarHabitaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pasajero\SeleccionarHabitaciones.aspx.designer.cs">
+    <Compile Include="SeleccionarHabitaciones.aspx.designer.cs">
       <DependentUpon>SeleccionarHabitaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

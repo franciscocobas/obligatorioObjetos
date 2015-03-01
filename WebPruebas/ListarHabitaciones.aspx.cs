@@ -135,7 +135,9 @@ namespace WebPruebas
             string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
             if (cantPasajerosMayores <= cantidadPasajeros)
             {
-                Response.Redirect("SeleccionarHabitaciones.aspx?pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores 
+                string doc = Request.QueryString["pDoc"];
+                string pais = Request.QueryString["pPais"];
+                Response.Redirect("SeleccionarHabitaciones.aspx?pDoc="+ doc + "&pPais="+ pais +"&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores 
                     + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
             }
         }

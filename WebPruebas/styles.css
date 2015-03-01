@@ -26,6 +26,11 @@
     margin-right: 3px;
 }
 
+#div_listarReservasLink{
+    width:220px;
+    float:right;
+}
+
 #drp_paisResid{
     margin-left:2px;
     margin-right: 3px;

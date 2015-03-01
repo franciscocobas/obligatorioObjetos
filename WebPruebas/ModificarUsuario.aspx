@@ -13,6 +13,9 @@
         
         <h1 style="font-family: 'Courier New', Courier, monospace; font-size: large; font-weight: normal; font-style: normal; color: #000080;" runat="server" id="h1_editTitle">Modificar datos del pasajero</h1>
         <br />
+        <div id="div_listarReservasLink" runat="server">
+            <asp:LinkButton ID="LinkButton1" visible="false"  CssClass="cssLabels" OnClick="Ver_Reservas" runat="server">Ver reservas activas</asp:LinkButton>
+        </div>
         <div id="div_1" >
             <asp:Label CssClass="cssLabels" ID="lbl_doc" runat="server" Text="Documento"></asp:Label><asp:TextBox ID="txt_documento2" runat="server"></asp:TextBox>
         </div>

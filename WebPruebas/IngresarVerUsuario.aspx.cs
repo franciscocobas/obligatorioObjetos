@@ -10,6 +10,7 @@ using Dominio.ServiciosDominio;
 using Dominio.Utilidades;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Security;
+using WebPruebas;
 
 
 namespace WebPruebas
@@ -30,8 +31,8 @@ namespace WebPruebas
 
             string doc = Request.QueryString["doc"];
             int int_doc = int.Parse(doc);
-            string pais = Request.QueryString["pais"];   
-            
+            string pais = Request.QueryString["pais"];
+
             if (!IsPostBack)
             {
                 drp_Pais2.DataSource = ListaPaises.llenarPaises();
@@ -44,7 +45,8 @@ namespace WebPruebas
 
             if (Request.QueryString["modo"] == "0")
             {
-                Pasajero p = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
+                LinkButton1.Visible = true;
+                Dominio.EntidadesDominio.Pasajero p = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
                 
                 enableDisableFields(false);
                 h1_inputTitle.Visible = false; // "Ingresar datos pasajero"
@@ -101,15 +103,14 @@ namespace WebPruebas
                 if (Request.QueryString["modo"] == "0") // usuario existente
                 {
                     Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
-                    Response.Redirect("Pasajero/listarHabitaciones.aspx");
+                    Response.Redirect("listarHabitaciones.aspx?pDoc=" + doc + "&pPais=" + pais);
                 }
 
                 else // usuario nuevo, validado
                 {
-                    /// aca tengo que validar por JS que el nombre tenga un espacio <<<<<<<<<<<<<<<<--------------------------------
                     elSistema.CrearPasajero(int_doc, pais, txt_nombre2.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad2.Text, txt_dptoProv2.Text, txt_CP.Text, drp_paisResid.SelectedValue));
                     Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
-                    Response.Redirect("Pasajero/listarHabitaciones.aspx");
+                    Response.Redirect("listarHabitaciones.aspxp?Doc=" + doc + "&pPais=" + pais);
                 }
             }
 
@@ -133,6 +134,11 @@ namespace WebPruebas
             drp_paisResid.Enabled = status;
             txt_CP.Enabled = status;
 
+        }
+
+        protected void Ver_Reservas(object sender, EventArgs e)
+        {
+            Response.Redirect("ListarReservasPasaj.aspx?pDoc=" + txt_documento2.Text + "&pPais=" + drp_Pais2.SelectedValue);
         }
     }
 }

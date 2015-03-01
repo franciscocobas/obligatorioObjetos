@@ -1,6 +1,7 @@
 ﻿using Dominio.EntidadesDominio;
 using Dominio.ServiciosDominio;
 using Dominio.Utilidades;
+using Dominio;
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -9,7 +10,7 @@ namespace WebPruebas
 {
     public partial class Default : System.Web.UI.Page
     {
-        Sistema elSistema = Sistema.Instancia;
+        Sistema elSistema = Dominio.ServiciosDominio.Sistema.Instancia;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,12 +33,10 @@ namespace WebPruebas
 
         protected void Submit_Click(object sender, EventArgs e)
         {
-
-
             string doc = txt_documento.Text;
             string pais = drp_Pais.SelectedValue;
             string alert;
-            Pasajero p = elSistema.existePasajero(doc, pais, out alert);
+            Dominio.EntidadesDominio.Pasajero p = elSistema.existePasajero(doc, pais, out alert);
             
             if (p != null)
             {

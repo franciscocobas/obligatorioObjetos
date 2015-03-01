@@ -406,7 +406,7 @@ namespace Dominio.ServiciosDominio
         #endregion
 
         #region Reservas
-        public Reserva CrearReserva(decimal precioPesos, DateTime pFechaDesde, DateTime pFechaHasta, int pCantMayores, int pCantMenores, List<int> pHabitaciones)
+        public Reserva CrearReserva(int pDoc, string pPais, decimal precioPesos, DateTime pFechaDesde, DateTime pFechaHasta, int pCantMayores, int pCantMenores, List<int> pHabitaciones)
         {
             // metodo a implementar
             Reserva reserva = new Reserva();
@@ -425,13 +425,18 @@ namespace Dominio.ServiciosDominio
                 }
             }
 
+            if (this.Reservas == null) this.Reservas = new List<Reserva>();
             this.Reservas.Add(reserva);
+
+            Pasajero p = BuscarPasajeroPorDocPais(pDoc, pPais);
+            p.AgregarReservaPas(reserva);
+
             return reserva;
         }
 
         public void CancelarReserva(int pIdPasajero, int pIdReserva)
         {
-            // metodo a implementar
+
         }
 
         #endregion
@@ -500,10 +505,17 @@ namespace Dominio.ServiciosDominio
             return precioTot;
         }
 
-        public List<Reserva> RecuperarReservasActivas(int pIdPasajero)
+        public List<Reserva> RecuperarReservasActivas(Pasajero pPasajero)
         {
-            // Metodo a implementar
-            return new List<Reserva>();
+            List<Reserva> reservasActivas = new List<Reserva>();
+
+            foreach (Reserva r in pPasajero.listaReservas){
+                if (r.Activa == true ){
+                    reservasActivas.Add(r);
+                }
+            }
+
+            return reservasActivas;
         }
 
         #endregion

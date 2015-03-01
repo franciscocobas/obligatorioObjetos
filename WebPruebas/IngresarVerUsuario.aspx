@@ -7,79 +7,17 @@
     <title id="titulo"></title>
     <link href="styles.css" rel="stylesheet" />
     <script src='Scripts/jquery-2.1.3.min.js' type = 'text/javascript'></script>
-<%--    <script type="text/javascript">
-        jQuery(document).ready(function inicio() {
-            divAlertaInicio = "<p style='color: #FF0000; font-size: 12px; margin:0px; font-family: &quot;Courier New&quot;, Courier, monospace'>";
-            divAlertaFin = "</p>";
-
-            validarJQ();
-
-        });
-
-        function validarJQ(){
-  
-            nom_val = $("#txt_nombre").val();
-            ciudad_val = $("#txt_ciudad").val();
-            dpto_val = $("#txt_dptoProv").val();
-
-            char = true;
-            for (i = 0; i < nom_val.length; i++) {
-                if (!isNaN(nom_val[i])) {
-                    if (nom_val[i] != " ") {
-                        char = false;
-                    }
-                }
-                else { char = true; }
-
-            };
-            if (!char) {
-                $("#div_jqueryValid").html(divAlertaInicio + "El nombre no puede contener números" + divAlertaFin);
-            }
-            else { $("#div_jqueryValid").html(""); }
-
-            char = true;
-            for (i = 0; i < ciudad_val.length; i++) {
-                if (!isNaN(ciudad_val[i])) {
-                    if (ciudad_val[i] != " ") {
-                        char = false;
-                    }
-                }
-                else { char = true; }
-
-            };
-
-            if (!char) {
-                $("#div_jqueryValid").html(divAlertaInicio + "La ciudad no puede contener números" + divAlertaFin);
-            }
-            else { $("#div_jqueryValid").html(""); }
-
-            char = true;
-            for (i = 0; i < dpto_val.length; i++) {
-                if (!isNaN(dpto_val[i])) {
-                    if (dpto_val[i] != " ") {
-                        char = false;
-                    }
-                }
-                else { char = true; }
-
-            };
-
-            if (!char) {
-                $("#div_jqueryValid").html(divAlertaInicio + "El departamento/provincia no puede contener números" + divAlertaFin);
-            }
-            else { $("#div_jqueryValid").html(""); }
-        }
-
-
-    </script>--%>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-    
+        
         <h1 style="font-family: 'Courier New', Courier, monospace; font-size: large; font-weight: normal; font-style: normal; color: #000080;" runat="server" id="h1_editTitle">Datos del pasajero</h1>
         <h1 style="font-family: 'Courier New', Courier, monospace; font-size: large; font-weight: normal; font-style: normal; color: #000080;" runat="server" id ="h1_inputTitle">Ingresar pasajero</h1>
         <br />
+        <div id="div_listarReservasLink" runat="server">
+            <asp:LinkButton ID="LinkButton1" visible="false"  CssClass="cssLabels" OnClick="Ver_Reservas" runat="server">Ver reservas activas</asp:LinkButton>
+        </div>
         <div id="div_1" >
             <asp:Label CssClass="cssLabels" ID="lbl_doc" runat="server" Text="Documento"></asp:Label><asp:TextBox ID="txt_documento2" runat="server"></asp:TextBox>
         </div>
