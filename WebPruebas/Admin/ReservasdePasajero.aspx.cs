@@ -57,14 +57,16 @@ namespace WebPruebas.Admin
         }
 
         protected void buscar_Reservas_Pasajero(object sender, EventArgs e)
-        {   
-            //string doc = docPasajero.SelectedValue;
-            //string paisDoc = paisPasajero.SelectedValue;
+        {
+            div_gridview2.Visible = true;
+            Pasajero p = elsistema.BuscarPasajeroPorDocPais(int.Parse(docPasajero.SelectedValue), paisPasajero.SelectedValue);
 
-            //Pasajero p = elsistema.BuscarPasajeroPorDocPais(int.Parse(doc), paisDoc);
+            List<Reserva> reservasActivas = new List<Reserva>();
+            reservasActivas = elsistema.RecuperarReservasActivas(p);
 
-            //List<Reserva> listaRes = new List<Reserva>();
-            //listaRes = p.listaReservas;
+            GridView2.AutoGenerateColumns = false;
+            GridView2.DataSource = reservasActivas;
+            GridView2.DataBind();
         }
     }
 }

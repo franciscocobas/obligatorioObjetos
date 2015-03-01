@@ -10,6 +10,36 @@
     float:left;
 }
 
+.cssGrid{
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+#Content_derivadas_div_mostrarDinero{
+    margin-left:35px;
+}
+
+#Content_derivadas_div_gridview2{
+    margin-top:30px;
+    float:left;
+    width:900px;
+}
+
+#GridView1{
+    margin: 0 auto;
+    width:700px;
+    text-align:center;
+}
+
+#Content_derivadas_GridView2{
+    width:550px;    
+    margin: 0 auto;
+    padding-top:15px;
+    text-align:center;
+}
+
 .validators{
     font-family: 'Courier New';
     color: red;
@@ -22,15 +52,28 @@
 }
 
 #titulo{
-    font-weight:600;
-    color: blueviolet;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 18px;
+    margin:0 auto;
+    margin-bottom:15px;
+    color: blue;
+    font-family:Courier New, Courier, monospace;
+    font-size: 19px;
+}
+
+#btn_volver{
+    width:80px;
+    height:30px;
+    margin-top:10px;
+    margin-right:10px;
+}
+
+#div_volver{
+    float:right;
 }
 
 #div_p_listaRes{
     margin: 0 auto;
-    width:400px;
+    margin-bottom:15px;
+    width:550px;
 }
 
 #txt_documento, #txt_CP{
@@ -120,7 +163,7 @@
     font-weight:600;
 }
 
-#hola{
+#hola{   /*aca*/
     margin: 0 auto;
     margin-top:60px;
     width:1232px;

@@ -29,7 +29,7 @@ namespace WebPruebas
         {
             CotizacionDolar cotiz = CotizacionDolar.Instancia;
             Precio dineroRec = elsistema.MostrarDineroRecaudado();
-            div_mostrarDinero.InnerHtml = "<p>Se recaudaron " + dineroRec.ConvertirAPesos(cotiz.PrecioVenta) + " pesos</p>";
+            div_mostrarDinero.InnerHtml = "<p>Se recaudaron $" + dineroRec.ConvertirAPesos(cotiz.PrecioCompra) + "</p>";
         }
     }
 }
