@@ -7,79 +7,17 @@
     <title id="titulo"></title>
     <link href="styles.css" rel="stylesheet" />
     <script src='Scripts/jquery-2.1.3.min.js' type = 'text/javascript'></script>
-    <script type="text/javascript">
-    jQuery(document).ready(function inicio() {
-        divAlertaInicio = "<p style='color: #FF0000; font-size: 12px; margin:0px; font-family: &quot;Courier New&quot;, Courier, monospace'>";
-        divAlertaFin = "</p>";
-
-        $("#txt_nombre").blur(function () {
-            nom_val = $("#txt_nombre").val();
-            char = true;
-            for (i = 0; i < nom_val.length; i++) {
-                if (!isNaN(nom_val[i])) {
-                    if (nom_val[i] != " ") {
-                        char = false;
-                    }
-                }
-                else { char = true; }
-
-            };
-
-            if (!char) {
-                $("#div_jqueryValid").html(divAlertaInicio + "El nombre no puede contener números" + divAlertaFin);
-            }
-            else { $("#div_jqueryValid").html(""); }
-
-        });
-
-        $("#txt_ciudad").blur(function () {
-            ciudad_val = $("#txt_ciudad").val();
-            char = true;
-            for (i = 0; i < ciudad_val.length; i++) {
-                if (!isNaN(ciudad_val[i])) {
-                    if (ciudad_val[i] != " ") {
-                        char = false;
-                    }
-                }
-                else { char = true; }
-
-            };
-
-            if (!char) {
-                $("#div_jqueryValid").html(divAlertaInicio + "La ciudad no puede contener números" + divAlertaFin);
-            }
-            else { $("#div_jqueryValid").html(""); }
-
-        });
-
-        $("#txt_dptoProv").blur(function () {
-            dpto_val = $("#txt_dptoProv").val();
-            char = true;
-            for (i = 0; i < dpto_val.length; i++) {
-                if (!isNaN(dpto_val[i])) {
-                    if (dpto_val[i] != " ") {
-                        char = false;
-                    }
-                }
-                else { char = true; }
-
-            };
-
-            if (!char) {
-                $("#div_jqueryValid").html(divAlertaInicio + "El departamento/provincia no puede contener números" + divAlertaFin);
-            }
-            else { $("#div_jqueryValid").html("");}
-        });   
-    });
-    </script>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-    
+        
         <h1 style="font-family: 'Courier New', Courier, monospace; font-size: large; font-weight: normal; font-style: normal; color: #000080;" runat="server" id="h1_editTitle">Datos del pasajero</h1>
         <h1 style="font-family: 'Courier New', Courier, monospace; font-size: large; font-weight: normal; font-style: normal; color: #000080;" runat="server" id ="h1_inputTitle">Ingresar pasajero</h1>
         <br />
+        <div id="div_listarReservasLink" runat="server">
+            <asp:LinkButton ID="LinkButton1" visible="false"  CssClass="cssLabels" OnClick="Ver_Reservas" runat="server">Ver reservas activas</asp:LinkButton>
+        </div>
         <div id="div_1" >
             <asp:Label CssClass="cssLabels" ID="lbl_doc" runat="server" Text="Documento"></asp:Label><asp:TextBox ID="txt_documento2" runat="server"></asp:TextBox>
         </div>
@@ -89,7 +27,9 @@
         </div>  
         <br />     
         <div id="div_4">
-            <asp:Label ID="lbl_nombre" CssClass="cssLabels" runat="server" Text="Nombre"></asp:Label><asp:TextBox ID="txt_nombre" runat="server"></asp:TextBox>            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorIngreso" ControlToValidate="txt_nombre">*</asp:RequiredFieldValidator>
+            <asp:Label ID="lbl_nombre" CssClass="cssLabels" runat="server" Text="Nombre"></asp:Label><asp:TextBox ID="txt_nombre2" runat="server"></asp:TextBox>            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorIngreso" ControlToValidate="txt_nombre2">*</asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorA" CssClass="validators" runat="server" ControlToValidate="txt_nombre2" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressionsIngr"></asp:RegularExpressionValidator>
+
         </div>
         <br />
         <div id="div_5">
@@ -101,12 +41,14 @@
         </div>
         <br />
         <div id="div_7">
-            <asp:Label ID="lbl_ciudad" CssClass="cssLabels" runat="server" Text="Ciudad"></asp:Label><asp:TextBox ID="txt_ciudad" runat="server"></asp:TextBox>            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorIngreso" ControlToValidate="txt_ciudad">*</asp:RequiredFieldValidator>
+            <asp:Label ID="lbl_ciudad" CssClass="cssLabels" runat="server" Text="Ciudad"></asp:Label><asp:TextBox ID="txt_ciudad2" runat="server"></asp:TextBox>            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorIngreso" ControlToValidate="txt_ciudad2">*</asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorB" CssClass="validators" runat="server" ControlToValidate="txt_ciudad2" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressionsIngr"></asp:RegularExpressionValidator>        
         </div>
         <br />
 
         <div id="div_8">
-            <asp:Label ID="lbl_dptoProv" CssClass="cssLabels" runat="server" Text="Dpto/Provincia"></asp:Label><asp:TextBox ID="txt_dptoProv" runat="server"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorIngreso" ControlToValidate="txt_dptoProv">*</asp:RequiredFieldValidator>
+            <asp:Label ID="lbl_dptoProv" CssClass="cssLabels" runat="server" Text="Dpto/Provincia"></asp:Label><asp:TextBox ID="txt_dptoProv2" runat="server"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" CssClass="validators" Display="Dynamic" ValidationGroup="ValidatorIngreso" ControlToValidate="txt_dptoProv2">*</asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidatorC" CssClass="validators" runat="server" ControlToValidate="txt_dptoProv2" ValidationExpression="^(?=.*?[A-Za-z])[^0-9]+$" ValidationGroup="expressionsIngr"></asp:RegularExpressionValidator>
         </div>
         <br /> 
         <div id="div_9">
@@ -119,10 +61,9 @@
         <br />
         <br />
         <div id="div_errorMessageDiv2" runat="server">
-            <div runat="server" id="div_jqueryValid">
-
-            </div>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="validators" ValidationGroup="ValidatorIngreso" DisplayMode="List" EnableTheming="True" HeaderText="Los campos con * son obligatorios"/>
+            <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="validators" ValidationGroup="expressionsIngr" DisplayMode="List" EnableTheming="True" HeaderText="Nombre, ciudad y Departamento/provincia no pueden contener números" />
+
         </div>
         <div id="div_11">
             <asp:Button ID="btn_cancelar" runat="server" OnClick="Cancelar_Click" Text="Cancelar" />            
