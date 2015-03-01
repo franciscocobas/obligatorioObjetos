@@ -52,9 +52,12 @@ namespace WebPruebas
                 {
                     DateTime fechaDesde = new DateTime(anioDesde, mesDesde, diaDesde);
                     DateTime fechaHasta = new DateTime(anioHasta, mesHasta, diaHasta);
+
                     List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value);
                     grid_container.Visible = true;
+
                     int cantidadPasajeros;
+                    
                     List<ArrayList> diccHabitaciones = sistema.obtenerHabitacionesIguales(habitaciones, out cantidadPasajeros);
                     grid_view_habitaciones.AutoGenerateColumns = false;
 
@@ -132,7 +135,9 @@ namespace WebPruebas
             string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
             if (cantPasajerosMayores <= cantidadPasajeros)
             {
-                Response.Redirect("SeleccionarHabitaciones.aspx?pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores 
+                string doc = Request.QueryString["pDoc"];
+                string pais = Request.QueryString["pPais"];
+                Response.Redirect("SeleccionarHabitaciones.aspx?pDoc="+ doc + "&pPais="+ pais +"&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores 
                     + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
             }
         }

@@ -49,6 +49,24 @@ namespace WebPruebas {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl h1_inputTitle;
         
         /// <summary>
+        /// div_listarReservasLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_listarReservasLink;
+        
+        /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        
+        /// <summary>
         /// lbl_doc control.
         /// </summary>
         /// <remarks>
@@ -94,13 +112,13 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.Label lbl_nombre;
         
         /// <summary>
-        /// txt_nombre control.
+        /// txt_nombre2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_nombre;
+        protected global::System.Web.UI.WebControls.TextBox txt_nombre2;
         
         /// <summary>
         /// RequiredFieldValidator1 control.
@@ -110,6 +128,15 @@ namespace WebPruebas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
+        /// RegularExpressionValidatorA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorA;
         
         /// <summary>
         /// lbl_dirección1 control.
@@ -166,13 +193,13 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.Label lbl_ciudad;
         
         /// <summary>
-        /// txt_ciudad control.
+        /// txt_ciudad2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_ciudad;
+        protected global::System.Web.UI.WebControls.TextBox txt_ciudad2;
         
         /// <summary>
         /// RequiredFieldValidator3 control.
@@ -184,6 +211,15 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
+        /// RegularExpressionValidatorB control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorB;
+        
+        /// <summary>
         /// lbl_dptoProv control.
         /// </summary>
         /// <remarks>
@@ -193,13 +229,13 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.Label lbl_dptoProv;
         
         /// <summary>
-        /// txt_dptoProv control.
+        /// txt_dptoProv2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_dptoProv;
+        protected global::System.Web.UI.WebControls.TextBox txt_dptoProv2;
         
         /// <summary>
         /// RequiredFieldValidator4 control.
@@ -209,6 +245,15 @@ namespace WebPruebas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        
+        /// <summary>
+        /// RegularExpressionValidatorC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatorC;
         
         /// <summary>
         /// lbl_CP control.
@@ -274,15 +319,6 @@ namespace WebPruebas {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_errorMessageDiv2;
         
         /// <summary>
-        /// div_jqueryValid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_jqueryValid;
-        
-        /// <summary>
         /// ValidationSummary1 control.
         /// </summary>
         /// <remarks>
@@ -290,6 +326,15 @@ namespace WebPruebas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        
+        /// <summary>
+        /// ValidationSummary2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary2;
         
         /// <summary>
         /// btn_cancelar control.

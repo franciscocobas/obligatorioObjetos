@@ -26,12 +26,17 @@
     margin-right: 3px;
 }
 
+#div_listarReservasLink{
+    width:220px;
+    float:right;
+}
+
 #drp_paisResid{
     margin-left:2px;
     margin-right: 3px;
 }
 
-#txt_dptoProv {
+#txt_dptoProv, #txt_dptoProv2 {
     margin-left:12px;
     margin-right: 3px;
 }
@@ -44,7 +49,7 @@
     margin-left:59px;
 }
 
-#txt_nombre, #txt_ciudad{
+#txt_nombre, #txt_ciudad, #txt_nombre2, #txt_ciudad2{
     margin-left:87px;
 }
 
@@ -56,7 +61,7 @@
     margin-left:39px;
 }
 
-#txt_dir1, #txt_dir2, #txt_nombre, #txt_ciudad, #txt_dptoProv{
+#txt_dir1, #txt_dir2, #txt_nombre, #txt_ciudad, #txt_dptoProv, #txt_nombre2, #txt_ciudad2, #txt_dptoProv2{
     width:441px;
 }
 

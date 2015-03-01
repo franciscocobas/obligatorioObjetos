@@ -86,8 +86,9 @@ namespace WebPruebas
                     }
                 }
             }
-
-            sistema.CrearReserva(precioPesos, fechaDesde, fechaHasta, cantidadPasajerosMayores, cantidadPasajerosMenores, habitacionesSeleccionadas);
+            int doc = int.Parse(Request.QueryString["pDoc"]);
+            string pais = Request.QueryString["pPais"];
+            sistema.CrearReserva(doc, pais, precioPesos, fechaDesde, fechaHasta, cantidadPasajerosMayores, cantidadPasajerosMenores, habitacionesSeleccionadas);
         }
     }
 }
