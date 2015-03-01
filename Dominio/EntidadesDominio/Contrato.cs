@@ -49,5 +49,11 @@ namespace Dominio.EntidadesDominio
         }
 
         #endregion
+
+        public Contrato ()
+        {
+            UltId++;
+            this.Id = UltId;
+        }
     }
 }

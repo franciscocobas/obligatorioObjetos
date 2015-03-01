@@ -73,6 +73,12 @@ namespace Dominio.EntidadesDominio
         }
         #endregion
 
+        public Reserva()
+        {
+            UltId++;
+            this.Id = UltId;
+        }
+
         public int CompareTo(Reserva other)
         {
             throw new NotImplementedException();
@@ -80,7 +86,13 @@ namespace Dominio.EntidadesDominio
 
         public void AgregarContrato(Servicio pServicio, int pDias, int pCant)
         {
-            // metodo a implementar
+            Contrato contrato = new Contrato();
+            contrato.DiasAlquilados = pDias;
+            contrato.CantidadPasajeros = pCant;
+
+            contrato.Servicio = pServicio;
+
+            this.Contratos.Add(contrato);
         }
 
         public void AgregarHabitacion(Habitacion pHab)

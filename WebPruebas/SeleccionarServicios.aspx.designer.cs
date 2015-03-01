@@ -10,7 +10,7 @@
 namespace WebPruebas {
     
     
-    public partial class SeleccionarHabitaciones {
+    public partial class SeleccionarServicios {
         
         /// <summary>
         /// form1 control.
@@ -22,49 +22,40 @@ namespace WebPruebas {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lbl_cant_mayores control.
+        /// grid_view_servicios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_cant_mayores;
+        protected global::System.Web.UI.WebControls.GridView grid_view_servicios;
         
         /// <summary>
-        /// lbl_cant_menores control.
+        /// datos_servicios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_cant_menores;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl datos_servicios;
         
         /// <summary>
-        /// grid_habitaciones_disponibles control.
+        /// lbl_cant_dias control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid_habitaciones_disponibles;
+        protected global::System.Web.UI.WebControls.Label lbl_cant_dias;
         
         /// <summary>
-        /// grid_habitaciones_no_disp control.
+        /// lbl_cant_pasajeros control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid_habitaciones_no_disp;
-        
-        /// <summary>
-        /// lbl_monto_total control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_monto_total;
+        protected global::System.Web.UI.WebControls.Label lbl_cant_pasajeros;
         
         /// <summary>
         /// mensaje control.

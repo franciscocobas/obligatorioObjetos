@@ -45,6 +45,7 @@ namespace Dominio.EntidadesDominio
             get { return edadMax; }
             set { edadMax = value; }
         }
+
         public Servicio(string desc, Precio costoDia , byte edadMin, byte edadMax)
         {
             this.Descripcion = desc;

@@ -26,7 +26,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="Id" HeaderText="Id"></asp:BoundField>
-                    <asp:BoundField HeaderText="Numero" DataField="Numero"></asp:BoundField>
+                    <asp:BoundField DataField="Numero" HeaderText="Numero"></asp:BoundField>
                     <asp:BoundField DataField="TieneJacuzzi" HeaderText="Tiene Jacuzzi?"></asp:BoundField>
                     <asp:BoundField DataField="EsExterior" HeaderText="Es Exterior?"></asp:BoundField>
                     <asp:BoundField DataField="CantCamasSingles" HeaderText="Cantidad de camas Simples"></asp:BoundField>
@@ -50,6 +50,8 @@
         <asp:Button Text="Calcular Total" runat="server" OnClick="calcularPrecioTotal" />
         <asp:Label Text="Monto total en u$s: " runat="server" /><asp:Label ID="lbl_monto_total" runat="server" />
         <asp:Button Text="Elegir Servicios" runat="server" OnClick="CrearReserva" />
+        <asp:Button Text="Cancelar" runat="server" OnClick="CancelarReserva" />
+        <asp:Label ID="mensaje" runat="server" Visible="False" />
     </div>
     </form>
 </body>

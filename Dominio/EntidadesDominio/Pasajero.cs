@@ -62,6 +62,8 @@ namespace Dominio.EntidadesDominio
 
         public Pasajero(int pDocumento, string pPaisDoc, string pNombre, Direccion pDireccion)
         {
+            UltId++;
+            this.Id = UltId;
             this.Documento = pDocumento;
             this.PaisDocumento = pPaisDoc;
             this.Nombre = pNombre;

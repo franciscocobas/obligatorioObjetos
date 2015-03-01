@@ -84,6 +84,8 @@ namespace WebPruebas
         {
             List<int> habitacionesSeleccionadas = new List<int>();
             decimal precioPesos = 0;
+            int totalPasajerosElegidos = cantidadPasajerosMayores + cantidadPasajerosMenores;
+            int totalPasajeros = 0;
             foreach (GridViewRow row in grid_habitaciones_disponibles.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -95,12 +97,35 @@ namespace WebPruebas
                         habitacionesSeleccionadas.Add(id);
                         Habitacion habitacionEncontrada = sistema.buscarHabitacionXId(id);
                         precioPesos += habitacionEncontrada.Precio.ConvertirAPesos(CotizacionDolar.Instancia.PrecioCompra);
+                        totalPasajeros += habitacionEncontrada.CantCamasDobles * 2 + habitacionEncontrada.CantCamasSingles;
                     }
                 }
             }
-            int doc = int.Parse(Request.QueryString["pDoc"]);
-            string pais = Request.QueryString["pPais"];
-            sistema.CrearReserva(doc, pais, precioPesos, fechaDesde, fechaHasta, cantidadPasajerosMayores, cantidadPasajerosMenores, habitacionesSeleccionadas);
+            if (totalPasajerosElegidos <= totalPasajeros)
+            { 
+                int doc;
+                if (!int.TryParse(Request.QueryString["pDoc"], out doc)) { }
+                string pais = Request.QueryString["pPais"];
+                Reserva reservaCreada = sistema.CrearReserva(doc, pais, precioPesos, fechaDesde, fechaHasta, cantidadPasajerosMayores, cantidadPasajerosMenores, habitacionesSeleccionadas);
+                if (reservaCreada != null)
+                {
+                    Pasajero pasajero = sistema.BuscarPasajeroPorDocPais(doc, pais);
+                    if (pasajero != null)
+                    {
+                        Response.Redirect("SeleccionarServicios.aspx?id=" + reservaCreada.Id + "&idP=" + pasajero.Id);
+                    }
+                }
+            } else
+            {
+                mensaje.Text = "El total de pasajeros que selecciono exceden los cupos de las habitaciones seleccionadas.";
+                mensaje.Visible = true;
+                mensaje.ForeColor = System.Drawing.Color.IndianRed;
+            }
+        }
+
+        protected void CancelarReserva(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 }

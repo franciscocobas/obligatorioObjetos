@@ -338,11 +338,28 @@ namespace Dominio.ServiciosDominio
         #endregion
 
         #region  Servicios
+
         public void AgregarServicio(Servicio s)
         {
             if (this.Servicios == null) this.Servicios = new List<Servicio>();
             this.Servicios.Add(s);
         }
+
+        public Servicio BuscarServicioXId(int id)
+        {
+            Servicio servicioEncontrado = null;
+
+            foreach (Servicio s in this.Servicios)
+            {
+                if (s.Id == id)
+                {
+                    servicioEncontrado = s;
+                }
+            }
+
+            return servicioEncontrado;
+        }
+
         #endregion
 
         #region Pasajeros
@@ -380,6 +397,21 @@ namespace Dominio.ServiciosDominio
                     pasajeroEncontrado = p;
                 }
             }
+            return pasajeroEncontrado;
+        }
+
+        public Pasajero BuscarPasajeroPorId(int id)
+        {
+            Pasajero pasajeroEncontrado = null;
+
+            foreach(Pasajero p in this.Pasajeros)
+            {
+                if (p.Id == id)
+                {
+                    pasajeroEncontrado = p;
+                }
+            }
+
             return pasajeroEncontrado;
         }
 
@@ -451,6 +483,21 @@ namespace Dominio.ServiciosDominio
             p.AgregarReservaPas(reserva);
 
             return reserva;
+        }
+
+        public Reserva buscarReservaXId(int id)
+        {
+            Reserva reservaEncontrada = null;
+
+            foreach (Reserva reserva in this.Reservas)
+            {
+                if (reserva.Id == id)
+                {
+                    reservaEncontrada = reserva;
+                }
+            }
+
+            return reservaEncontrada;
         }
 
         public void CancelarReserva(int pIdPasajero, int pIdReserva)
