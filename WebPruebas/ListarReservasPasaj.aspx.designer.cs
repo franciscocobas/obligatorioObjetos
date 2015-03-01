@@ -31,6 +31,15 @@ namespace WebPruebas {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl titulo;
         
         /// <summary>
+        /// btn_volver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_volver;
+        
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
