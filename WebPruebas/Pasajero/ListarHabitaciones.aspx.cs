@@ -29,6 +29,7 @@ namespace WebPruebas
 
         protected void ddl_tipoHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
             if (ddl_tipoHabitaciones.SelectedItem != null && datepickerFrom.Value != "" && datepickerTo.Value != "")
             {
                 string[] fechaDesdeArray = datepickerFrom.Value.Split('/');
@@ -58,11 +59,11 @@ namespace WebPruebas
                     grid_view_habitaciones.AutoGenerateColumns = false;
 
                     string nuHabit = "Numero de Habitaciones disponibles";
-                    string tieneJac = "Tiene Jacuzzi?";
-                    string esExt = "Es Exterior?";
+                    string tieneJac = "Jacuzzi";
+                    string esExt = "Exterior";
                     string cantCamSimples = "Cantidad de camas Simples";
                     string cantCamDobles = "Cantidad de camas Dobles";
-                    string precio = "Precio en u$s";
+                    string precio = "Precio (U$S)";
 
                     DataTable table = new DataTable();
                     DataColumn columnNumHabit = new DataColumn(nuHabit, typeof(System.Int32));
@@ -111,8 +112,10 @@ namespace WebPruebas
                         }
                     }
 
+
                     grid_view_habitaciones.DataSource = table;
                     grid_view_habitaciones.DataBind();
+
                 }
             }
         }

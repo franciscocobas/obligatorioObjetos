@@ -40,13 +40,13 @@ namespace WebPruebas.Admin {
         protected global::System.Web.UI.WebControls.DropDownList ddl_tipoHabitaciones;
         
         /// <summary>
-        /// hola control.
+        /// hola2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hola;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hola2;
         
         /// <summary>
         /// grid_view_habitaciones control.

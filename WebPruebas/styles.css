@@ -93,8 +93,37 @@
     float:right;
 }
 
+#grid_view_habitaciones{
+    margin-top:16px;
+    margin-left:15px;
+    margin-right:15px;
+    width:1200px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+#grid_view_habitaciones th{
+    font-weight:600;
+}
+
 #hola{
+    margin: 0 auto;
+    margin-top:60px;
+    width:1232px;
+    height:350px;
+    background-color: #dfe2e6;
+    border-color:#e8eaed;
+    border-width: 1px;
+    border-style:solid;
+    border-radius:15px;
+}
+
+#Content_derivadas_hola2{
+    margin: 0 auto;
     margin-top:30px;
+    margin-left:15px;
+    border-color:#e8eaed;
+    border-width: 1px;
 }
 
 #div_left{
@@ -218,6 +247,18 @@
 #div_H{
     margin-top:70px;
     width:700px;
+}
+
+#div_p_reservasAdmin2{
+    width:300px;
+    margin: 0 auto;
+    padding-bottom:40px;
+}
+
+#div_LH{
+    margin-left: 80px;
+    width:700px;
+    margin-top:40px;
 }
 
 #btn_buscarRes{

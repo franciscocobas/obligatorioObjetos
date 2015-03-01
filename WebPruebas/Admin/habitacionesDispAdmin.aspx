@@ -19,11 +19,12 @@
         <div id="div_p_reservasAdmin"><p id="p_reservasAdmin" class="cssLabels">Habitaciones disponibles</p></div> 
 
         <div id="div_H">
-        <div id="div_left"><asp:Label Text="Fecha desde: " CssClass="cssLabels" runat="server" /><input type="text" id="datepickerFromHab" runat="server"/>
+        <div id="div_left">
+            <asp:Label Text="Fecha desde: " CssClass="cssLabels" runat="server" /><input type="text" id="datepickerFromHab" runat="server"/>
         </div>
-            <div id="div_right"><asp:Label Text="Fecha hasta: " CssClass="cssLabels" runat="server" /><input type="text" id="datepickerToHab" runat="server"/></div>
-        
-
+        <div id="div_right">
+            <asp:Label Text="Fecha hasta: " CssClass="cssLabels" runat="server" /><input type="text" id="datepickerToHab" runat="server"/>
+        </div>
         <br />
         <div id="div_tipoHab">
             <asp:Label CssClass="cssLabels" Text="Tipo habitación: " runat="server" /><asp:DropDownList ID="ddl_tipoHabitaciones" CssClass="cssLabels" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_tipoHabitaciones_SelectedIndexChanged"></asp:DropDownList>
@@ -31,8 +32,9 @@
         
         </div>    
         <br />
-        <div id="hola" runat="server">
-            <asp:GridView ID="grid_view_habitaciones" runat="server"></asp:GridView>
+        <div id="hola2" runat="server">
+            <asp:GridView CssClass="cssLabels" ID="grid_view_habitaciones" runat="server" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal">
+            </asp:GridView>        
         </div>
     </div>
 </asp:Content>
