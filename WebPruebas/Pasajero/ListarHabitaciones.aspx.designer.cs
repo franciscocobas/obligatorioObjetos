@@ -58,13 +58,13 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.DropDownList ddl_tipoHabitaciones;
         
         /// <summary>
-        /// hola control.
+        /// grid_container control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hola;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl grid_container;
         
         /// <summary>
         /// grid_view_habitaciones control.
@@ -74,5 +74,32 @@ namespace WebPruebas {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grid_view_habitaciones;
+        
+        /// <summary>
+        /// lbl_cant_total_pasajeros control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_cant_total_pasajeros;
+        
+        /// <summary>
+        /// txt_mayores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_mayores;
+        
+        /// <summary>
+        /// txt_menores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_menores;
     }
 }

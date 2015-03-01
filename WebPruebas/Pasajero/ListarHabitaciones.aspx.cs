@@ -23,7 +23,7 @@ namespace WebPruebas
                 ddl_tipoHabitaciones.DataSource = tipoHabitaciones;
                 ddl_tipoHabitaciones.DataBind();
                 ddl_tipoHabitaciones.Items.Insert(0, new ListItem("--Ingrese un valor--"));
-                hola.Visible = false;
+                grid_container.Visible = false;
             }
         }
 
@@ -53,7 +53,7 @@ namespace WebPruebas
                     DateTime fechaDesde = new DateTime(anioDesde, mesDesde, diaDesde);
                     DateTime fechaHasta = new DateTime(anioHasta, mesHasta, diaHasta);
                     List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value);
-                    hola.Visible = true;
+                    grid_container.Visible = true;
                     int cantidadPasajeros;
                     List<ArrayList> diccHabitaciones = sistema.obtenerHabitacionesIguales(habitaciones, out cantidadPasajeros);
                     grid_view_habitaciones.AutoGenerateColumns = false;
@@ -100,7 +100,6 @@ namespace WebPruebas
                             boundfield.DataField = dc.ColumnName;
                             boundfield.HeaderText = dc.ColumnName;
                             boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                            boundfield.ControlStyle.Width = Unit.Pixel(40);
                             grid_view_habitaciones.Columns.Add(boundfield);
                         } else
                         {
@@ -112,11 +111,29 @@ namespace WebPruebas
                         }
                     }
 
+                    lbl_cant_total_pasajeros.Text = cantidadPasajeros.ToString();
 
                     grid_view_habitaciones.DataSource = table;
                     grid_view_habitaciones.DataBind();
 
                 }
+            }
+        }
+
+        protected void MostrarHabitaciones(object sender, EventArgs e)
+        {
+            int cantPasajerosMayores = int.Parse(txt_mayores.Text);
+            int cantPasajerosMenores = int.Parse(txt_menores.Text);
+            int cantidadPasajeros = int.Parse(lbl_cant_total_pasajeros.Text);
+            string fechaDesde = datepickerFrom.Value;
+            fechaDesde = fechaDesde.Replace("/", "");
+            string fechaHasta = datepickerTo.Value;
+            fechaHasta = fechaDesde.Replace("/", "");
+            string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
+            if (cantPasajerosMayores <= cantidadPasajeros)
+            {
+                Response.Redirect("SeleccionarHabitaciones.aspx?pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores 
+                    + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
             }
         }
     }

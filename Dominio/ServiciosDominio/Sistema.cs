@@ -160,6 +160,19 @@ namespace Dominio.ServiciosDominio
 
         }
 
+        public Habitacion buscarHabitacionXId(int id)
+        {
+            Habitacion habitacionEncontrada = null;
+            foreach (Habitacion habitacion in this.Habitaciones)
+            {
+                if (habitacion.Id == id)
+                {
+                    habitacionEncontrada = habitacion;
+                }
+            }
+            return habitacionEncontrada;
+        }
+
         public List<Habitacion> ObtenerHabitacionesDisponiblesXFecha(DateTime pfechaDesde, DateTime pfechaHasta)
         {
 
@@ -393,10 +406,27 @@ namespace Dominio.ServiciosDominio
         #endregion
 
         #region Reservas
-        public Reserva CrearReserva(DateTime pFechaDesde, DateTime pFechaHasta, int pCantMayores, int pCantMenores, List<int> pHabitaciones)
+        public Reserva CrearReserva(decimal precioPesos, DateTime pFechaDesde, DateTime pFechaHasta, int pCantMayores, int pCantMenores, List<int> pHabitaciones)
         {
             // metodo a implementar
-            return new Reserva();
+            Reserva reserva = new Reserva();
+            reserva.PrecioPesos = precioPesos;
+            reserva.FechaDesde = pFechaDesde;
+            reserva.FechaHasta = pFechaHasta;
+            reserva.CantMayores = pCantMayores;
+            reserva.CantMenores = pCantMenores;
+            
+            foreach (int id in pHabitaciones)
+            {
+                Habitacion habitacionEncontrada = this.buscarHabitacionXId(id);
+                if (habitacionEncontrada != null)
+                {
+                    reserva.AgregarHabitacion(habitacionEncontrada);
+                }
+            }
+
+            this.Reservas.Add(reserva);
+            return reserva;
         }
 
         public void CancelarReserva(int pIdPasajero, int pIdReserva)

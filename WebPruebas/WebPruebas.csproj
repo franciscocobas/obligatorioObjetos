@@ -66,7 +66,7 @@
     <Content Include="Pasajero\ListarHabitaciones.aspx" />
     <Content Include="loginAdmin.aspx" />
     <Content Include="ModificarUsuario.aspx" />
-    <Content Include="Pasajero\Reserva.aspx" />
+    <Content Include="Pasajero\SeleccionarHabitaciones.aspx" />
     <Content Include="styles.css" />
     <Content Include="IngresarVerUsuario.aspx" />
     <Content Include="packages.config" />
@@ -148,14 +148,14 @@
     <Compile Include="ModificarUsuario.aspx.designer.cs">
       <DependentUpon>ModificarUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pasajero\Reserva.aspx.cs">
-      <DependentUpon>Reserva.aspx</DependentUpon>
+    <Compile Include="Pasajero\SeleccionarHabitaciones.aspx.cs">
+      <DependentUpon>SeleccionarHabitaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pasajero\Reserva.aspx.designer.cs">
-      <DependentUpon>Reserva.aspx</DependentUpon>
+    <Compile Include="Pasajero\SeleccionarHabitaciones.aspx.designer.cs">
+      <DependentUpon>SeleccionarHabitaciones.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-2.1.3.min.map" />
