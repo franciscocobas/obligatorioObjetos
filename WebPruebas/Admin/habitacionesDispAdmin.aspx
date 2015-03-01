@@ -34,9 +34,11 @@
         <br />
         <div id="hola2" runat="server">
             <asp:GridView CssClass="cssLabels" ID="grid_view_habitaciones" runat="server" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal">
-            </asp:GridView>        
+            </asp:GridView>
+            
+                   
         </div>
-    </div>
+</div>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder2" runat="server">

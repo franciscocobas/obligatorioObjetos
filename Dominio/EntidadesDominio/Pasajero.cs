@@ -67,7 +67,13 @@ namespace Dominio.EntidadesDominio
             this.Nombre = pNombre;
             this.Direccion = pDireccion;
         }
-        
+
+        public void AgregarReservaPas(Reserva res)
+        {
+            if (listaReservas == null) listaReservas = new List<Reserva>();
+            listaReservas.Add(res);
+        }
+
         public override bool Equals(object obj)
         {
             Pasajero p = obj as Pasajero;

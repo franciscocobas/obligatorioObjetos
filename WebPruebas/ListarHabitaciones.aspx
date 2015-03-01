@@ -49,6 +49,7 @@
         <div id="grid_container" runat="server">
             <asp:GridView CssClass="cssLabels" ID="grid_view_habitaciones" runat="server" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal">
             </asp:GridView>
+
             <div class="line_form">
                 <asp:Label runat="server" CssClass="cssLabels" Text="Numero total de Pasajeros que se pueden alojar: "></asp:Label><asp:Label ID="lbl_cant_total_pasajeros" CssClass="cssLabels" runat="server" Text=""></asp:Label>
             </div>
@@ -59,6 +60,7 @@
                 <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Menores se alojarán" runat="server" /><asp:TextBox ID="txt_menores" runat="server" />
             </div>
             <asp:Button Text="Ver Habitaciones Disponibles" runat="server" OnClick="MostrarHabitaciones" />
+
         </div>
     <//div>
     </form>

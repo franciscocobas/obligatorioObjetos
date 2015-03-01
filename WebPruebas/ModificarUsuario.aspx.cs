@@ -20,7 +20,9 @@ namespace WebPruebas
         {
             string doc = Request.QueryString["doc"];
             int int_doc = int.Parse(doc);
-            string pais = Request.QueryString["pais"];  
+            string pais = Request.QueryString["pais"];
+
+            LinkButton1.Visible = true;
 
             if (!IsPostBack)
             {
@@ -31,7 +33,7 @@ namespace WebPruebas
                 drp_paisResid.DataBind();
                 drp_paisResid.Items.Insert(0, "Seleccionar");
 
-                Pasajero p = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
+                Dominio.EntidadesDominio.Pasajero p = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
 
                 txt_documento2.Text = doc;
                 txt_documento2.Enabled = false;
@@ -60,10 +62,10 @@ namespace WebPruebas
                 string pais = Request.QueryString["pais"];
                 Direccion nuevaDir = elSistema.ModificarDireccion(int_doc, pais, txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue);
                 //aca puedo cambiar new Direction por un metodo que sea modificar direccion?
-                Pasajero p = elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, nuevaDir);
+                Dominio.EntidadesDominio.Pasajero p = elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, nuevaDir);
                 if (p != null){
                     Session["Pasajero"] = p;
-                    Response.Redirect("Pasajero/listarHabitaciones.aspx");
+                    Response.Redirect("listarHabitaciones.aspx?pDoc=" + doc + "&pPais=" + pais);
                 }
             }
             
@@ -72,6 +74,11 @@ namespace WebPruebas
         protected void Cancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");
+        }
+
+        protected void Ver_Reservas(object sender, EventArgs e)
+        {
+            Response.Redirect("ListarReservasPasaj.aspx?pDoc=" + txt_documento2.Text + "&pPais=" + drp_Pais2.SelectedValue);
         }
     }
 }
