@@ -6,6 +6,29 @@
 <head runat="server">
     <title>Listado de Habitaciones</title>
     <link href="../styles.css" rel="stylesheet" />
+    <style>
+        #grid_container {
+            width: 85%;
+            height: auto;
+            margin: 0px auto;
+        }
+        #grid_container div {
+            width: 100%;
+            overflow: auto;
+        }
+        #grid_container table {
+            width: 100%;
+        }
+        .line_form {
+            margin: 5px 0px 5px 0px;
+        }
+        .line_form span:first-child {
+            width: 40%;
+        }
+        #lbl_cant_total_pasajeros {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div runat="server" id="div_p_reservasAdmin2"><p id="p_reservasAdmin" class="cssLabels">Habitaciones disponibles</p></div> 
@@ -23,9 +46,21 @@
                 <asp:Label Text="Tipo habitación: " CssClass="cssLabels" runat="server" /><asp:DropDownList ID="ddl_tipoHabitaciones" CssClass="cssLabels"  runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddl_tipoHabitaciones_SelectedIndexChanged"></asp:DropDownList>
             </div>  
         </div>
-        <div id="hola" runat="server">
+        <div id="grid_container" runat="server">
             <asp:GridView CssClass="cssLabels" ID="grid_view_habitaciones" runat="server" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal">
             </asp:GridView>
+
+            <div class="line_form">
+                <asp:Label runat="server" CssClass="cssLabels" Text="Numero total de Pasajeros que se pueden alojar: "></asp:Label><asp:Label ID="lbl_cant_total_pasajeros" CssClass="cssLabels" runat="server" Text=""></asp:Label>
+            </div>
+            <div class="line_form">
+                <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Mayores se alojarán: " runat="server" /><asp:TextBox ID="txt_mayores" runat="server" />
+            </div>
+            <div class="line_form">
+                <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Menores se alojarán" runat="server" /><asp:TextBox ID="txt_menores" runat="server" />
+            </div>
+            <asp:Button Text="Ver Habitaciones Disponibles" runat="server" OnClick="MostrarHabitaciones" />
+
         </div>
     <//div>
     </form>

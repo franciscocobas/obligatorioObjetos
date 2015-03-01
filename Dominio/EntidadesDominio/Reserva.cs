@@ -13,7 +13,7 @@ namespace Dominio.EntidadesDominio
         int id;
         static int ultId;
         bool activa;
-        double precioPesos;
+        decimal precioPesos;
         DateTime fechaDesde;
         DateTime fechaHasta;
         int cantMenores;
@@ -42,7 +42,7 @@ namespace Dominio.EntidadesDominio
             set { activa = value; }
         }
 
-        public double PrecioPesos
+        public decimal PrecioPesos
         {
             get { return precioPesos; }
             set { precioPesos = value; }
