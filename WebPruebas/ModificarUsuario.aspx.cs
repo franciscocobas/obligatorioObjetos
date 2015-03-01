@@ -47,22 +47,26 @@ namespace WebPruebas
             }
 
             titulo.Text = "Datos Pasajero";
-
-
         }
 
-        protected void ReservaModif_Click(object sender, AuthenticateEventArgs e)
+        protected void ReservaModif_Click(object sender, EventArgs e)
         {
-            string doc = Request.QueryString["doc"];
-            int int_doc = int.Parse(doc);
-            string pais = Request.QueryString["pais"];
-            
-            //aca puedo cambiar new Direction por un metodo que sea modificar direccion?
-            Pasajero p = elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, new Direccion(txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue));
-            if (p != null){
-                Session["Pasajero"] = p;
-                Response.Redirect("Pasajero/Reserva.aspx");
+            Page.Validate("expressions");
+
+            if (Page.IsValid)
+            {
+                string doc = Request.QueryString["doc"];
+                int int_doc = int.Parse(doc);
+                string pais = Request.QueryString["pais"];
+                Direccion nuevaDir = elSistema.ModificarDireccion(int_doc, pais, txt_dir1.Text, txt_dir2.Text, txt_ciudad.Text, txt_dptoProv.Text, txt_CP.Text, drp_paisResid.SelectedValue);
+                //aca puedo cambiar new Direction por un metodo que sea modificar direccion?
+                Pasajero p = elSistema.ModificarPasajero(int_doc, pais, txt_nombre.Text, nuevaDir);
+                if (p != null){
+                    Session["Pasajero"] = p;
+                    Response.Redirect("Pasajero/listarHabitaciones.aspx");
+                }
             }
+            
         }
 
         protected void Cancelar_Click(object sender, EventArgs e)

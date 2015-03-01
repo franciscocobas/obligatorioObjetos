@@ -7,45 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebPruebas {
+namespace WebPruebas.Admin {
     
     
-    public partial class controlPanelAdmin {
+    public partial class ReservasdePasajero {
         
         /// <summary>
-        /// lnk_habs control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_habs;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// lnk_reservas control.
+        /// docPasajero control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_reservas;
+        protected global::System.Web.UI.WebControls.DropDownList docPasajero;
         
         /// <summary>
-        /// lnk_dinero control.
+        /// Label_res2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnk_dinero;
+        protected global::System.Web.UI.WebControls.Label Label_res2;
         
         /// <summary>
-        /// div_mostrarDinero control.
+        /// paisPasajero control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_mostrarDinero;
+        protected global::System.Web.UI.WebControls.DropDownList paisPasajero;
+        
+        /// <summary>
+        /// btn_buscarRes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_buscarRes;
+        
+        /// <summary>
+        /// btn_volverPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_volverPanel;
     }
 }

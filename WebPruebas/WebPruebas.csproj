@@ -59,12 +59,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\controlPanelAdmin.aspx" />
+    <Content Include="Admin\dineroRecaudado.aspx" />
+    <Content Include="Admin\habitacionesDispAdmin.aspx" />
+    <Content Include="Admin\ReservasdePasajero.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Pasajero\ListarHabitaciones.aspx" />
     <Content Include="loginAdmin.aspx" />
     <Content Include="ModificarUsuario.aspx" />
     <Content Include="Pasajero\Reserva.aspx" />
-    <Content Include="Scripts\ValidacionUsuario.js" />
     <Content Include="styles.css" />
     <Content Include="IngresarVerUsuario.aspx" />
     <Content Include="packages.config" />
@@ -82,6 +84,27 @@
     </Compile>
     <Compile Include="Admin\controlPanelAdmin.aspx.designer.cs">
       <DependentUpon>controlPanelAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\dineroRecaudado.aspx.cs">
+      <DependentUpon>dineroRecaudado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\dineroRecaudado.aspx.designer.cs">
+      <DependentUpon>dineroRecaudado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\habitacionesDispAdmin.aspx.cs">
+      <DependentUpon>habitacionesDispAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\habitacionesDispAdmin.aspx.designer.cs">
+      <DependentUpon>habitacionesDispAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ReservasdePasajero.aspx.cs">
+      <DependentUpon>ReservasdePasajero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ReservasdePasajero.aspx.designer.cs">
+      <DependentUpon>ReservasdePasajero.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

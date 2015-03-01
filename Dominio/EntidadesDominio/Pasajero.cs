@@ -18,6 +18,7 @@ namespace Dominio.EntidadesDominio
         Direccion direccion;
         const int minSize = 8;
         const int maxSize = 10;
+        public List<Reserva> listaReservas { get; private set; } 
 
         #endregion
 
@@ -74,17 +75,13 @@ namespace Dominio.EntidadesDominio
             return this.id == p.id;
         }
 
-        public override int GetHashCode() /// agregué esto porque me decia: Warning1 'Dominio.EntidadesDominio.Habitacion' overrides Object.Equals(object o) but does not override Object.GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-
         #region Validacion
 
         public static bool valSizeDocumento(string pDoc)
         {
             return pDoc.Length <= maxSize && pDoc.Length >= minSize;
         }
+
 
         #endregion
     }

@@ -2,7 +2,6 @@
     background-color:whitesmoke
 }
 
-
 .cssLabels{
     color: black;
     font-family: 'Courier New';
@@ -17,7 +16,12 @@
     font-size: 12px;
 }
 
-#txt_documento, #txt_CP  {
+#div_errorCotiz{
+    float:left;
+    margin-top:16px;
+}
+
+#txt_documento, #txt_CP{
     margin-left:21px;
     margin-right: 3px;
 }
@@ -27,9 +31,13 @@
     margin-right: 3px;
 }
 
-#txt_dptoProv{
+#txt_dptoProv {
     margin-left:12px;
     margin-right: 3px;
+}
+
+#txt_venta{
+    margin-left:9px;
 }
 
 #txt_documento2 {
@@ -38,6 +46,10 @@
 
 #txt_nombre, #txt_ciudad{
     margin-left:87px;
+}
+
+#Label_res2, #div_P, #div_H{
+    margin-left: 15px;
 }
 
 #txt_dir1, #txt_dir2, #drp_Pais2 {
@@ -72,3 +84,183 @@
 
 }
 
+#div_cerrarSesion, #btn_commit {
+    float:right;
+}
+
+#div_right{
+    width:350px;
+    float:right;
+}
+
+#grid_view_habitaciones{
+    margin-top:16px;
+    margin-left:15px;
+    margin-right:15px;
+    width:1200px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+#grid_view_habitaciones th{
+    font-weight:600;
+}
+
+#hola{
+    margin: 0 auto;
+    margin-top:60px;
+    width:1232px;
+    height:350px;
+    background-color: #dfe2e6;
+    border-color:#e8eaed;
+    border-width: 1px;
+    border-style:solid;
+    border-radius:15px;
+}
+
+#Content_derivadas_hola2{
+    margin: 0 auto;
+    margin-top:30px;
+    margin-left:15px;
+    border-color:#e8eaed;
+    border-width: 1px;
+}
+
+#div_left{
+    float:left;
+    width:350px;
+}
+
+#datepickerFrom{
+    margin-left:40px;
+}
+
+#div_0{
+    width:150px;
+    float:right;
+}
+
+#LinkLoginAdmin{
+    color: black;
+    font-family: 'Courier New';
+    font-size: 12px;
+    float:right;
+    margin-right:10px;
+}
+
+#div_sideCotizacion, #div_btnVolver{
+    margin: 0 auto;
+    margin-right:30px;
+    width:286px;
+    float:right;
+}
+
+#Content_derivadas, #Button1{
+    margin: 0 auto;
+    float:left;
+    width:400px;
+}
+
+#div_panel{
+     margin: 0 auto;
+     float:left;
+     width:1000px;
+     height:500px;
+     background-color: #dfe2e6;
+     border-color:#e8eaed;
+     border-width: 1px;
+     border-style:solid;
+     border-bottom-right-radius:30px;
+     border-top-right-radius:30px;
+     border-top-left-radius:10px;
+     border-bottom-left-radius:10px;
+}
+
+#div_reservas, #div_habitaciones, #div_dinero{
+    height:50px;
+    margin-top:55px;
+    margin-left:35px;
+}
+
+#h_dolar {
+    color: navy;
+    font-family: 'Courier New';
+    font-size: 16px;
+    text-align:center;
+    margin: 15px 0px;
+}
+
+#p_panel, #p_reservasAdmin{
+    color: navy;
+    font-family: 'Courier New';
+    font-size: 20px;
+    text-align:center;
+    margin: 15px 0px;
+}
+
+#p_panel{
+    font-weight:600;
+}
+
+#btn_commit {
+    margin-top:15px;
+}
+
+#txt_compra, #txt_venta{
+    padding-left: 3px;
+}
+
+#div_textPanel{
+    width:250px;
+    margin: 0 auto;
+    margin-bottom:50px;
+}
+
+#div_cerrarSesion{
+    margin: 0 auto;
+}
+
+#LnkCerrarSesion{
+    margin-right:8px;
+}
+
+.csslinks:hover{
+    background-color: whitesmoke;
+}
+
+#div_p_reservasAdmin{
+    width:300px;
+    margin: 0 auto;
+}
+
+#div_tipoHab {
+    margin-top:18px;
+    width:700px;
+}
+
+#div_inputConsulta{
+    margin-top:70px;
+    float:none;
+    width:700px;
+}
+
+#div_H{
+    margin-top:70px;
+    width:700px;
+}
+
+#div_p_reservasAdmin2{
+    width:300px;
+    margin: 0 auto;
+    padding-bottom:40px;
+}
+
+#div_LH{
+    margin-left: 80px;
+    width:700px;
+    margin-top:40px;
+}
+
+#btn_buscarRes{
+    width: 60px;
+}

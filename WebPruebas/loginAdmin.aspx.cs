@@ -34,6 +34,8 @@ namespace WebPruebas
             {
                 Session["usuario"] = null;
                 e.Authenticated = false;
+                this.LoginAdmin.DestinationPageUrl = "Admin/controlPanelAdmin.aspx";
+
             }
         }
 

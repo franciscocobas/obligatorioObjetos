@@ -26,7 +26,7 @@ namespace Dominio.EntidadesDominio
         public void ActualizarPrecios(decimal precioVta, decimal precioCompra)
         {
             this.PrecioVenta = precioVta;
-            this.PrecioCompra = PrecioCompra;
+            this.PrecioCompra = precioCompra;
 
         }
     }

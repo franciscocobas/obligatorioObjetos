@@ -97,7 +97,7 @@ namespace WebPruebas
             if (Request.QueryString["modo"] == "0") // usuario existente
             {
                 Session["Pasajero"] = elSistema.BuscarPasajeroPorDocPais(int_doc, pais);
-                Response.Redirect("Pasajero/Reserva.aspx"); 
+                Response.Redirect("Pasajero/listarHabitaciones.aspx"); 
             }
 
             else // usuario nuevo, validado

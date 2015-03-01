@@ -1,17 +1,17 @@
-﻿using Dominio.EntidadesDominio;
-using Dominio.ServiciosDominio;
-using System;
+﻿using System;
+using System.Data;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio.EntidadesDominio;
+using Dominio.ServiciosDominio;
 
-namespace WebPruebas
+namespace WebPruebas.Admin
 {
-    public partial class ListarHabitaciones : System.Web.UI.Page
+    public partial class habitacionesDispAdmin : System.Web.UI.Page
     {
         Sistema sistema = Sistema.Instancia;
 
@@ -22,18 +22,18 @@ namespace WebPruebas
                 List<string> tipoHabitaciones = sistema.obtenerTipoHabitaciones();
                 ddl_tipoHabitaciones.DataSource = tipoHabitaciones;
                 ddl_tipoHabitaciones.DataBind();
-                ddl_tipoHabitaciones.Items.Insert(0, new ListItem("--Ingrese un valor--"));
-                hola.Visible = false;
+                ddl_tipoHabitaciones.Items.Insert(0, "Seleccionar");
+                hola2.Visible = false;
             }
         }
 
         protected void ddl_tipoHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-            if (ddl_tipoHabitaciones.SelectedItem != null && datepickerFrom.Value != "" && datepickerTo.Value != "")
+
+            if (ddl_tipoHabitaciones.SelectedItem != null && datepickerFromHab.Value != "" && datepickerToHab.Value != "")
             {
-                string[] fechaDesdeArray = datepickerFrom.Value.Split('/');
-                string[] fechaHastaArray = datepickerTo.Value.Split('/');
+                string[] fechaDesdeArray = datepickerFromHab.Value.Split('/');
+                string[] fechaHastaArray = datepickerToHab.Value.Split('/');
                 string diaDesdeTexto = fechaDesdeArray[0];
                 string diaHastaTexto = fechaHastaArray[0];
                 int diaDesde;
@@ -53,7 +53,7 @@ namespace WebPruebas
                     DateTime fechaDesde = new DateTime(anioDesde, mesDesde, diaDesde);
                     DateTime fechaHasta = new DateTime(anioHasta, mesHasta, diaHasta);
                     List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value);
-                    hola.Visible = true;
+                    hola2.Visible = true;
                     int cantidadPasajeros;
                     List<ArrayList> diccHabitaciones = sistema.obtenerHabitacionesIguales(habitaciones, out cantidadPasajeros);
                     grid_view_habitaciones.AutoGenerateColumns = false;
@@ -79,7 +79,7 @@ namespace WebPruebas
                     DataColumn columnPrecio = new DataColumn(precio, typeof(System.Decimal));
                     table.Columns.Add(columnPrecio);
 
-                    for (var i = 0; i < diccHabitaciones.Count ; i++)
+                    for (var i = 0; i < diccHabitaciones.Count; i++)
                     {
                         DataRow row = table.NewRow();
                         row[nuHabit] = diccHabitaciones[i][0];
@@ -95,14 +95,15 @@ namespace WebPruebas
                     foreach (DataColumn dc in table.Columns)
                     {
                         if (dc.DataType != typeof(System.Boolean))
-                        { 
+                        {
                             BoundField boundfield = new BoundField();
                             boundfield.DataField = dc.ColumnName;
                             boundfield.HeaderText = dc.ColumnName;
                             boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
                             boundfield.ControlStyle.Width = Unit.Pixel(40);
                             grid_view_habitaciones.Columns.Add(boundfield);
-                        } else
+                        }
+                        else
                         {
                             CheckBoxField checkbox = new CheckBoxField();
                             checkbox.DataField = dc.ColumnName;
@@ -121,4 +122,3 @@ namespace WebPruebas
         }
     }
 }
-

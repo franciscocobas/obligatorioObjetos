@@ -4,7 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Panel de Control</title>
+    <script src='../Scripts/jquery-2.1.3.min.js' type = 'text/javascript'></script>
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>    
     <link href="../styles.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -12,15 +15,40 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <div id="div_cerrarSesion"><asp:LinkButton ID="LnkCerrarSesion" CssClass="cssLabels" runat="server" onclick="LnkCerrarSesion_Click"
+            PostBackUrl="~/loginAdmin.aspx">Cerrar Sesión</asp:LinkButton></div>
+        <div id="div_master1">
+            <div id="div_textPanel"><p id="p_panel">Panel de Control</p></div>
 
-        <%-- CERRAR SESION----
-            <asp:LinkButton ID="LnkCerrarSesion" runat="server" onclick="LnkCerrarSesion_Click"
-        PostBackUrl="~/loginAdmin.aspx">Cerrar Sesión</asp:LinkButton>--%>
-        <asp:ContentPlaceHolder ID="Content1" runat="server">
+        </div>
+        <div id="div_contenedorAdmin">
+        <asp:ContentPlaceHolder ID="Content_derivadas" runat="server">
 
 
         </asp:ContentPlaceHolder>
+            <div id="div_sideCotizacion">
+            <p id="h_dolar">Cotización del Dólar</p>
+            <hr />
+            <asp:Label ID="Label1" runat="server" CssClass="cssLabels" Text="Compra:" AssociatedControlID="txt_compra"></asp:Label>
+            <asp:TextBox ID="txt_compra" Enabled="false" runat="server"></asp:TextBox><br />
+            <br />
+            <asp:Label ID="Label2" runat="server" CssClass="cssLabels" Text="Venta:" AssociatedControlID="txt_venta"></asp:Label>
+            <asp:TextBox ID="txt_venta" Enabled="false" runat="server"></asp:TextBox>
+            <br />
+            <div runat="server" id="div_errorCotiz"></div>
+            <asp:Button ID="btn_commit" runat="server" OnClick="Actualizar_Cotizacion" Text="Actualizar" /><br />
+            <br />
+            <hr />
+        </div>
+           <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+
+
+           </asp:ContentPlaceHolder>
+            
+        </div>
+
     </div>
     </form>
+    
 </body>
 </html>
