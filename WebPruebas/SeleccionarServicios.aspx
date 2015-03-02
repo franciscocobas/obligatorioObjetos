@@ -48,7 +48,14 @@
         </div>
         <asp:Label ID="mensaje" Text="" runat="server" visible="false" ForeColor="#00CC00" />
         <br />
-        <div id="div_btn_cancelar"><asp:Button ID="btn_cancelar" Text="Cancelar Reserva" runat="server" OnClick="CancelarReserva" /></div>
+        <div style="float:right">
+            <div id="div_btn_cancelar"><asp:Button ID="btn_cancelar" Text="Cancelar Reserva" runat="server" OnClick="CancelarReserva" /></div>
+        
+            <br />
+        
+            <div id="div_btn_volver"><asp:Button ID="btn_volverServ" runat="server" OnClick="Volver" Text="Volver" /></div>
+        </div>
+
     </div>
     </form>
 </body>

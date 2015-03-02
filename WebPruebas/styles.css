@@ -39,12 +39,13 @@
 
 #div_datos{
     margin:0 auto;
-    width:500px;
+    width:550px;
 }
 
-#div_btn_cancelar{
+#div_btn_cancelar, #div_btn_volver{
     width: 150px;
     float:right;
+    margin-bottom:5px;
 }
 
 #serviciosContainer, #grid_habitaciones_disponibles, #grid_habitaciones_no_disp{

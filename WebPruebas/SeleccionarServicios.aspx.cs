@@ -100,5 +100,10 @@ namespace WebPruebas
         {
             Response.Redirect("Home.aspx");
         }
+
+        protected void Volver(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 }
