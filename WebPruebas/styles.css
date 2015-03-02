@@ -17,6 +17,43 @@
     margin-right: 15px;
 }
 
+#p_servicios{
+    font-size:20px;
+    text-align:center;
+}
+
+#div_p_servicio{
+    width:500px;
+    margin:0 auto;
+}
+
+#div_p_habs{
+    width:570px;
+    margin:0 auto;
+}
+
+#datos_servicios{
+    margin:0 auto;
+    width:500px;
+}
+
+#div_datos{
+    margin:0 auto;
+    width:500px;
+}
+
+#div_btn_cancelar{
+    width: 150px;
+    float:right;
+}
+
+#serviciosContainer, #grid_habitaciones_disponibles, #grid_habitaciones_no_disp{
+    text-align:center;
+    margin:0 auto;
+    width:800px;
+    margin-bottom:30px;
+}
+
 #Content_derivadas_div_mostrarDinero{
     margin-left:35px;
 }
@@ -27,10 +64,21 @@
     width:900px;
 }
 
-#GridView1{
+#div_instruccionEliminar{
+    height:55px;
     margin: 0 auto;
+    width:300px;
+}
+#p_instrucc{
+    font-size:17px;
+}
+
+#GridView1, #table1{
+    margin: 0 auto;
+    margin-top:20px;
     width:700px;
     text-align:center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 #Content_derivadas_GridView2{
@@ -61,7 +109,7 @@
 
 #btn_volver{
     width:80px;
-    height:30px;
+    height:25px;
     margin-top:10px;
     margin-right:10px;
 }
@@ -73,7 +121,18 @@
 #div_p_listaRes{
     margin: 0 auto;
     margin-bottom:15px;
-    width:550px;
+    width:425px;
+}
+
+#div_eliminar_reservas{
+    margin-top:55px;
+    width:150px;
+    float:right;
+}
+
+#btn_eliminar{
+    width:150px;
+    height:25px;
 }
 
 #txt_documento, #txt_CP{
@@ -212,7 +271,7 @@
     float:right;
 }
 
-#Content_derivadas, #Button1{
+#Content_derivadas{
     margin: 0 auto;
     float:left;
     width:400px;

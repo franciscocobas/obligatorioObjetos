@@ -76,6 +76,11 @@ namespace Dominio.EntidadesDominio
             listaReservas.Add(res);
         }
 
+        public void EliminarReserva(Reserva res)
+        {
+            res.Activa = false;
+        }
+
         public override bool Equals(object obj)
         {
             Pasajero p = obj as Pasajero;

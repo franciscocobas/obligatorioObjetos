@@ -47,7 +47,6 @@ namespace Dominio.ServiciosDominio
             CargarHabitacionesPrueba();
             CargarServiciosPrueba();
             CargarAdministrativoPrueba();
-            //agregar pasajero se tiene que eliminar cuando se entregue??
             CrearPasajero(12345678, "Uruguay", "Pasajero Pasajero", new Direccion("SanMartin3384", "", "Montevideo", "Montevideo", "11710", "Uruguay"));
             CrearPasajero(12345678, "Argentina", "Arg Pasajero", new Direccion("SanMartin84", "", "BsAs", "BsAs", "11710", "Uruguay"));
  
@@ -458,7 +457,6 @@ namespace Dominio.ServiciosDominio
         #region Reservas
         public Reserva CrearReserva(int pDoc, string pPais, decimal precioPesos, DateTime pFechaDesde, DateTime pFechaHasta, int pCantMayores, int pCantMenores, List<int> pHabitaciones)
         {
-            // metodo a implementar
             Reserva reserva = new Reserva();
             reserva.PrecioPesos = precioPesos;
             reserva.FechaDesde = pFechaDesde;
@@ -500,9 +498,12 @@ namespace Dominio.ServiciosDominio
             return reservaEncontrada;
         }
 
-        public void CancelarReserva(int pIdPasajero, int pIdReserva)
+        public void CancelarReserva(int pDocPasajero, string pPais, int pIdReserva)
         {
+            Pasajero pas = BuscarPasajeroPorDocPais(pDocPasajero, pPais);
+            Reserva res = buscarReservaXId(pIdReserva);
 
+            pas.EliminarReserva(res);
         }
 
         #endregion
