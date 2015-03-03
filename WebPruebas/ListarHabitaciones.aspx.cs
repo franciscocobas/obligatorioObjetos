@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -134,12 +135,17 @@ namespace WebPruebas
             string fechaHasta = datepickerTo.Value;
             fechaHasta = fechaHasta.Replace("/", "");
             string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
-            if (cantPasajerosMayores <= cantidadPasajeros)
+            if (cantPasajerosMayores + cantPasajerosMenores <= cantidadPasajeros)
             {
                 string doc = Request.QueryString["pDoc"];
                 string pais = Request.QueryString["pPais"];
                 Response.Redirect("SeleccionarHabitaciones.aspx?pDoc="+ doc + "&pPais="+ pais +"&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores 
                     + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
+            }
+            else
+            {
+                warn.Text = "*  La cantidad total de pasajeros no puede exceder la capacidad total";
+                warn.ForeColor = Color.Red;
             }
         }
     }

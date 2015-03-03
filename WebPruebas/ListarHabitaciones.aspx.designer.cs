@@ -85,6 +85,15 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.Label lbl_cant_total_pasajeros;
         
         /// <summary>
+        /// warn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label warn;
+        
+        /// <summary>
         /// txt_mayores control.
         /// </summary>
         /// <remarks>

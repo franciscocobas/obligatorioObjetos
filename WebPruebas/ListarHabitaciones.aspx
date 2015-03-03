@@ -25,8 +25,10 @@
         .line_form span:first-child {
             width: 40%;
         }
-        #lbl_cant_total_pasajeros {
+        #lbl_cant_total_pasajeros, #warn {
             font-weight: bold;
+            font-size: 15px;
+            font-family:'Times New Roman', Times, serif
         }
     </style>
 </head>
@@ -52,6 +54,7 @@
 
             <div class="line_form">
                 <asp:Label runat="server" CssClass="cssLabels" Text="Numero total de Pasajeros que se pueden alojar: "></asp:Label><asp:Label ID="lbl_cant_total_pasajeros" CssClass="cssLabels" runat="server" Text=""></asp:Label>
+                <asp:Label  id="warn" runat="server"></asp:Label>
             </div>
             <div class="line_form">
                 <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Mayores se alojarán: " runat="server" /><asp:TextBox ID="txt_mayores" runat="server" />
@@ -76,6 +79,21 @@
             $('#datepickerFrom, #datepickerTo').datepicker({
                 minDate: 0
             });
+
+            var dateFrom = $('#datepickerFrom'),
+                dateTo = $('#datepickerTo');
+            
+            dateTo.on('change', function (e) {
+                dateFrom = dateFrom.val();
+                dateTo = dateTo.val();
+                var dateFromDate = $.datepicker.parseDate('dd/mm/yy', dateFrom),
+                    dateToDate = $.datepicker.parseDate('dd/mm/yy', dateTo);
+                if (dateToDate < dateFromDate) {
+                    console.log('hola');
+                }
+            });
+            
+
         });
     </script>
 </body>

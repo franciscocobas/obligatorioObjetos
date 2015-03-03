@@ -18,47 +18,21 @@
     <div>
         <div id="div_p_habs"><p id="p_servicios" class="cssLabels">Seleccione las habitaciones que desea reservar</p></div>
         <br />
-         
-        <div class="habitacionesDispContainer">
-            <asp:GridView CssClass="cssGrid" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal" ID="grid_habitaciones_disponibles" runat="server">
-                <Columns>
-                    <asp:TemplateField HeaderText="Seleccionar">
-                        <ItemTemplate>
-                            <asp:CheckBox ID="seleccionado" runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="Id" HeaderText="Id"></asp:BoundField>
-                    <asp:BoundField DataField="Numero" HeaderText="Numero"></asp:BoundField>
-                    <asp:BoundField DataField="TieneJacuzzi" HeaderText="Tiene Jacuzzi?"></asp:BoundField>
-                    <asp:BoundField DataField="EsExterior" HeaderText="Es Exterior?"></asp:BoundField>
-                    <asp:BoundField DataField="CantCamasSingles" HeaderText="Camas Simples"></asp:BoundField>
-                    <asp:BoundField DataField="CantCamasDobles" HeaderText="Camas Dobles"></asp:BoundField>
-                    <asp:BoundField DataField="Precio.MontoDolares" HeaderText="Precio"></asp:BoundField>
-                </Columns>
-            </asp:GridView>
-        </div>
         <asp:Label Text="Cantidad pasajeros Mayores Seleccionados: " runat="server" /><asp:Label CssClass="cantPasajeros" ID="lbl_cant_mayores"  Text="" runat="server" />
+        <br />
         <asp:Label Text="Cantidad pasajeros Menores Seleccionados: " runat="server" /><asp:Label CssClass="cantPasajeros" ID="lbl_cant_menores" Text="" runat="server" />
-
-        <div class="habitacionesNoDispContainer">
-            <asp:GridView ID="grid_habitaciones_no_disp" runat="server">
-                <Columns>
-                    <asp:BoundField HeaderText="Numero" DataField="Numero"></asp:BoundField>
-                    <asp:BoundField DataField="TieneJacuzzi" HeaderText="Tiene Jacuzzi?"></asp:BoundField>
-                    <asp:BoundField DataField="EsExterior" HeaderText="Es Exterior?"></asp:BoundField>
-                    <asp:BoundField DataField="CantCamasSingles" HeaderText="Cantidad de camas Simples"></asp:BoundField>
-                    <asp:BoundField DataField="CantCamasDobles" HeaderText="Cantidad de camas Dobles"></asp:BoundField>
-                    <asp:BoundField DataField="Precio.MontoDolares" HeaderText="Precio"></asp:BoundField>
-                </Columns>
-            </asp:GridView>
-        </div>
-        <div id="div_datos" class="cssLabels" runat="server">
-            <asp:Button Text="Calcular Total" runat="server" OnClick="calcularPrecioTotal" />
-            <asp:Label Text="Monto total en u$s: " runat="server" /><asp:Label ID="lbl_monto_total" runat="server" />
-            <asp:Button Text="Elegir Servicios" runat="server" OnClick="CrearReserva" />
-            <asp:Button Text="Cancelar" runat="server" OnClick="CancelarReserva" />
-            <asp:Label ID="mensaje" runat="server" Visible="False" />
-        </div>
+        <br />
+        <asp:Label Text="Cantidad de Matrimoniales: " runat="server" /><asp:TextBox ID="txt_cant_matrimoniales" runat="server" />
+        <br />
+        <asp:Label Text="Cantidad de Singles: " runat="server" /><asp:TextBox ID="txt_cant_singles" runat="server" />
+        <br />
+        <asp:Button ID="BuscarHabitacion" Text="Buscar Habitacion" runat="server" OnClick="BuscarHabitacion_Click" />
+    </div>
+    <div id="listadoHabitaciones">
+        <asp:Label Text="Habitaciones Disponibles" runat="server" />
+        <asp:GridView ID="gridHabitDisponibles" runat="server" AutoGenerateColumns="False"></asp:GridView>
+        <asp:Label Text="Habitaciones No Disponibles" runat="server" />
+        <asp:GridView ID="gridHabitNoDisponibles" runat="server"></asp:GridView>
     </div>
     </form>
 </body>

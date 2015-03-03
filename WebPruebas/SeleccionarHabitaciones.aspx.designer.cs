@@ -22,15 +22,6 @@ namespace WebPruebas {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// grid_habitaciones_disponibles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid_habitaciones_disponibles;
-        
-        /// <summary>
         /// lbl_cant_mayores control.
         /// </summary>
         /// <remarks>
@@ -49,39 +40,48 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.Label lbl_cant_menores;
         
         /// <summary>
-        /// grid_habitaciones_no_disp control.
+        /// txt_cant_matrimoniales control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grid_habitaciones_no_disp;
+        protected global::System.Web.UI.WebControls.TextBox txt_cant_matrimoniales;
         
         /// <summary>
-        /// div_datos control.
+        /// txt_cant_singles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_datos;
+        protected global::System.Web.UI.WebControls.TextBox txt_cant_singles;
         
         /// <summary>
-        /// lbl_monto_total control.
+        /// BuscarHabitacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_monto_total;
+        protected global::System.Web.UI.WebControls.Button BuscarHabitacion;
         
         /// <summary>
-        /// mensaje control.
+        /// gridHabitDisponibles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label mensaje;
+        protected global::System.Web.UI.WebControls.GridView gridHabitDisponibles;
+        
+        /// <summary>
+        /// gridHabitNoDisponibles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridHabitNoDisponibles;
     }
 }

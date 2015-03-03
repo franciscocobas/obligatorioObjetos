@@ -49,3 +49,13 @@ C:\Users\Francisco\Desktop\Taller Objetos\obligatorioObjetos\WebPruebas\obj\Debu
 C:\Users\Francisco\Desktop\Taller Objetos\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.csproj.GenerateResource.Cache
 C:\Users\Francisco\Desktop\Taller Objetos\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.dll
 C:\Users\Francisco\Desktop\Taller Objetos\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.pdb
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\bin\WebPruebas.dll.config
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\bin\WebPruebas.dll
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\bin\WebPruebas.pdb
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\bin\Dominio.dll
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\bin\Dominio.pdb
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.csprojResolveAssemblyReference.cache
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.Default.resources
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.csproj.GenerateResource.Cache
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.dll
+C:\Users\Usuario\Dropbox\The Cloud\Facultad\00 ORT\TallerObjetos\Tarea3\obligatorioObjetos\WebPruebas\obj\Debug\WebPruebas.pdb

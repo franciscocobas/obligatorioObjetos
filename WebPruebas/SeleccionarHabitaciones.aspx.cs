@@ -3,6 +3,7 @@ using Dominio.ServiciosDominio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,6 +18,15 @@ namespace WebPruebas
         DateTime fechaHasta;
         int cantidadPasajerosMayores;
         int cantidadPasajerosMenores;
+        List<Habitacion> habitacionesNoOcupadas;
+        ArrayList habitDisponiblesArray = new ArrayList();
+        ArrayList habitNoDisponiblesArray = new ArrayList();
+        List<Habitacion> habitacionesSeleccionadas = new List<Habitacion>();
+        DataTable tableDisponibles;
+        DataTable tableNoDisponibles;
+
+        string cantidadDobles = "Cantidad de Camas Dobles";
+        string cantidadSingles = "Cantidad de Camas Singles";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,97 +45,121 @@ namespace WebPruebas
             string anioHasta = fechaHastaChar[4].ToString() + fechaHastaChar[5].ToString() + fechaHastaChar[6].ToString() + fechaHastaChar[7].ToString();
             fechaHasta = new DateTime(int.Parse(anioHasta), int.Parse(mesHasta), int.Parse(diaHasta));
 
-            if (!IsPostBack) { 
+            string type = Request.QueryString["type"];
 
-                string type = Request.QueryString["type"];
+            habitacionesNoOcupadas = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, type);
 
+            habitDisponiblesArray = (ArrayList)Session["habitDisponiblesArray"];
+            if (habitDisponiblesArray == null)
+                habitDisponiblesArray = new ArrayList();
+            habitNoDisponiblesArray = (ArrayList)Session["habitNoDisponiblesArray"];
+            if (habitNoDisponiblesArray == null)
+                habitNoDisponiblesArray = new ArrayList();
+
+            gridHabitDisponibles.AutoGenerateColumns = false;
+            gridHabitNoDisponibles.AutoGenerateColumns = false;
+
+            if (!IsPostBack) {
+                
                 // Cargar habitaciones en disponibles
-                List<Habitacion> habitacionesDisponibles = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, type);
                 lbl_cant_mayores.Text = Request.QueryString["pMay"];
                 lbl_cant_menores.Text = Request.QueryString["pMen"];
 
-                grid_habitaciones_disponibles.AutoGenerateColumns = false;
-                grid_habitaciones_disponibles.DataSource = habitacionesDisponibles;
-                grid_habitaciones_disponibles.DataBind();
+                DataTable tableDisponibles = (DataTable)Session["tableDisponibles"];
+                DataTable tableNoDisponibles = (DataTable)Session["tableNoDisponibles"];
+                if (tableDisponibles == null && tableNoDisponibles == null)
+                { 
+                    tableDisponibles = new DataTable();
+                    DataColumn columnCantDobles = new DataColumn(cantidadDobles, typeof(System.Int32));
+                    tableDisponibles.Columns.Add(columnCantDobles);
+                    DataColumn columnTCantSingles = new DataColumn(cantidadSingles, typeof(System.Int32));
+                    tableDisponibles.Columns.Add(columnTCantSingles);
 
-                // Cargar habitaciones en no disponibles
-                List<Habitacion> habitacionesNoDisponibles = sistema.ObtenerHabitacionesNoDisponiblesXTipo(fechaDesde, fechaHasta, type);
-                if (habitacionesNoDisponibles.Count > 0)
-                {
-                    grid_habitaciones_no_disp.AutoGenerateColumns = false;
-                    grid_habitaciones_no_disp.DataSource = habitacionesNoDisponibles;
-                    grid_habitaciones_no_disp.DataBind();
+                    foreach (DataColumn dc in tableDisponibles.Columns)
+                    {
+                        BoundField boundfield = new BoundField();
+                        boundfield.DataField = dc.ColumnName;
+                        boundfield.HeaderText = dc.ColumnName;
+                        boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                        gridHabitDisponibles.Columns.Add(boundfield);
+                    }
+
+                    tableNoDisponibles = new DataTable();
+                    DataColumn columnCantDoblesNoDisp = new DataColumn(cantidadDobles, typeof(System.Int32));
+                    tableNoDisponibles.Columns.Add(columnCantDoblesNoDisp);
+                    DataColumn columnCantSinglesNoDisp = new DataColumn(cantidadSingles, typeof(System.Int32));
+                    tableNoDisponibles.Columns.Add(columnCantSinglesNoDisp);
+                
+                    foreach (DataColumn dc in tableNoDisponibles.Columns)
+                    {
+                        BoundField boundfield = new BoundField();
+                        boundfield.DataField = dc.ColumnName;
+                        boundfield.HeaderText = dc.ColumnName;
+                        boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                        gridHabitNoDisponibles.Columns.Add(boundfield);
+                    }
+
+                    Session["tableDisponibles"] = tableDisponibles;
+                    Session["tableNoDisponibles"] = tableNoDisponibles;
                 }
                 
             }
-        }
+            else
+            {
 
-        protected void calcularPrecioTotal(object sender, EventArgs e)
-        {
-            ArrayList list = new ArrayList();
-            decimal precioTotal = 0M;
-            foreach(GridViewRow row in grid_habitaciones_disponibles.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    CheckBox check = (row.Cells[0].FindControl("seleccionado") as CheckBox);
-                    if (check.Checked)
-                    {
-                        list.Add(row.Cells[1].Text);
-                        int id = int.Parse(row.Cells[1].Text);
-                        precioTotal += sistema.buscarHabitacionXId(id).Precio.MontoDolares;
-                    }
-                }
-            }
-            lbl_monto_total.Text = precioTotal.ToString();
-        }
+                
 
-        protected void CrearReserva(object sender, EventArgs e)
-        {
-            List<int> habitacionesSeleccionadas = new List<int>();
-            decimal precioPesos = 0;
-            int totalPasajerosElegidos = cantidadPasajerosMayores + cantidadPasajerosMenores;
-            int totalPasajeros = 0;
-            foreach (GridViewRow row in grid_habitaciones_disponibles.Rows)
-            {
-                if (row.RowType == DataControlRowType.DataRow)
-                {
-                    CheckBox check = (row.Cells[0].FindControl("seleccionado") as CheckBox);
-                    if (check.Checked)
-                    {
-                        int id = int.Parse(row.Cells[1].Text);
-                        habitacionesSeleccionadas.Add(id);
-                        Habitacion habitacionEncontrada = sistema.buscarHabitacionXId(id);
-                        precioPesos += habitacionEncontrada.Precio.ConvertirAPesos(CotizacionDolar.Instancia.PrecioCompra);
-                        totalPasajeros += habitacionEncontrada.CantCamasDobles * 2 + habitacionEncontrada.CantCamasSingles;
-                    }
-                }
-            }
-            if (totalPasajerosElegidos <= totalPasajeros)
-            { 
-                int doc;
-                if (!int.TryParse(Request.QueryString["pDoc"], out doc)) { }
-                string pais = Request.QueryString["pPais"];
-                Reserva reservaCreada = sistema.CrearReserva(doc, pais, precioPesos, fechaDesde, fechaHasta, cantidadPasajerosMayores, cantidadPasajerosMenores, habitacionesSeleccionadas);
-                if (reservaCreada != null)
-                {
-                    Pasajero pasajero = sistema.BuscarPasajeroPorDocPais(doc, pais);
-                    if (pasajero != null)
-                    {
-                        Response.Redirect("SeleccionarServicios.aspx?id=" + reservaCreada.Id + "&idP=" + pasajero.Id);
-                    }
-                }
-            } else
-            {
-                mensaje.Text = "El total de pasajeros que selecciono exceden los cupos de las habitaciones seleccionadas.";
-                mensaje.Visible = true;
-                mensaje.ForeColor = System.Drawing.Color.IndianRed;
             }
         }
 
-        protected void CancelarReserva(object sender, EventArgs e)
+        protected void BuscarHabitacion_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Home.aspx");
+            int cantDobles;
+            int cantSingles;
+            if (int.TryParse(txt_cant_matrimoniales.Text, out cantDobles) && int.TryParse(txt_cant_singles.Text, out cantSingles))
+            {
+                Habitacion habitacion = sistema.BuscarHabitacionXCama(habitacionesNoOcupadas, cantDobles, cantSingles);
+
+                ArrayList cantidadCamasArray = new ArrayList();
+                cantidadCamasArray.Add(cantDobles);
+                cantidadCamasArray.Add(cantSingles);
+
+                tableDisponibles = (DataTable)Session["tableDisponibles"];
+                tableNoDisponibles = (DataTable)Session["tableNoDisponibles"];
+
+                if (habitacion != null)
+                {
+                    habitDisponiblesArray.Add(cantidadCamasArray);
+                    habitacionesSeleccionadas.Add(habitacion);
+
+                    Session["habitDisponiblesArray"] = habitDisponiblesArray;
+
+                    DataRow row = tableDisponibles.NewRow();
+                    row[cantidadDobles] = cantidadCamasArray[0];
+                    row[cantidadSingles] = cantidadCamasArray[1];
+                    tableDisponibles.Rows.Add(row);
+
+                    gridHabitDisponibles.DataSource = tableDisponibles;
+                    gridHabitDisponibles.DataBind();
+                }
+                else
+                {
+                    habitNoDisponiblesArray.Add(cantidadCamasArray);
+
+                    Session["habitNoDisponiblesArray"] = habitNoDisponiblesArray;
+
+                    DataRow row = tableNoDisponibles.NewRow();
+                    row[cantidadDobles] = cantidadCamasArray[0];
+                    row[cantidadSingles] = cantidadCamasArray[1];
+                    tableNoDisponibles.Rows.Add(row);
+
+                    gridHabitNoDisponibles.DataSource = tableNoDisponibles;
+                    gridHabitNoDisponibles.DataBind();
+                    
+                }
+
+
+            }
         }
     }
 }

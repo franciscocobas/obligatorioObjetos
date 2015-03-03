@@ -285,6 +285,21 @@ namespace Dominio.ServiciosDominio
             return habitacionesIguales;
         }
         
+        public Habitacion BuscarHabitacionXCama(List<Habitacion> habitacionesNoOcupadas, int cantDobles, int cantSingles)
+        {
+            Habitacion habitacionEncontrada = null;
+
+            foreach(Habitacion habitacion in habitacionesNoOcupadas)
+            {
+                if (habitacion.CantCamasDobles == cantDobles && habitacion.CantCamasSingles == cantSingles)
+                {
+                    habitacionEncontrada = habitacion;
+                }
+            }
+
+            return habitacionEncontrada;
+        }
+
         public List<Habitacion> MostrarHabitNoDisponiblesCPrecio(List<Habitacion> pHabitaciones, Precio pPrecio, DateTime pFechaDesde, DateTime pFechaHasta)
         {
             // metodo a implementar
