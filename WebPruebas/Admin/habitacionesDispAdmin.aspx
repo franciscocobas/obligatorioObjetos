@@ -2,7 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script>
         jQuery(document).ready(function ($) {
-            console.log('hola');
             $.datepicker.setDefaults({
                 dateFormat: 'dd/mm/yy'
             });

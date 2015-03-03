@@ -13,6 +13,7 @@ namespace Dominio.EntidadesDominio
         int id;
         static int ultId;
         bool activa;
+        bool expirada;
         decimal precioPesos;
         DateTime fechaDesde;
         DateTime fechaHasta;
@@ -40,6 +41,12 @@ namespace Dominio.EntidadesDominio
         {
             get { return activa; }
             set { activa = value; }
+        }
+
+        public bool Expirada
+        {
+            get { return expirada; }
+            set { expirada = value; }
         }
 
         public decimal PrecioPesos
@@ -77,6 +84,7 @@ namespace Dominio.EntidadesDominio
         {
             UltId++;
             this.Id = UltId;
+            this.Expirada = false;
         }
 
         public int CompareTo(Reserva other)

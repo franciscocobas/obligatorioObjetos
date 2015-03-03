@@ -25,12 +25,12 @@ namespace WebPruebas
                 ddl_tipoHabitaciones.DataBind();
                 ddl_tipoHabitaciones.Items.Insert(0, new ListItem("--Ingrese un valor--"));
                 grid_container.Visible = false;
+                Session["dataColumns"] = null;
             }
         }
 
         protected void ddl_tipoHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
             if (ddl_tipoHabitaciones.SelectedItem != null && datepickerFrom.Value != "" && datepickerTo.Value != "")
             {
                 string[] fechaDesdeArray = datepickerFrom.Value.Split('/');
@@ -53,8 +53,9 @@ namespace WebPruebas
                 {
                     DateTime fechaDesde = new DateTime(anioDesde, mesDesde, diaDesde);
                     DateTime fechaHasta = new DateTime(anioHasta, mesHasta, diaHasta);
+                    int cantidadHabitaciones;
 
-                    List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value);
+                    List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value, out cantidadHabitaciones);
                     grid_container.Visible = true;
 
                     int cantidadPasajeros;
@@ -97,26 +98,31 @@ namespace WebPruebas
                         table.Rows.Add(row);
                     }
 
-                    foreach (DataColumn dc in table.Columns)
-                    {
-                        if (dc.DataType != typeof(System.Boolean))
-                        { 
-                            BoundField boundfield = new BoundField();
-                            boundfield.DataField = dc.ColumnName;
-                            boundfield.HeaderText = dc.ColumnName;
-                            boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                            grid_view_habitaciones.Columns.Add(boundfield);
-                        } else
+                    if (Session["dataColumns"] == null)
+                    { 
+                        foreach (DataColumn dc in table.Columns)
                         {
-                            CheckBoxField checkbox = new CheckBoxField();
-                            checkbox.DataField = dc.ColumnName;
-                            checkbox.HeaderText = dc.ColumnName;
-                            checkbox.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                            grid_view_habitaciones.Columns.Add(checkbox);
+                            if (dc.DataType != typeof(System.Boolean))
+                            { 
+                                BoundField boundfield = new BoundField();
+                                boundfield.DataField = dc.ColumnName;
+                                boundfield.HeaderText = dc.ColumnName;
+                                boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                                grid_view_habitaciones.Columns.Add(boundfield);
+                            } else
+                            {
+                                CheckBoxField checkbox = new CheckBoxField();
+                                checkbox.DataField = dc.ColumnName;
+                                checkbox.HeaderText = dc.ColumnName;
+                                checkbox.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                                grid_view_habitaciones.Columns.Add(checkbox);
+                            }
                         }
+                        Session["dataColumns"] = table.Columns;
                     }
-
+                    
                     lbl_cant_total_pasajeros.Text = cantidadPasajeros.ToString();
+                    lbl_cant_habitaciones.Text = cantidadHabitaciones.ToString();
 
                     grid_view_habitaciones.DataSource = table;
                     grid_view_habitaciones.DataBind();
@@ -146,6 +152,7 @@ namespace WebPruebas
                 {
                     string doc = Request.QueryString["pDoc"];
                     string pais = Request.QueryString["pPais"];
+                    Session["dataColumns"] = null;
                     Response.Redirect("SeleccionarHabitaciones.aspx?pDoc=" + doc + "&pPais=" + pais + "&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores
                         + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
                 }

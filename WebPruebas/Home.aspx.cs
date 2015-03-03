@@ -21,10 +21,13 @@ namespace WebPruebas
             jQuery.DebugPath = "~/scripts/jquery-2.1.3.js";
             jQuery.CdnPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.3.min.js";
             jQuery.CdnDebugPath = "http://ajax.microsoft.com/ajax/jQuery/jquery-2.1.3.js";
-            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", jQuery); 
-
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", jQuery);
+            
             if (!IsPostBack)
             {
+                // Chequeo y seteo todas las reservas que ya caducaron
+                elSistema.chequearReservasExpiradas();
+
                 drp_Pais.DataSource = ListaPaises.llenarPaises();
                 drp_Pais.DataBind();
                 drp_Pais.Items.Insert(0, "Seleccionar");

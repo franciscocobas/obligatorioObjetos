@@ -206,10 +206,11 @@ namespace Dominio.ServiciosDominio
             return habitacionesNoDispXTipo;
 
         }
-        public List<Habitacion> ObtenerHabitacionesDisponiblesXTipo(DateTime pFechaDesde, DateTime pFechaHasta, String pTipo)
+        public List<Habitacion> ObtenerHabitacionesDisponiblesXTipo(DateTime pFechaDesde, DateTime pFechaHasta, String pTipo, out int cantidadHabitaciones)
         {
             List<Habitacion> habitacionesDispXTipo = new List<Habitacion>();
             List<Habitacion> habitacionesDisponibles = ObtenerHabitacionesDisponiblesXFecha(pFechaDesde, pFechaHasta);
+            cantidadHabitaciones = 0;
 
             // Filtro por tipo
             foreach (Habitacion habitacion in habitacionesDisponibles)
@@ -218,6 +219,7 @@ namespace Dominio.ServiciosDominio
                 if (tipoHabitacion.Name == pTipo)
                 {
                     habitacionesDispXTipo.Add(habitacion);
+                    cantidadHabitaciones++;
                 }
             }
             return habitacionesDispXTipo;
@@ -539,6 +541,42 @@ namespace Dominio.ServiciosDominio
             pas.EliminarReserva(res);
         }
 
+        public List<Reserva> RecuperarReservasActivas(Pasajero pPasajero)
+        {
+            List<Reserva> reservasProximasActivas = new List<Reserva>();
+
+            Reserva reservaProxima = null;
+
+            if (pPasajero.listaReservas != null)
+            {
+                foreach (Reserva r in pPasajero.listaReservas)
+                {
+                    if (r.Activa == true && !r.Expirada)
+                    {
+                        if (r.FechaDesde < reservaProxima.FechaDesde || reservaProxima == null)
+                        { 
+                            reservaProxima = r;
+                            
+                            if (reservasProximasActivas.Count == 0)
+                            {
+                                reservasProximasActivas.Add(reservaProxima);
+                            } else
+                            {
+                                reservasProximasActivas = new List<Reserva>();
+                                reservasProximasActivas.Add(reservaProxima);
+                            }
+                        } else if (r.FechaDesde == reservaProxima.FechaDesde)
+                        {
+                            reservaProxima = r;
+                            reservasProximasActivas.Add(reservaProxima);
+                        }
+                    }
+                }
+            }
+
+            return reservasProximasActivas;
+        }
+
         #endregion
 
         #region Direccion
@@ -605,20 +643,15 @@ namespace Dominio.ServiciosDominio
             return precioTot;
         }
 
-        public List<Reserva> RecuperarReservasActivas(Pasajero pPasajero)
+        public void chequearReservasExpiradas() 
         {
-            List<Reserva> reservasActivas = new List<Reserva>();
-
-            if (pPasajero.listaReservas != null){
-                foreach (Reserva r in pPasajero.listaReservas){
-                    if (r.Activa == true ){
-                        reservasActivas.Add(r);
-                    }
+            foreach (Reserva reserva in this.Reservas)
+            {
+                if (reserva.FechaDesde < DateTime.Today)
+                {
+                    reserva.Expirada = true;
                 }
             }
-
-
-            return reservasActivas;
         }
 
         #endregion

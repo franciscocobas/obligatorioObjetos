@@ -25,7 +25,7 @@
         .line_form span:first-child {
             width: 40%;
         }
-        #lbl_cant_total_pasajeros, #warn {
+        #lbl_cant_total_pasajeros, #warn, #lbl_cant_habitaciones {
             font-weight: bold;
             font-size: 15px;
             font-family:'Times New Roman', Times, serif
@@ -51,19 +51,23 @@
         <div id="grid_container" runat="server">
             <asp:GridView CssClass="cssLabels" ID="grid_view_habitaciones" runat="server" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal">
             </asp:GridView>
-
-            <div class="line_form">
-                <asp:Label runat="server" CssClass="cssLabels" Text="Numero total de Pasajeros que se pueden alojar: "></asp:Label><asp:Label ID="lbl_cant_total_pasajeros" CssClass="cssLabels" runat="server" Text=""></asp:Label>
-                <asp:Label  id="warn" runat="server"></asp:Label>
+            <div class="datos_pasajeros_container">
+                <div class="line_form">
+                    <asp:Label runat="server" CssClass="cssLabels" Text="Numero total de habitaciones disponibles: "></asp:Label><asp:Label ID="lbl_cant_habitaciones" CssClass="cssLabels" runat="server" Text=""></asp:Label>
+                </div>
+                <div class="line_form">
+                    <asp:Label runat="server" CssClass="cssLabels" Text="Numero total de Pasajeros que se pueden alojar: "></asp:Label><asp:Label ID="lbl_cant_total_pasajeros" CssClass="cssLabels" runat="server" Text=""></asp:Label>
+                    <asp:Label  id="warn" runat="server"></asp:Label>
+                </div>
+                <div class="line_form">
+                    <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Mayores se alojarán: " runat="server" /><asp:TextBox ID="txt_mayores" runat="server" />
+                </div>
+                <div class="line_form">
+                    <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Menores se alojarán" runat="server" /><asp:TextBox ID="txt_menores" runat="server" />
+                </div>
+                <asp:Button Text="Ver Habitaciones Disponibles" runat="server" OnClick="MostrarHabitaciones" />
+                <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar" PostBackUrl="~/Home.aspx" />
             </div>
-            <div class="line_form">
-                <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Mayores se alojarán: " runat="server" /><asp:TextBox ID="txt_mayores" runat="server" />
-            </div>
-            <div class="line_form">
-                <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Menores se alojarán" runat="server" /><asp:TextBox ID="txt_menores" runat="server" />
-            </div>
-            <asp:Button Text="Ver Habitaciones Disponibles" runat="server" OnClick="MostrarHabitaciones" />
-            <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar" PostBackUrl="~/Home.aspx" />
 
         </div>
     <//div>
@@ -93,8 +97,6 @@
                     console.log('hola');
                 }
             });
-            
-
         });
     </script>
 </body>

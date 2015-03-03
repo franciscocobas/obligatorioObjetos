@@ -62,6 +62,7 @@ namespace WebPruebas.Admin
             Pasajero p = elsistema.BuscarPasajeroPorDocPais(int.Parse(docPasajero.SelectedValue), paisPasajero.SelectedValue);
 
             List<Reserva> reservasActivas = new List<Reserva>();
+
             reservasActivas = elsistema.RecuperarReservasActivas(p);
 
             GridView2.AutoGenerateColumns = false;

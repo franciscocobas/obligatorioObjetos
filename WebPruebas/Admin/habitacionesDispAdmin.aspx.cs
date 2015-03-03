@@ -24,6 +24,7 @@ namespace WebPruebas.Admin
                 ddl_tipoHabitaciones.DataBind();
                 ddl_tipoHabitaciones.Items.Insert(0, "Seleccionar");
                 hola2.Visible = false;
+                Session["dataColumns"] = null;
             }
         }
 
@@ -52,7 +53,8 @@ namespace WebPruebas.Admin
                 {
                     DateTime fechaDesde = new DateTime(anioDesde, mesDesde, diaDesde);
                     DateTime fechaHasta = new DateTime(anioHasta, mesHasta, diaHasta);
-                    List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value);
+                    int cantidadHabitaciones;
+                    List<Habitacion> habitaciones = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, ddl_tipoHabitaciones.SelectedItem.Value, out cantidadHabitaciones);
                     hola2.Visible = true;
                     int cantidadPasajeros;
                     List<ArrayList> diccHabitaciones = sistema.obtenerHabitacionesIguales(habitaciones, out cantidadPasajeros);
@@ -92,24 +94,28 @@ namespace WebPruebas.Admin
                         table.Rows.Add(row);
                     }
 
-                    foreach (DataColumn dc in table.Columns)
-                    {
-                        if (dc.DataType != typeof(System.Boolean))
+                    if (Session["dataColumns"] == null)
+                    { 
+                        foreach (DataColumn dc in table.Columns)
                         {
-                            BoundField boundfield = new BoundField();
-                            boundfield.DataField = dc.ColumnName;
-                            boundfield.HeaderText = dc.ColumnName;
-                            boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                            boundfield.ControlStyle.Width = Unit.Pixel(40);
-                            grid_view_habitaciones.Columns.Add(boundfield);
-                        }
-                        else
-                        {
-                            CheckBoxField checkbox = new CheckBoxField();
-                            checkbox.DataField = dc.ColumnName;
-                            checkbox.HeaderText = dc.ColumnName;
-                            checkbox.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
-                            grid_view_habitaciones.Columns.Add(checkbox);
+                            if (dc.DataType != typeof(System.Boolean))
+                            {
+                                BoundField boundfield = new BoundField();
+                                boundfield.DataField = dc.ColumnName;
+                                boundfield.HeaderText = dc.ColumnName;
+                                boundfield.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                                boundfield.ControlStyle.Width = Unit.Pixel(40);
+                                grid_view_habitaciones.Columns.Add(boundfield);
+                            }
+                            else
+                            {
+                                CheckBoxField checkbox = new CheckBoxField();
+                                checkbox.DataField = dc.ColumnName;
+                                checkbox.HeaderText = dc.ColumnName;
+                                checkbox.ItemStyle.HorizontalAlign = HorizontalAlign.Center;
+                                grid_view_habitaciones.Columns.Add(checkbox);
+                            }
+                            Session["dataColumns"] = table.Columns;
                         }
                     }
 

@@ -76,6 +76,15 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.GridView grid_view_habitaciones;
         
         /// <summary>
+        /// lbl_cant_habitaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_cant_habitaciones;
+        
+        /// <summary>
         /// lbl_cant_total_pasajeros control.
         /// </summary>
         /// <remarks>

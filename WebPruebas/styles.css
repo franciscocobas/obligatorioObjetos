@@ -406,9 +406,8 @@
 }
 
 #div_LH{
-    margin-left: 80px;
+    margin: 40px auto 0px auto;
     width:700px;
-    margin-top:40px;
 }
 
 #btn_buscarRes{

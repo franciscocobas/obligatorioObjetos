@@ -53,8 +53,8 @@ namespace WebPruebas
             fechaHasta = new DateTime(int.Parse(anioHasta), int.Parse(mesHasta), int.Parse(diaHasta));
 
             string type = Request.QueryString["type"];
-
-            habitacionesNoOcupadas = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, type);
+            int cantidadHabitaciones;
+            habitacionesNoOcupadas = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, type, out cantidadHabitaciones);
 
             gridHabitDisponibles.AutoGenerateColumns = false;
             gridHabitNoDisponibles.AutoGenerateColumns = false;
