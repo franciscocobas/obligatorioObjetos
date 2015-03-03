@@ -45,12 +45,14 @@ namespace WebPruebas
             string mesDesde = fechaDesdeChar[2].ToString() + fechaDesdeChar[3].ToString();
             string anioDesde = fechaDesdeChar[4].ToString() + fechaDesdeChar[5].ToString() + fechaDesdeChar[6].ToString() + fechaDesdeChar[7].ToString();
             fechaDesde = new DateTime(int.Parse(anioDesde), int.Parse(mesDesde), int.Parse(diaDesde));
+            Session["desde"] = fechaDesde;
 
             char[] fechaHastaChar = Request.QueryString["fh"].ToCharArray();
             string diaHasta = fechaHastaChar[0].ToString() + fechaHastaChar[1].ToString();
             string mesHasta = fechaHastaChar[2].ToString() + fechaHastaChar[3].ToString();
             string anioHasta = fechaHastaChar[4].ToString() + fechaHastaChar[5].ToString() + fechaHastaChar[6].ToString() + fechaHastaChar[7].ToString();
             fechaHasta = new DateTime(int.Parse(anioHasta), int.Parse(mesHasta), int.Parse(diaHasta));
+            Session["hasta"] = fechaHasta;
 
             string type = Request.QueryString["type"];
 
@@ -62,6 +64,11 @@ namespace WebPruebas
             if (!IsPostBack) {
 
                 Session.Clear();
+
+                int pasajTot = cantidadPasajerosMayores + cantidadPasajerosMenores;
+                int pasajRestantes = pasajTot;
+
+                Session["restantes"] = pasajRestantes;
 
                 habitacionesSeleccionadas = new List<Habitacion>();
 
@@ -117,6 +124,7 @@ namespace WebPruebas
             }
             else
             {
+
                 habitDisponiblesArray = (ArrayList)Session["habitDisponiblesArray"];
                 if (habitDisponiblesArray == null)
                     habitDisponiblesArray = new ArrayList();
@@ -136,6 +144,7 @@ namespace WebPruebas
 
         protected void BuscarHabitacion_Click(object sender, EventArgs e)
         {
+
             Sistema elsistema = Sistema.Instancia;
             CotizacionDolar cotiz = CotizacionDolar.Instancia;
 
@@ -145,6 +154,7 @@ namespace WebPruebas
             habitDisponiblesArray = (ArrayList)Session["habitDisponiblesArray"];
             habitNoDisponiblesArray = (ArrayList)Session["habitNoDisponiblesArray"];
 
+            int restantes = (int)Session["restantes"];
 
             if (txt_cant_matrimoniales.Text != "" && txt_cant_singles.Text != "")
             {
@@ -188,7 +198,19 @@ namespace WebPruebas
                         precioPesos = resultPesos.ConvertirAPesos(cotiz.PrecioVenta); // compra o venta?
 
                         div_precios.InnerHtml = "<p>Costo de la reserva: $"+ precioPesos +"</p>";
+                        Session["precioPesos"] = precioPesos;
 
+                        int pasajMenos = 2*(int)cantidadCamasArray[0] + (int)cantidadCamasArray[1];
+                        restantes = restantes - pasajMenos;
+
+                        if (restantes <= 0)
+                        {
+                            btn_confReserva.Visible = true;
+                            p_res.InnerText = "Usted ya puede realizar una reserva";
+                            p_res.Visible = true;
+                        }
+
+                        Session["restantes"] = restantes;
                     }
                     else
                     {
@@ -205,9 +227,46 @@ namespace WebPruebas
                         gridHabitNoDisponibles.DataSource = tableNoDisponibles;
                         gridHabitNoDisponibles.DataBind();
 
+                        if (restantes <= 0)
+                        {
+                            btn_confReserva.Visible = true;
+                            p_res.InnerText = "Usted ya puede realizar una reserva";
+                            p_res.Visible = true;
+                        }
+
                     }
                 }
             }           
+        }
+
+        protected void Confirmar_Reserva (object sender, EventArgs e)
+        {
+            Sistema elsistema = Sistema.Instancia;
+            
+            //pDoc=12345678&pPais=Uruguay&pMay=4&pMen=0&fd=03032015&fh=04032015&type=Suite
+            int doc = int.Parse(Request.QueryString["pDoc"]);
+            string pais = Request.QueryString["pPais"];
+            cantidadPasajerosMayores = int.Parse(Request.QueryString["pMay"]);
+            cantidadPasajerosMenores = int.Parse(Request.QueryString["pMen"]);
+
+            habitacionesSeleccionadas = (List<Habitacion>)Session["HabitacionesSeleccionadas"];
+            decimal precioPesos = (decimal)Session["precioPesos"];
+            DateTime desde = (DateTime)Session["desde"];
+            DateTime hasta = (DateTime)Session["hasta"];
+
+            List<int> intHabsSelecc = new List<int>();
+
+            foreach(Habitacion hab in habitacionesSeleccionadas){
+                intHabsSelecc.Add(hab.Id);
+            }
+
+            Reserva res = elsistema.CrearReserva(doc, pais, precioPesos, desde, hasta, cantidadPasajerosMayores, cantidadPasajerosMenores, intHabsSelecc);
+
+            if (res != null)
+            {
+                Response.Redirect("~/SeleccionarServicios.aspx?id=" + res.Id + "&pDoc="+ doc + "&pais=" + pais);
+            }
+
         }
     }
 }
