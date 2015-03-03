@@ -285,15 +285,26 @@ namespace Dominio.ServiciosDominio
             return habitacionesIguales;
         }
         
-        public Habitacion BuscarHabitacionXCama(List<Habitacion> habitacionesNoOcupadas, int cantDobles, int cantSingles)
+        public Habitacion BuscarHabitacionXCama(List<Habitacion> habitacionesNoOcupadas, int cantDobles, int cantSingles, List<Habitacion> HabSelecc)
         {
+
             Habitacion habitacionEncontrada = null;
 
             foreach(Habitacion habitacion in habitacionesNoOcupadas)
             {
                 if (habitacion.CantCamasDobles == cantDobles && habitacion.CantCamasSingles == cantSingles)
                 {
-                    habitacionEncontrada = habitacion;
+                    if (HabSelecc == null)
+                    {
+                        habitacionEncontrada = habitacion;
+                    }
+                    else
+                    {
+                        if(!HabSelecc.Contains(habitacion))
+                        {
+                            habitacionEncontrada = habitacion;
+                        }
+                    }    
                 }
             }
 
@@ -313,8 +324,15 @@ namespace Dominio.ServiciosDominio
         }
         public Precio MostrarTarifaHabitaciones(List<Habitacion> pHabitaciones)
         {
-            // metodo a implementar
-            return new Precio(0M);
+            decimal monto = 0M;
+
+            foreach (Habitacion hab in pHabitaciones){
+                monto += hab.Precio.MontoDolares;
+            }
+            
+            Precio result = new Precio(monto);
+
+            return result;
         }
 
         public List<string> obtenerTipoHabitaciones()

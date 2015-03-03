@@ -127,26 +127,35 @@ namespace WebPruebas
 
         protected void MostrarHabitaciones(object sender, EventArgs e)
         {
-            int cantPasajerosMayores = int.Parse(txt_mayores.Text);
-            int cantPasajerosMenores = int.Parse(txt_menores.Text);
-            int cantidadPasajeros = int.Parse(lbl_cant_total_pasajeros.Text);
-            string fechaDesde = datepickerFrom.Value;
-            fechaDesde = fechaDesde.Replace("/", "");
-            string fechaHasta = datepickerTo.Value;
-            fechaHasta = fechaHasta.Replace("/", "");
-            string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
-            if (cantPasajerosMayores + cantPasajerosMenores <= cantidadPasajeros)
-            {
-                string doc = Request.QueryString["pDoc"];
-                string pais = Request.QueryString["pPais"];
-                Response.Redirect("SeleccionarHabitaciones.aspx?pDoc="+ doc + "&pPais="+ pais +"&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores 
-                    + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
+            if (txt_mayores.Text == "" || txt_menores.Text == ""){
+                warn.Text = "* Debe ingresar la cantidad de pasajeros mayores y menores";
+                warn.ForeColor = Color.Red;
             }
             else
             {
-                warn.Text = "*  La cantidad total de pasajeros no puede exceder la capacidad total";
-                warn.ForeColor = Color.Red;
+                int cantPasajerosMayores = int.Parse(txt_mayores.Text);
+                int cantPasajerosMenores = int.Parse(txt_menores.Text);
+
+                int cantidadPasajeros = int.Parse(lbl_cant_total_pasajeros.Text);
+                string fechaDesde = datepickerFrom.Value;
+                fechaDesde = fechaDesde.Replace("/", "");
+                string fechaHasta = datepickerTo.Value;
+                fechaHasta = fechaHasta.Replace("/", "");
+                string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
+                if (cantPasajerosMayores + cantPasajerosMenores <= cantidadPasajeros)
+                {
+                    string doc = Request.QueryString["pDoc"];
+                    string pais = Request.QueryString["pPais"];
+                    Response.Redirect("SeleccionarHabitaciones.aspx?pDoc=" + doc + "&pPais=" + pais + "&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores
+                        + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
+                }
+                else
+                {
+                    warn.Text = "*  La cantidad total de pasajeros no puede exceder la capacidad total";
+                    warn.ForeColor = Color.Red;
+                }
             }
+            
         }
     }
 }

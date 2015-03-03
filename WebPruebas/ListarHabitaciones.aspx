@@ -63,6 +63,7 @@
                 <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Menores se alojarán" runat="server" /><asp:TextBox ID="txt_menores" runat="server" />
             </div>
             <asp:Button Text="Ver Habitaciones Disponibles" runat="server" OnClick="MostrarHabitaciones" />
+            <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar" PostBackUrl="~/Home.aspx" />
 
         </div>
     <//div>

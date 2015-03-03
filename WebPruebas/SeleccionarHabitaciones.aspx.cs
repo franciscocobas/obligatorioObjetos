@@ -1,4 +1,5 @@
-﻿using Dominio.EntidadesDominio;
+﻿using Dominio;
+using Dominio.EntidadesDominio;
 using Dominio.ServiciosDominio;
 using System;
 using System.Collections;
@@ -14,14 +15,19 @@ namespace WebPruebas
     public partial class SeleccionarHabitaciones : System.Web.UI.Page
     {
         Sistema sistema = Sistema.Instancia;
+       
         DateTime fechaDesde;
         DateTime fechaHasta;
+
         int cantidadPasajerosMayores;
         int cantidadPasajerosMenores;
-        List<Habitacion> habitacionesNoOcupadas;
+
+        List<Habitacion> habitacionesNoOcupadas = new List<Habitacion>();
+        List<Habitacion> habitacionesSeleccionadas = new List<Habitacion>();
+
         ArrayList habitDisponiblesArray = new ArrayList();
         ArrayList habitNoDisponiblesArray = new ArrayList();
-        List<Habitacion> habitacionesSeleccionadas = new List<Habitacion>();
+
         DataTable tableDisponibles;
         DataTable tableNoDisponibles;
 
@@ -34,6 +40,7 @@ namespace WebPruebas
             cantidadPasajerosMenores = int.Parse(Request.QueryString["pMen"]);
 
             char[] fechaDesdeChar = Request.QueryString["fd"].ToCharArray();
+
             string diaDesde = fechaDesdeChar[0].ToString() + fechaDesdeChar[1].ToString();
             string mesDesde = fechaDesdeChar[2].ToString() + fechaDesdeChar[3].ToString();
             string anioDesde = fechaDesdeChar[4].ToString() + fechaDesdeChar[5].ToString() + fechaDesdeChar[6].ToString() + fechaDesdeChar[7].ToString();
@@ -49,17 +56,17 @@ namespace WebPruebas
 
             habitacionesNoOcupadas = sistema.ObtenerHabitacionesDisponiblesXTipo(fechaDesde, fechaHasta, type);
 
-            habitDisponiblesArray = (ArrayList)Session["habitDisponiblesArray"];
-            if (habitDisponiblesArray == null)
-                habitDisponiblesArray = new ArrayList();
-            habitNoDisponiblesArray = (ArrayList)Session["habitNoDisponiblesArray"];
-            if (habitNoDisponiblesArray == null)
-                habitNoDisponiblesArray = new ArrayList();
-
             gridHabitDisponibles.AutoGenerateColumns = false;
             gridHabitNoDisponibles.AutoGenerateColumns = false;
 
             if (!IsPostBack) {
+
+                Session.Clear();
+
+                habitacionesSeleccionadas = new List<Habitacion>();
+
+                ArrayList habitDisponiblesArray = new ArrayList();
+                ArrayList habitNoDisponiblesArray = new ArrayList();
                 
                 // Cargar habitaciones en disponibles
                 lbl_cant_mayores.Text = Request.QueryString["pMay"];
@@ -67,11 +74,14 @@ namespace WebPruebas
 
                 DataTable tableDisponibles = (DataTable)Session["tableDisponibles"];
                 DataTable tableNoDisponibles = (DataTable)Session["tableNoDisponibles"];
+                
                 if (tableDisponibles == null && tableNoDisponibles == null)
                 { 
                     tableDisponibles = new DataTable();
+                    
                     DataColumn columnCantDobles = new DataColumn(cantidadDobles, typeof(System.Int32));
                     tableDisponibles.Columns.Add(columnCantDobles);
+                    
                     DataColumn columnTCantSingles = new DataColumn(cantidadSingles, typeof(System.Int32));
                     tableDisponibles.Columns.Add(columnTCantSingles);
 
@@ -85,8 +95,10 @@ namespace WebPruebas
                     }
 
                     tableNoDisponibles = new DataTable();
+
                     DataColumn columnCantDoblesNoDisp = new DataColumn(cantidadDobles, typeof(System.Int32));
                     tableNoDisponibles.Columns.Add(columnCantDoblesNoDisp);
+
                     DataColumn columnCantSinglesNoDisp = new DataColumn(cantidadSingles, typeof(System.Int32));
                     tableNoDisponibles.Columns.Add(columnCantSinglesNoDisp);
                 
@@ -101,65 +113,101 @@ namespace WebPruebas
 
                     Session["tableDisponibles"] = tableDisponibles;
                     Session["tableNoDisponibles"] = tableNoDisponibles;
-                }
-                
+                }   
             }
             else
             {
+                habitDisponiblesArray = (ArrayList)Session["habitDisponiblesArray"];
+                if (habitDisponiblesArray == null)
+                    habitDisponiblesArray = new ArrayList();
+                Session["habitDisponiblesArray"] = habitDisponiblesArray;
 
-                
+                habitNoDisponiblesArray = (ArrayList)Session["habitNoDisponiblesArray"];
+                if (habitNoDisponiblesArray == null)
+                    habitNoDisponiblesArray = new ArrayList();
+                Session["habitNoDisponiblesArray"] = habitNoDisponiblesArray;
 
+                habitacionesSeleccionadas = (List<Habitacion>)Session["HabitacionesSeleccionadas"];
+                if (habitacionesSeleccionadas == null)
+                    habitacionesSeleccionadas = new List<Habitacion>();
+                Session["HabitacionesSeleccionadas"] = habitacionesSeleccionadas;
             }
         }
 
         protected void BuscarHabitacion_Click(object sender, EventArgs e)
         {
+            Sistema elsistema = Sistema.Instancia;
+            CotizacionDolar cotiz = CotizacionDolar.Instancia;
+
             int cantDobles;
             int cantSingles;
-            if (int.TryParse(txt_cant_matrimoniales.Text, out cantDobles) && int.TryParse(txt_cant_singles.Text, out cantSingles))
+            habitacionesSeleccionadas = (List<Habitacion>)Session["HabitacionesSeleccionadas"];
+            habitDisponiblesArray = (ArrayList)Session["habitDisponiblesArray"];
+            habitNoDisponiblesArray = (ArrayList)Session["habitNoDisponiblesArray"];
+
+
+            if (txt_cant_matrimoniales.Text != "" && txt_cant_singles.Text != "")
             {
-                Habitacion habitacion = sistema.BuscarHabitacionXCama(habitacionesNoOcupadas, cantDobles, cantSingles);
-
-                ArrayList cantidadCamasArray = new ArrayList();
-                cantidadCamasArray.Add(cantDobles);
-                cantidadCamasArray.Add(cantSingles);
-
-                tableDisponibles = (DataTable)Session["tableDisponibles"];
-                tableNoDisponibles = (DataTable)Session["tableNoDisponibles"];
-
-                if (habitacion != null)
+                if (int.TryParse(txt_cant_matrimoniales.Text, out cantDobles) && int.TryParse(txt_cant_singles.Text, out cantSingles))
                 {
-                    habitDisponiblesArray.Add(cantidadCamasArray);
-                    habitacionesSeleccionadas.Add(habitacion);
+                    listadoHabitaciones.Visible = true;
 
-                    Session["habitDisponiblesArray"] = habitDisponiblesArray;
+                    Habitacion habitacion = sistema.BuscarHabitacionXCama(habitacionesNoOcupadas, cantDobles, cantSingles, habitacionesSeleccionadas);
 
-                    DataRow row = tableDisponibles.NewRow();
-                    row[cantidadDobles] = cantidadCamasArray[0];
-                    row[cantidadSingles] = cantidadCamasArray[1];
-                    tableDisponibles.Rows.Add(row);
+                    ArrayList cantidadCamasArray = new ArrayList();
 
-                    gridHabitDisponibles.DataSource = tableDisponibles;
-                    gridHabitDisponibles.DataBind();
+                    cantidadCamasArray.Add(cantDobles);
+                    cantidadCamasArray.Add(cantSingles);
+
+                    tableDisponibles = (DataTable)Session["tableDisponibles"];
+                    tableNoDisponibles = (DataTable)Session["tableNoDisponibles"];
+
+                    if (habitacion != null)
+                    {
+
+                        habitDisponiblesArray.Add(cantidadCamasArray);
+                        habitacionesSeleccionadas.Add(habitacion);
+                        Session["HabitacionesSeleccionadas"] = habitacionesSeleccionadas;
+
+                        Session["habitDisponiblesArray"] = habitDisponiblesArray;
+
+                        DataRow row = tableDisponibles.NewRow();
+                        row[cantidadDobles] = cantidadCamasArray[0];
+                        row[cantidadSingles] = cantidadCamasArray[1];
+                        tableDisponibles.Rows.Add(row);
+
+                        gridHabitDisponibles.DataSource = tableDisponibles;
+                        gridHabitDisponibles.DataBind();
+
+                        decimal precioDolares;
+
+                        precioDolares = elsistema.MostrarTarifaHabitaciones(habitacionesSeleccionadas).MontoDolares;
+
+                        Precio resultPesos = new Precio(precioDolares);
+                        decimal precioPesos;
+                        precioPesos = resultPesos.ConvertirAPesos(cotiz.PrecioVenta); // compra o venta?
+
+                        div_precios.InnerHtml = "<p>Costo de la reserva: $"+ precioPesos +"</p>";
+
+                    }
+                    else
+                    {
+
+                        habitNoDisponiblesArray.Add(cantidadCamasArray);
+
+                        Session["habitNoDisponiblesArray"] = habitNoDisponiblesArray;
+
+                        DataRow row = tableNoDisponibles.NewRow();
+                        row[cantidadDobles] = cantidadCamasArray[0];
+                        row[cantidadSingles] = cantidadCamasArray[1];
+                        tableNoDisponibles.Rows.Add(row);
+
+                        gridHabitNoDisponibles.DataSource = tableNoDisponibles;
+                        gridHabitNoDisponibles.DataBind();
+
+                    }
                 }
-                else
-                {
-                    habitNoDisponiblesArray.Add(cantidadCamasArray);
-
-                    Session["habitNoDisponiblesArray"] = habitNoDisponiblesArray;
-
-                    DataRow row = tableNoDisponibles.NewRow();
-                    row[cantidadDobles] = cantidadCamasArray[0];
-                    row[cantidadSingles] = cantidadCamasArray[1];
-                    tableNoDisponibles.Rows.Add(row);
-
-                    gridHabitNoDisponibles.DataSource = tableNoDisponibles;
-                    gridHabitNoDisponibles.DataBind();
-                    
-                }
-
-
-            }
+            }           
         }
     }
 }

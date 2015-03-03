@@ -17,6 +17,39 @@
     margin-right: 15px;
 }
 
+#gridHabitDisponibles, #gridHabitNoDisponibles{
+    margin-top:15px;
+}
+
+#listadoHabitaciones{
+    float:left;
+    width: 900px;
+}
+
+#div_NOdisponibles{
+    float:right;
+}
+
+#div_disponibles{
+    float:left;
+}
+
+#BuscarHabitacion{
+    margin-bottom:15px;
+}
+
+#div_errorCamas{
+    height: 40px;
+}
+
+#div_cantidades{
+    width:300px;
+}
+
+#txt_cant_singles{
+    margin-left:47px;
+}
+
 #p_servicios{
     font-size:20px;
     text-align:center;
