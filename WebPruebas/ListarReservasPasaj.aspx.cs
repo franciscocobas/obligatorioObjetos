@@ -81,6 +81,17 @@ namespace WebPruebas
             List<Reserva> reservasActivas = new List<Reserva>();
             reservasActivas = elsistema.RecuperarReservasActivas(p);
 
+            if (reservasActivas.Count == 0)
+            {
+                btn_eliminar.Visible = false;
+                div_instruccionEliminar.Visible = true;
+                p_instrucc.InnerText = "Usted no tiene actualmente reservas activas";
+            }
+            else
+            {
+                btn_eliminar.Visible = true;
+            }
+
             GridView1.AutoGenerateColumns = false;
 
             if (!IsPostBack)

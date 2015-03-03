@@ -32,10 +32,13 @@
         <br />
         <br />
         <div id="div_errorCamas">
+            <p runat="server" visible="false" id="p_res" class="validators"></p>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="ValCamas" CssClass="validators" HeaderText="Es necesario completar ambos campos" />
         </div>
         <asp:Button ID="BuscarHabitacion" Text="Buscar Habitacion" runat="server" OnClick="BuscarHabitacion_Click" ValidationGroup="ValCamas" />
         <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar" PostBackUrl="~/Home.aspx" />
+        <asp:Button ID="btn_confReserva" Visible="false" OnClick="Confirmar_Reserva" runat="server" Text="Confirmar y elegir servicios" />
+
     </div>
     <div runat="server" id="listadoHabitaciones" visible="false">
         <div id="div_disponibles">   
