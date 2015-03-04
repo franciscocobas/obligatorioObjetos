@@ -18,12 +18,13 @@
 }
 
 #gridHabitDisponibles, #gridHabitNoDisponibles{
+    width:500px;
     margin-top:15px;
 }
 
 #listadoHabitaciones{
     float:left;
-    width: 900px;
+    width: 1100px;
 }
 
 #div_NOdisponibles{
@@ -71,12 +72,28 @@
 
 #datos_servicios{
     margin:0 auto;
+    margin-top:30px;
     width:500px;
+}
+
+#mensaje{
+    font-family:Cambria;
+    margin-left:8px;
+    float:right;
+}
+
+#div_contr{
+    width:760px;
+    margin-top:5px;
 }
 
 #div_datos{
     margin:0 auto;
     width:550px;
+}
+
+#btn_cancelar{
+    width:129px;
 }
 
 #div_btn_cancelar, #div_btn_volver{
@@ -85,11 +102,19 @@
     margin-bottom:5px;
 }
 
-#serviciosContainer, #grid_habitaciones_disponibles, #grid_habitaciones_no_disp{
+#grid_habitaciones_disponibles, #grid_habitaciones_no_disp{
     text-align:center;
     margin:0 auto;
     width:800px;
     margin-bottom:30px;
+}
+
+
+#serviciosContainer{
+    text-align:center;
+    margin:0 auto;
+    width:900px;
+    margin-bottom:50px;
 }
 
 #Content_derivadas_div_mostrarDinero{
@@ -159,7 +184,7 @@
 #div_p_listaRes{
     margin: 0 auto;
     margin-bottom:15px;
-    width:425px;
+    width:525px;
 }
 
 #div_eliminar_reservas{

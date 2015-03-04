@@ -15,6 +15,7 @@ namespace WebPruebas
     public partial class ListarHabitaciones : System.Web.UI.Page
     {
         Sistema sistema = Sistema.Instancia;
+        CotizacionDolar cotiz = CotizacionDolar.Instancia;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -68,7 +69,7 @@ namespace WebPruebas
                     string esExt = "Exterior";
                     string cantCamSimples = "Cantidad de camas Simples";
                     string cantCamDobles = "Cantidad de camas Dobles";
-                    string precio = "Precio (U$S)";
+                    string precio = "Precio ($U)";
 
                     DataTable table = new DataTable();
                     DataColumn columnNumHabit = new DataColumn(nuHabit, typeof(System.Int32));
@@ -94,7 +95,7 @@ namespace WebPruebas
                         row[esExt] = habitacion.EsExterior;
                         row[cantCamSimples] = habitacion.CantCamasSingles;
                         row[cantCamDobles] = habitacion.CantCamasDobles;
-                        row[precio] = habitacion.Precio.MontoDolares;
+                        row[precio] = habitacion.Precio.ConvertirAPesos(cotiz.PrecioVenta);
                         table.Rows.Add(row);
                     }
 
@@ -134,31 +135,41 @@ namespace WebPruebas
         protected void MostrarHabitaciones(object sender, EventArgs e)
         {
             if (txt_mayores.Text == "" || txt_menores.Text == ""){
-                warn.Text = "* Debe ingresar la cantidad de pasajeros mayores y menores";
+                warn.Text = "*   Debe ingresar la cantidad de pasajeros mayores y menores";
                 warn.ForeColor = Color.Red;
             }
             else
             {
-                int cantPasajerosMayores = int.Parse(txt_mayores.Text);
-                int cantPasajerosMenores = int.Parse(txt_menores.Text);
+                int cantPasajerosMayores;
+                int cantPasajerosMenores;
+                bool test = int.TryParse(txt_mayores.Text, out cantPasajerosMayores);
+                bool test2 = int.TryParse(txt_menores.Text, out cantPasajerosMenores);
 
-                int cantidadPasajeros = int.Parse(lbl_cant_total_pasajeros.Text);
-                string fechaDesde = datepickerFrom.Value;
-                fechaDesde = fechaDesde.Replace("/", "");
-                string fechaHasta = datepickerTo.Value;
-                fechaHasta = fechaHasta.Replace("/", "");
-                string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
-                if (cantPasajerosMayores + cantPasajerosMenores <= cantidadPasajeros)
+                if (test && test2)
                 {
-                    string doc = Request.QueryString["pDoc"];
-                    string pais = Request.QueryString["pPais"];
-                    Session["dataColumns"] = null;
-                    Response.Redirect("SeleccionarHabitaciones.aspx?pDoc=" + doc + "&pPais=" + pais + "&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores
-                        + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
+                    int cantidadPasajeros = int.Parse(lbl_cant_total_pasajeros.Text);
+                    string fechaDesde = datepickerFrom.Value;
+                    fechaDesde = fechaDesde.Replace("/", "");
+                    string fechaHasta = datepickerTo.Value;
+                    fechaHasta = fechaHasta.Replace("/", "");
+                    string tipoHabitacion = ddl_tipoHabitaciones.SelectedItem.Value;
+                    if (cantPasajerosMayores + cantPasajerosMenores <= cantidadPasajeros)
+                    {
+                        string doc = Request.QueryString["pDoc"];
+                        string pais = Request.QueryString["pPais"];
+                        Session["dataColumns"] = null;
+                        Response.Redirect("SeleccionarHabitaciones.aspx?pDoc=" + doc + "&pPais=" + pais + "&pMay=" + cantPasajerosMayores.ToString() + "&pMen=" + cantPasajerosMenores
+                            + "&fd=" + fechaDesde + "&fh=" + fechaHasta + "&type=" + tipoHabitacion);
+                    }
+                    else
+                    {
+                        warn.Text = "*    La cantidad total de pasajeros no puede exceder la capacidad total";
+                        warn.ForeColor = Color.Red;
+                    }
                 }
                 else
                 {
-                    warn.Text = "*  La cantidad total de pasajeros no puede exceder la capacidad total";
+                    warn.Text = "*    Debe ingresar números";
                     warn.ForeColor = Color.Red;
                 }
             }

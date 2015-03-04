@@ -25,7 +25,7 @@ namespace WebPruebas
             
             if (!IsPostBack)
             {
-                // Chequeo y seteo todas las reservas que ya caducaron
+                // Chequeo y seteo todas las reservas que ya pasaron la fecha actual como "expiradas"
                 elSistema.chequearReservasExpiradas();
 
                 drp_Pais.DataSource = ListaPaises.llenarPaises();

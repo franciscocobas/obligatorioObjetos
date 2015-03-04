@@ -31,8 +31,9 @@ namespace WebPruebas
         DataTable tableDisponibles;
         DataTable tableNoDisponibles;
 
-        string cantidadDobles = "Cantidad de Camas Dobles";
-        string cantidadSingles = "Cantidad de Camas Singles";
+        string cantidadDobles = "Camas Dobles";
+        string cantidadSingles = "Camas Singles";
+        string tarifa = "Precio/dia ($U)";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -92,6 +93,9 @@ namespace WebPruebas
                     DataColumn columnTCantSingles = new DataColumn(cantidadSingles, typeof(System.Int32));
                     tableDisponibles.Columns.Add(columnTCantSingles);
 
+                    DataColumn tarifaItemDia = new DataColumn(tarifa, typeof(System.Decimal));
+                    tableDisponibles.Columns.Add(tarifaItemDia);
+
                     foreach (DataColumn dc in tableDisponibles.Columns)
                     {
                         BoundField boundfield = new BoundField();
@@ -108,7 +112,7 @@ namespace WebPruebas
 
                     DataColumn columnCantSinglesNoDisp = new DataColumn(cantidadSingles, typeof(System.Int32));
                     tableNoDisponibles.Columns.Add(columnCantSinglesNoDisp);
-                
+
                     foreach (DataColumn dc in tableNoDisponibles.Columns)
                     {
                         BoundField boundfield = new BoundField();
@@ -150,6 +154,7 @@ namespace WebPruebas
 
             int cantDobles;
             int cantSingles;
+            int tarifaItem;
             habitacionesSeleccionadas = (List<Habitacion>)Session["HabitacionesSeleccionadas"];
             habitDisponiblesArray = (ArrayList)Session["habitDisponiblesArray"];
             habitNoDisponiblesArray = (ArrayList)Session["habitNoDisponiblesArray"];
@@ -164,7 +169,8 @@ namespace WebPruebas
 
                     Habitacion habitacion = sistema.BuscarHabitacionXCama(habitacionesNoOcupadas, cantDobles, cantSingles, habitacionesSeleccionadas);
 
-                    ArrayList cantidadCamasArray = new ArrayList();
+                    
+                    ArrayList cantidadCamasArray = new ArrayList(); //incluye la tarifa
 
                     cantidadCamasArray.Add(cantDobles);
                     cantidadCamasArray.Add(cantSingles);
@@ -174,6 +180,8 @@ namespace WebPruebas
 
                     if (habitacion != null)
                     {
+                        tarifaItem = Convert.ToInt32(habitacion.Precio.ConvertirAPesos(cotiz.PrecioVenta));
+                        cantidadCamasArray.Add(tarifaItem);
 
                         habitDisponiblesArray.Add(cantidadCamasArray);
                         habitacionesSeleccionadas.Add(habitacion);
@@ -184,6 +192,7 @@ namespace WebPruebas
                         DataRow row = tableDisponibles.NewRow();
                         row[cantidadDobles] = cantidadCamasArray[0];
                         row[cantidadSingles] = cantidadCamasArray[1];
+                        row[tarifa] = cantidadCamasArray[2];
                         tableDisponibles.Rows.Add(row);
 
                         gridHabitDisponibles.DataSource = tableDisponibles;
@@ -222,6 +231,7 @@ namespace WebPruebas
                         DataRow row = tableNoDisponibles.NewRow();
                         row[cantidadDobles] = cantidadCamasArray[0];
                         row[cantidadSingles] = cantidadCamasArray[1];
+
                         tableNoDisponibles.Rows.Add(row);
 
                         gridHabitNoDisponibles.DataSource = tableNoDisponibles;
@@ -235,6 +245,11 @@ namespace WebPruebas
                         }
 
                     }
+                }
+                else
+                {
+                    p_res.InnerText = "Debe ingresar sólo números";
+                    p_res.Visible = true;
                 }
             }           
         }

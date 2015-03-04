@@ -77,7 +77,7 @@ namespace WebPruebas
             int pDoc = int.Parse(Request.QueryString["pDoc"]);
             string pPais = Request.QueryString["pPais"];
             Pasajero p = elsistema.BuscarPasajeroPorDocPais(pDoc, pPais);
-            titulo.InnerText = "Reservas activas de " + p.Nombre;
+            titulo.InnerText = "Reservas activas próximas de " + p.Nombre;
             List<Reserva> reservasActivas = new List<Reserva>();
             reservasActivas = elsistema.RecuperarReservasActivas(p);
 

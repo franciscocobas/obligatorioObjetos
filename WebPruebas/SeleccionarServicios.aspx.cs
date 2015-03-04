@@ -3,6 +3,7 @@ using Dominio.ServiciosDominio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -22,7 +23,9 @@ namespace WebPruebas
             int id;
             int idPasajero;
 
-            if (int.TryParse(Request.QueryString["id"], out id) && int.TryParse(Request.QueryString["idP"], out idPasajero))
+            CotizacionDolar cotiz = CotizacionDolar.Instancia;
+
+            if (int.TryParse(Request.QueryString["id"], out id) && int.TryParse(Request.QueryString["pDoc"], out idPasajero))
             {
                 reserva = sistema.buscarReservaXId(id);
                 pasajero = sistema.BuscarPasajeroPorId(idPasajero);
@@ -34,22 +37,19 @@ namespace WebPruebas
                 grid_view_servicios.AutoGenerateColumns = false;
                 grid_view_servicios.DataSource = servicios;
                 grid_view_servicios.DataBind();
-
-                arrayServiciosSeleccionados = new ArrayList();
-
-                foreach (GridViewRow row in grid_view_servicios.Rows)
+                ArrayList a = new ArrayList();
+                foreach (Servicio s in servicios)
                 {
-                    if (row.RowType == DataControlRowType.DataRow)
+                    a.Add(s.CostoDiario.ConvertirAPesos(cotiz.PrecioVenta).ToString());
+                }
+
+                for (var i = 0; i < servicios.Count; i++)
+                {
+                    GridViewRow r = grid_view_servicios.Rows[i];
+                    if (r.RowType == DataControlRowType.DataRow)
                     {
-                        CheckBox check = (row.Cells[0].FindControl("seleccionado") as CheckBox);
-                        if (check.Checked)
-                        {
-                            ArrayList servicio = new ArrayList();
-                            servicio.Add(row.Cells[1].Text);
-                            servicio.Add((row.Cells[6].FindControl("cantDias") as TextBox));
-                            servicio.Add((row.Cells[7].FindControl("cantPasajeros") as TextBox));
-                            arrayServiciosSeleccionados.Add(servicio);
-                        }
+                        Label check = (r.Cells[3].FindControl("costoPesos") as Label);
+                        r.Cells[3].Text = (string)a[i];
                     }
                 }
             }
@@ -57,52 +57,93 @@ namespace WebPruebas
 
         protected void ContratarServicios(object sender, EventArgs e)
         {
-            if (pasajero != null && reserva != null)
+            arrayServiciosSeleccionados = new ArrayList();
+            CotizacionDolar cotiz = CotizacionDolar.Instancia;
+            bool hayCheckeado = false;
+
+            foreach (GridViewRow row in grid_view_servicios.Rows)
             {
-                if (arrayServiciosSeleccionados != null && arrayServiciosSeleccionados.Count > 0)
+                if (row.RowType == DataControlRowType.DataRow)
                 {
-                    for (var i = 0; i < arrayServiciosSeleccionados.Count; i++)
+                    CheckBox check = (row.Cells[0].FindControl("seleccionado") as CheckBox);
+                    if (check.Checked)
                     {
-                        ArrayList arrayServicio;
-                        try {
-                            arrayServicio = (ArrayList)arrayServiciosSeleccionados[i];
-                            TextBox cantDiasTextBox = (TextBox)arrayServicio[1];
-                            TextBox cantPasajerosTextBox = (TextBox)arrayServicio[2];
+                        hayCheckeado = true;
+                        ArrayList servicio = new ArrayList();
+                        TextBox cantDias = (row.Cells[6].FindControl("cantDias") as TextBox);
+                        TextBox cantPas = (row.Cells[7].FindControl("cantPasajeros") as TextBox);
 
-                            int idServicio;
-                            int cantidadDias;
-                            int cantidadPasajeros;
-
-                            if (int.TryParse(arrayServicio[0].ToString(), out idServicio) 
-                                && int.TryParse(cantDiasTextBox.Text, out cantidadDias)
-                                && int.TryParse(cantPasajerosTextBox.Text, out cantidadPasajeros))
-                            {
-                                Servicio servicio = sistema.BuscarServicioXId(idServicio);
-                                if (servicio != null)
-                                {
-                                    reserva.AgregarContrato(servicio, cantidadDias, cantidadPasajeros);
-                                }
-                            }
-                        } 
-                        catch (Exception exception)
+                        if (cantDias.Text != "" && cantPas.Text != "")
                         {
-                            Console.Write(exception.Message);
+                            servicio.Add(row.Cells[1].Text);
+                            servicio.Add(cantDias.Text);
+                            servicio.Add(cantPas.Text);
+                            arrayServiciosSeleccionados.Add(servicio);
+                            mensaje.Visible = true;
+
+                        }
+                        else
+                        {
+                            mensaje.Visible = true;
+                            mensaje.Text = "Ingresar cantidad de días y pasajeros de las selecciones";
+                            mensaje.ForeColor = Color.Red;
+                        }
+
+                    }
+                }
+            }
+
+            if (arrayServiciosSeleccionados != null && arrayServiciosSeleccionados.Count > 0)
+            {
+                for (var i = 0; i < arrayServiciosSeleccionados.Count; i++)
+                {
+                    ArrayList arrayServicio;
+                    arrayServicio = (ArrayList)arrayServiciosSeleccionados[i];
+                    int cantDias;
+                    int cantPasajeros;
+                    int idServicio;
+
+                    bool test = int.TryParse(arrayServicio[1].ToString(), out cantDias);
+                    bool test2 = int.TryParse(arrayServicio[2].ToString(), out cantPasajeros);
+                    bool test3 = int.TryParse(arrayServicio[0].ToString(), out idServicio);
+
+                    if (test && test2 && test3)
+                    {
+                        Servicio servicio = sistema.BuscarServicioXId(idServicio);
+                        if (servicio != null)
+                        {
+                            reserva.AgregarContrato(servicio, cantDias, cantPasajeros);
+
+                            mensaje.Visible = true;
+                            mensaje.Text = "Servicios agregados Correctamente";
+                            mensaje.ForeColor = Color.Green;
+                            decimal total = reserva.PrecioPesos;
+                            btn_servicios.Enabled = false;
+                            datos_de_reserva_final.InnerText = "Precio total: $" + total;
                         }
                     }
                 }
-                datos_servicios.Visible = false;
+            }
+            else if (arrayServiciosSeleccionados.Count == 0 && hayCheckeado == false)
+            {
                 mensaje.Visible = true;
-                mensaje.Text = "Servicios agregados Correctamente";
+                mensaje.Text = "No se agregaron servicios";
+                mensaje.ForeColor = Color.Green;
+                decimal total = reserva.PrecioPesos;
+                btn_servicios.Enabled = false;
+                datos_de_reserva_final.InnerText = "Precio total: $" + total;
             }
         }
 
         protected void CancelarReserva(object sender, EventArgs e)
         {
-            Response.Redirect("Home.aspx");
-        }
+            Sistema elsistema = Sistema.Instancia;
+            int doc = int.Parse(Request.QueryString["pDoc"]);
+            string pais = Request.QueryString["pais"];
+            int idRes = int.Parse(Request.QueryString["id"]);
 
-        protected void Volver(object sender, EventArgs e)
-        {
+            elsistema.CancelarReserva(doc, pais, idRes);
+
             Response.Redirect("Home.aspx");
         }
     }
