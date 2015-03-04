@@ -14,7 +14,7 @@
         <div id="div_p_servicio"><p id="p_servicios" class="cssLabels">Seleccione los servicios para la reserva</p></div>
         <br />
         <div id="serviciosContainer">
-            <asp:GridView CssClass="cssGrid" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal" ID="grid_view_servicios" runat="server">
+            <asp:GridView CssClass="cssLabels" BorderColor="#CCCCCC" BorderStyle="Double" GridLines="Horizontal" ID="grid_view_servicios" runat="server">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -23,7 +23,11 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="Id" HeaderText="ID"></asp:BoundField>
                     <asp:BoundField DataField="Descripcion" HeaderText="Descripcion"></asp:BoundField>
-                    <asp:BoundField DataField="CostoDiario.MontoDolares" HeaderText="Costo diario en U$S"></asp:BoundField>
+                    <asp:TemplateField HeaderText="Costo diario">
+                        <ItemTemplate>
+                            <asp:Label ID="costoPesos" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="EdadMin" HeaderText="Edad m&#237;nima"></asp:BoundField>
                     <asp:BoundField DataField="EdadMax" HeaderText="Edad m&#225;xima"></asp:BoundField>
                     <asp:TemplateField HeaderText="Cantidad de días">
@@ -40,22 +44,19 @@
             </asp:GridView>
         </div>
         <div id="datos_servicios" class="cssLabels" runat="server">
-            <asp:Label Text="Cantidad de Días: " runat="server" /><asp:Label ID="lbl_cant_dias" runat="server" />
-            <br />
-            <asp:Label Text="Cantidad de Pasajeros: " runat="server" /><asp:Label ID="lbl_cant_pasajeros" runat="server" />
-            <br />
-            <asp:Button Text="Contratar Servicios" runat="server" OnClick="ContratarServicios" />
-        </div>
-        <asp:Label ID="mensaje" Text="" runat="server" visible="false" ForeColor="#00CC00" />
-        <br />
-        <div style="float:right">
-            <div id="div_btn_cancelar"><asp:Button ID="btn_cancelar" Text="Cancelar Reserva" runat="server" OnClick="CancelarReserva" /></div>
-        
-            <br />
-        
-            <div id="div_btn_volver"><asp:Button ID="btn_volverServ" runat="server" OnClick="Volver" Text="Volver" /></div>
-        </div>
+            <div id="div_contr">
+                <asp:Button ID="btn_cancelar" Text="Cancelar Reserva" runat="server" OnClick="CancelarReserva" />
+                <asp:Button Text="Contratar Servicios" ID="btn_servicios" runat="server" OnClick="ContratarServicios" />
+                <asp:Button ID="Volver_home" runat="server" Text="Inicio" PostBackUrl="~/Home.aspx" />
+                <asp:Label ID="mensaje" Text="" runat="server" visible="false" ForeColor="#00CC00" />
+                <p id="datos_de_reserva_final" runat="server">
 
+                </p>
+            </div>
+
+
+        </div>
+        <br />
     </div>
     </form>
 </body>

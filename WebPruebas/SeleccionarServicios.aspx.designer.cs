@@ -40,22 +40,31 @@ namespace WebPruebas {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl datos_servicios;
         
         /// <summary>
-        /// lbl_cant_dias control.
+        /// btn_cancelar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_cant_dias;
+        protected global::System.Web.UI.WebControls.Button btn_cancelar;
         
         /// <summary>
-        /// lbl_cant_pasajeros control.
+        /// btn_servicios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_cant_pasajeros;
+        protected global::System.Web.UI.WebControls.Button btn_servicios;
+        
+        /// <summary>
+        /// Volver_home control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Volver_home;
         
         /// <summary>
         /// mensaje control.
@@ -67,21 +76,12 @@ namespace WebPruebas {
         protected global::System.Web.UI.WebControls.Label mensaje;
         
         /// <summary>
-        /// btn_cancelar control.
+        /// datos_de_reserva_final control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_cancelar;
-        
-        /// <summary>
-        /// btn_volverServ control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_volverServ;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl datos_de_reserva_final;
     }
 }

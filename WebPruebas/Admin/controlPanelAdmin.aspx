@@ -8,7 +8,7 @@
             <asp:LinkButton ID="lnk_habs" PostBackUrl="~/Admin/habitacionesDispAdmin.aspx" runat="server" CssClass="cssLabels csslinks" ForeColor="#333399" Font-Size="Large">Listar habitaciones disponibles entre fechas</asp:LinkButton>
         </div>       
          <div id="div_reservas">
-            <asp:LinkButton ID="lnk_reservas" PostBackUrl="~/Admin/ReservasdePasajero.aspx" runat="server" CssClass="cssLabels csslinks" ForeColor="#333399" Font-Size="Large">Listar reservas de pasajeros</asp:LinkButton>
+            <asp:LinkButton ID="lnk_reservas" PostBackUrl="~/Admin/ReservasdePasajero.aspx" runat="server" CssClass="cssLabels csslinks" ForeColor="#333399" Font-Size="Large">Listar reservas próximas de pasajeros</asp:LinkButton>
         </div>
         <div id="div_dinero">
             <asp:LinkButton ID="lnk_dinero" OnClick="dinero_Recaudado" runat="server" CssClass="cssLabels csslinks" ForeColor="#333399" Font-Size="Large">Obtener dinero recaudado en pesos</asp:LinkButton>

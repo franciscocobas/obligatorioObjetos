@@ -48,6 +48,8 @@ namespace Dominio.EntidadesDominio
 
         public Servicio(string desc, Precio costoDia , byte edadMin, byte edadMax)
         {
+            Servicio.ultId = Servicio.ultId + 1;
+            this.id = Servicio.UltId;
             this.Descripcion = desc;
             this.CostoDiario = costoDia;
             this.EdadMin = EdadMin;
