@@ -60,18 +60,18 @@ namespace Dominio.ServiciosDominio
 
         private void CargarServiciosPrueba()
         {
-            AgregarServicio(new Servicio("Canoas", new Precio(180M), 75, 89));
-            AgregarServicio(new Servicio("Pensión Completa", new Precio(3500M), 20, 89));
+            AgregarServicio(new Servicio("Canoas", new Precio(18M), 75, 89));
+            AgregarServicio(new Servicio("Pensión Completa", new Precio(35M), 20, 89));
 
         }
 
         private void CargarHabitacionesPrueba()
         {
             AgregarHabitacion(CrearHabitacionEstandar(108, false, true, 2, 1));
-            AgregarHabitacion(CrearHabitacionSuite(109, true, true, 0, 1, new Precio(400)));
-            AgregarHabitacion(CrearHabitacionSuite(110, true, true, 0, 1, new Precio(250.0M)));
-            AgregarHabitacion(CrearHabitacionSuite(111, false, true, 2, 1, new Precio(250.0M)));
-            AgregarHabitacion(CrearHabitacionSuite(112, false, true, 2, 1, new Precio(250.0M)));
+            AgregarHabitacion(CrearHabitacionSuite(109, true, true, 0, 1, new Precio(40)));
+            AgregarHabitacion(CrearHabitacionSuite(110, true, true, 0, 1, new Precio(25M)));
+            AgregarHabitacion(CrearHabitacionSuite(111, false, true, 2, 1, new Precio(25M)));
+            AgregarHabitacion(CrearHabitacionSuite(112, false, true, 2, 1, new Precio(25M)));
 
         }
 
