@@ -553,19 +553,24 @@ namespace Dominio.ServiciosDominio
                 {
                     if (r.Activa == true && !r.Expirada)
                     {
-                        if (r.FechaDesde < reservaProxima.FechaDesde || reservaProxima == null)
-                        { 
+                        if (reservaProxima == null)
                             reservaProxima = r;
-                            
+
+                        if (r.FechaDesde < reservaProxima.FechaDesde)
+                        {
+                            reservaProxima = r;
+
                             if (reservasProximasActivas.Count == 0)
                             {
                                 reservasProximasActivas.Add(reservaProxima);
-                            } else
+                            }
+                            else
                             {
                                 reservasProximasActivas = new List<Reserva>();
                                 reservasProximasActivas.Add(reservaProxima);
                             }
-                        } else if (r.FechaDesde == reservaProxima.FechaDesde)
+                        }
+                        else if (r.FechaDesde == reservaProxima.FechaDesde)
                         {
                             reservaProxima = r;
                             reservasProximasActivas.Add(reservaProxima);
@@ -573,6 +578,8 @@ namespace Dominio.ServiciosDominio
                     }
                 }
             }
+
+            reservasProximasActivas.Sort();
 
             return reservasProximasActivas;
         }

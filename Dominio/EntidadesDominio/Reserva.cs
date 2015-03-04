@@ -89,18 +89,27 @@ namespace Dominio.EntidadesDominio
 
         public int CompareTo(Reserva other)
         {
-            throw new NotImplementedException();
+            if (this.PrecioPesos < other.PrecioPesos)
+                return +1;
+            else if (this.PrecioPesos > other.PrecioPesos)
+                return -1;
+            else
+                return 0;
         }
 
         public void AgregarContrato(Servicio pServicio, int pDias, int pCant)
         {
+            CotizacionDolar cotiz = CotizacionDolar.Instancia;
             Contrato contrato = new Contrato();
             contrato.DiasAlquilados = pDias;
             contrato.CantidadPasajeros = pCant;
 
             contrato.Servicio = pServicio;
 
+            if (this.Contratos == null) this.Contratos = new List<Contrato>();
             this.Contratos.Add(contrato);
+            this.PrecioPesos += contrato.Servicio.CostoDiario.ConvertirAPesos(cotiz.PrecioVenta) * pDias * pCant; 
+            
         }
 
         public void AgregarHabitacion(Habitacion pHab)

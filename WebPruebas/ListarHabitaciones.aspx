@@ -28,7 +28,7 @@
         #lbl_cant_total_pasajeros, #warn, #lbl_cant_habitaciones {
             font-weight: bold;
             font-size: 15px;
-            font-family:'Times New Roman', Times, serif
+            font-family: Calibri;
         }
     </style>
 </head>
@@ -60,10 +60,10 @@
                     <asp:Label  id="warn" runat="server"></asp:Label>
                 </div>
                 <div class="line_form">
-                    <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Mayores se alojarán: " runat="server" /><asp:TextBox ID="txt_mayores" runat="server" />
+                    <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Mayores que se alojarán: " runat="server" /><asp:TextBox ID="txt_mayores" runat="server" />
                 </div>
                 <div class="line_form">
-                    <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Menores se alojarán" runat="server" /><asp:TextBox ID="txt_menores" runat="server" />
+                    <asp:Label CssClass="cssLabels" Text="Ingrese la cantidad de Menores que se alojarán: " runat="server" /><asp:TextBox ID="txt_menores" runat="server" />
                 </div>
                 <asp:Button Text="Ver Habitaciones Disponibles" runat="server" OnClick="MostrarHabitaciones" />
                 <asp:Button ID="btn_cancelar" runat="server" Text="Cancelar" PostBackUrl="~/Home.aspx" />
