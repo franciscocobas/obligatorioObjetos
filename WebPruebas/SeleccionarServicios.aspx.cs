@@ -31,26 +31,28 @@ namespace WebPruebas
                 pasajero = sistema.BuscarPasajeroPorId(idPasajero);
             }
 
+            List<Servicio> servicios = sistema.Servicios;
+
             if (!IsPostBack)
             {
-                List<Servicio> servicios = sistema.Servicios;
                 grid_view_servicios.AutoGenerateColumns = false;
                 grid_view_servicios.DataSource = servicios;
                 grid_view_servicios.DataBind();
-                ArrayList a = new ArrayList();
-                foreach (Servicio s in servicios)
-                {
-                    a.Add(s.CostoDiario.ConvertirAPesos(cotiz.PrecioVenta).ToString());
-                }
+            }
 
-                for (var i = 0; i < servicios.Count; i++)
+            ArrayList a = new ArrayList();
+
+            foreach (Servicio s in servicios)
+            {
+                a.Add(s.CostoDiario.ConvertirAPesos(cotiz.PrecioVenta).ToString());
+            }
+
+            for (var i = 0; i < servicios.Count; i++)
+            {
+                GridViewRow r = grid_view_servicios.Rows[i];
+                if (r.RowType == DataControlRowType.DataRow)
                 {
-                    GridViewRow r = grid_view_servicios.Rows[i];
-                    if (r.RowType == DataControlRowType.DataRow)
-                    {
-                        Label check = (r.Cells[3].FindControl("costoPesos") as Label);
-                        r.Cells[3].Text = (string)a[i];
-                    }
+                    r.Cells[3].Text = (string)a[i];
                 }
             }
         }
