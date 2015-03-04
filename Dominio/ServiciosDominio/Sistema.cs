@@ -553,7 +553,10 @@ namespace Dominio.ServiciosDominio
                 {
                     if (r.Activa == true && !r.Expirada)
                     {
-                        if (r.FechaDesde < reservaProxima.FechaDesde || reservaProxima == null)
+                        if (reservaProxima == null)
+                            reservaProxima = r;
+
+                        if (r.FechaDesde > reservaProxima.FechaDesde)
                         { 
                             reservaProxima = r;
                             
@@ -573,6 +576,8 @@ namespace Dominio.ServiciosDominio
                     }
                 }
             }
+
+            reservasProximasActivas.Sort();
 
             return reservasProximasActivas;
         }

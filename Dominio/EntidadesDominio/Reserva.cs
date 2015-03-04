@@ -89,7 +89,12 @@ namespace Dominio.EntidadesDominio
 
         public int CompareTo(Reserva other)
         {
-            throw new NotImplementedException();
+            if (this.PrecioPesos < other.PrecioPesos)
+                return +1;
+            else if (this.PrecioPesos > other.PrecioPesos)
+                return -1;
+            else
+                return 0;
         }
 
         public void AgregarContrato(Servicio pServicio, int pDias, int pCant)
